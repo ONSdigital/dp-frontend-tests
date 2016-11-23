@@ -62,7 +62,7 @@ public class CommonStepDefs extends Urls{
     @And("^I click \"([^\"]*)\" button$")
     public void iClickButton(String element) throws Throwable {
 
-        Thread.sleep(500);
+        Thread.sleep(100);
         commonMethods.ClickOnButton(element);
         Thread.sleep(500);
         Log.info("Clicked on " + element + " button");
@@ -91,12 +91,17 @@ public class CommonStepDefs extends Urls{
 
     @Then("^I should see the text \"([^\"]*)\"$")
     public void iShouldSeeTheText(String text) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        commonMethods.SeeTheTextInAPage(text);
+         commonMethods.SeeTheTextInAPage(text);
     }
 
     @When("^I navigate to \"([^\"]*)\" Website$")
     public void iNavigateToWebsite(String Url) throws Throwable {
+        String navigateToUrl = Urls.urlMapping.get(Url).toLowerCase();
+        commonMethods.NavigateToUrl(navigateToUrl);
+    }
+
+    @Given("^I am on the \"([^\"]*)\" Website$")
+    public void iAmOnTheWebsite(String Url) throws Throwable {
         String navigateToUrl = Urls.urlMapping.get(Url).toLowerCase();
         commonMethods.NavigateToUrl(navigateToUrl);
     }
@@ -151,6 +156,11 @@ public class CommonStepDefs extends Urls{
     @And("^I should see \"([^\"]*)\" dimension with (.*) option selected and \"([^\"]*)\" link$")
     public void iShouldSeeDimensionWithAgeGroupOptionSelectedAndLink(String text, String element, String linkText) throws Throwable {
 
+    }
+
+    @And("^I refresh the page$")
+    public void iRefreshThePage() throws Throwable {
+        driver.navigate().refresh();
     }
 }
 

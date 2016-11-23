@@ -16,7 +16,7 @@ Feature: Check a collection in florence website
     And I select Manual publish radio button
     And I click "Create collection" button
 
-    Then I should be on the Working on Collection section
+    Then I should be on the Working on "Test Manual Publish Collection" section
 
     When I click on "About us" static landing page
 

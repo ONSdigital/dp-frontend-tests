@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 //import org.testng.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasePage;
 import utilities.CommonMethods;
 import utilities.Log;
@@ -76,8 +78,29 @@ public class CollectionsPage extends BasePage
 
     }
 
-    public void ClickOnThePageToReview(){
-        driver.findElement(By.cssSelector(".page__item.page__item--static_landing_page")).click();
+    public void SeeTheCollectionInAListOfCollections(String text) throws InterruptedException {
+        Thread.sleep(500);
+        List<WebElement> linkResults = driver.findElements(By.cssSelector(".collection-name"));
+        Thread.sleep(500);
+        for (WebElement link : linkResults) {
+            if(link.getText().contains(text)){
+                Log.info(text + " is showing in list of collections");
+                break;
+
+            }
+
+        }
+
+    }
+
+    public void ClickOnThePageToReview() throws InterruptedException {
+
+        Thread.sleep(500);
+        WebElement element = driver.findElement(By.cssSelector(".page__item.page__item--static_landing_page"));
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.visibilityOf(element));
+        WebElement element2 = driver.findElement(By.cssSelector(".page__item.page__item--static_landing_page"));
+        element2.click();
     }
 
     public void SelectACollectionInPublishingQueue(String text, String linkText) throws InterruptedException {
@@ -119,7 +142,46 @@ public class CollectionsPage extends BasePage
 
     public void IsWebPreviewHomePageDisplayed() {
 
+        driver.switchTo().frame(driver.findElement(By.id("iframe")));
         WebElement element = driver.findElement(By.cssSelector(".page-intro__title.page-intro__title--home"));
-        Assert.assertTrue(element.getText().contains("Welcome to the Office for National Statistics"));
+        Assert.assertTrue(element.getText().contains("Office for National Statistics"));
+        driver.switchTo().defaultContent();
+    }
+
+    public void IsTaxonomyDisplayed() {
+
+        WebElement element = driver.findElement(By.xpath(".//*[@id='browse-tree']/section/nav/ul/li"));
+        Assert.assertTrue(element.getText().contains("Home"));
+        Assert.assertTrue(element.getText().contains("A-Z"));
+        Assert.assertTrue(element.getText().contains("About us"));
+        Assert.assertTrue(element.getText().contains("Business, industry and trade"));
+        Assert.assertTrue(element.getText().contains("Census"));
+        Assert.assertTrue(element.getText().contains("Classifications"));
+        Assert.assertTrue(element.getText().contains("Economy"));
+        Assert.assertTrue(element.getText().contains("Emergency information for ONS staff"));
+        Assert.assertTrue(element.getText().contains("Employment and labour market"));
+        Assert.assertTrue(element.getText().contains("Help"));
+        Assert.assertTrue(element.getText().contains("Media"));
+        Assert.assertTrue(element.getText().contains("Methodology"));
+        Assert.assertTrue(element.getText().contains("People, population and community"));
+        Assert.assertTrue(element.getText().contains("Surveys"));
+        Assert.assertTrue(element.getText().contains("releases"));
+
+    }
+
+    public void SeeTextOnThePopUp(String text) {
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".confirm")));
+
+    }
+
+    public void ClickOnTheVisualisationPageToReview() {
+
+        WebElement element = driver.findElement(By.cssSelector(".page__item.page__item--visualisation"));
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.visibilityOf(element));
+        element.click();
     }
 }

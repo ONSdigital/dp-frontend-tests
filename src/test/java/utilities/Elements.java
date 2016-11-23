@@ -81,6 +81,14 @@ public class Elements {
 
         elementMapping.put("Continue", ".confirm");
 
+        elementMapping.put("Create", ".btn.btn--positive.btn-browse-create");
+
+        elementMapping.put("Select your option", "pagetype");
+
+        elementMapping.put("Upload visualisation", ".btn.btn--positive.btn-browse-create-datavis");
+
+        elementMapping.put("Unique ID", "visualisation-uid");
+
 
         //Users and access
         elementMapping.put("Username", "create-user-username");
@@ -88,6 +96,14 @@ public class Elements {
         elementMapping.put("Create a user Email", "create-user-email");
 
         elementMapping.put("Create a user Password", "create-user-password");
+
+        elementMapping.put("Viewer", "viewer-type");
+
+        elementMapping.put("Administrator", "admin-type");
+
+        elementMapping.put("Publisher", "publisher-type");
+
+        elementMapping.put("Visualisation publisher", "data-vis-type");
 
         elementMapping.put("Viewer", "viewer-type");
 

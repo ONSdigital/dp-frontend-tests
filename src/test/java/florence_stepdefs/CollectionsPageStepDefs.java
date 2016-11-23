@@ -5,10 +5,12 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import florence_pages.CollectionsPage;
+import florence_pages.UsersAndAccessPage;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 //import org.testng.Assert;
 import stepDefs.Hooks;
+import utilities.CommonMethods;
 
 /**
  * Created by admin on 21/10/2016.
@@ -17,18 +19,22 @@ public class CollectionsPageStepDefs {
 
     public WebDriver driver;
     private CollectionsPage collectionsPage;
+    private CommonMethods commonMethods;
+    private UsersAndAccessPage usersAndAccessPage;
 
     public CollectionsPageStepDefs(){
 
         driver = Hooks.driver;
         collectionsPage = new CollectionsPage(driver);
+        commonMethods = new CommonMethods(driver);
+        usersAndAccessPage = new UsersAndAccessPage(driver);
 
     }
 
-    @Then("^I should be on the Working on Collection section$")
-    public void iShouldBeOnTheWorkingOnCollectionSection() throws Throwable {
+    @Then("^I should be on the Working on \"([^\"]*)\" section$")
+    public void iShouldBeOnTheWorkingOnCollectionSection(String text) throws Throwable {
 
-        Assert.assertEquals(collectionsPage.AmIOnWorkingOnCollectionSection(), "Working on: Release Calendar");
+        Assert.assertEquals(collectionsPage.AmIOnWorkingOnCollectionSection(), "Working on: " + text);
 
     }
 
@@ -82,6 +88,11 @@ public class CollectionsPageStepDefs {
         collectionsPage.IsThisTabSelected(text);
     }
 
+    @Then("^I should be directed to the \"([^\"]*)\" tab$")
+    public void iShouldBeDirectedToTab(String text) throws Throwable {
+        collectionsPage.IsThisTabSelected(text);
+    }
+
     @And("^Presented with \"([^\"]*)\" button$")
     public void presentedWithAnButton(String buttonText) throws Throwable {
         collectionsPage.IsEditAndCreateButtonShowing(buttonText);
@@ -91,5 +102,26 @@ public class CollectionsPageStepDefs {
     @And("^The web preview is displayed$")
     public void theWebPreviewIsDisplayed() throws Throwable {
         collectionsPage.IsWebPreviewHomePageDisplayed();
+    }
+
+    @And("^The taxonomy is displayed$")
+    public void theTaxonomyIsDisplayed() throws Throwable {
+        collectionsPage.IsTaxonomyDisplayed();
+    }
+
+    @Then("^I should see the text \"([^\"]*)\" on the pop-up$")
+    public void iShouldSeeTheTextOnThePopUp(String text) throws Throwable {
+        collectionsPage.SeeTextOnThePopUp(text);
+        commonMethods.SeeTheTextInAPage(text);
+    }
+
+    @And("^I should see the text \"([^\"]*)\" in the list of collections$")
+    public void iShouldSeeTheTextInTheListOfCollections(String text) throws Throwable {
+        usersAndAccessPage.SeeTheTextInATable(text);
+    }
+
+    @And("^I click on the visualisation publisher page awaiting review$")
+    public void iClickOnTheVisualisationPublisherPageAwaitingReview() throws Throwable {
+        collectionsPage.ClickOnTheVisualisationPageToReview();
     }
 }

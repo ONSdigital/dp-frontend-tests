@@ -14,10 +14,10 @@ public class Urls {
         urlMapping = new HashMap<String, String>();
 
         // Developer Environment
-        urlMapping.put("ONS", "https://develop2.onsdigital.co.uk/");
+        urlMapping.put("ONS", "https://develop.onsdigital.co.uk/");
 
         // About us
-        urlMapping.put("About us", "https://develop2.onsdigital.co.uk/aboutus");
+        urlMapping.put("About us", "https://develop.onsdigital.co.uk/aboutus");
 
         // Media
         urlMapping.put("Media", "https://www.ons.gov.uk/news");
@@ -28,13 +28,12 @@ public class Urls {
         urlMapping.put("Office locations", "https://www.ons.gov.uk/aboutus/contactus/officelocations");
 
         // Florence
-        urlMapping.put("Florence Home", "https://publishing.develop2.onsdigital.co.uk/florence/index.html");
-        urlMapping.put("Florence", "https://publishing.develop2.onsdigital.co.uk/florence/index.html");
+        urlMapping.put("Florence Home", "https://publishing.develop.onsdigital.co.uk/florence/index.html");
+        urlMapping.put("Florence", "https://publishing.develop.onsdigital.co.uk/florence/index.html");
 
         // Ermintrude
-        urlMapping.put("Ermintrude", "https://preview.develop2.onsdigital.co.uk/ermintrude/index.html");
+        urlMapping.put("Ermintrude", "https://preview.develop.onsdigital.co.uk/ermintrude/index.html");
     }
-
 }
 
 

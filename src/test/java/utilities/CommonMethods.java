@@ -203,7 +203,7 @@ public class CommonMethods
 
       //  WebDriverWait wait = new WebDriverWait(driver, 10);
       //  wait.until(ExpectedConditions.textToBePresentInElementLocated(element, text));
-        Thread.sleep(500);
+        Thread.sleep(3000);
         Assert.assertTrue(driver.getPageSource().contains(text));
 
     }
@@ -241,12 +241,16 @@ public class CommonMethods
         }
     }
 
-    public void SelectTextInATable(String text, String tableElement){
+    public void SelectTextInATable(String text, String tableElement) throws InterruptedException {
         String mappedElement = Elements.elementMapping.get(tableElement);
         List<WebElement> elements = driver.findElements(By.cssSelector(mappedElement));
-
+        Thread.sleep(500);
         for (WebElement element: elements) {
             if(element.getText().contains(text)){
+
+                /*WebDriverWait wait = new WebDriverWait(driver, 30);
+                WebElement title = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(mappedElement)));*/
+
                 element.click();
                 break;
 

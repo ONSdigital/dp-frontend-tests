@@ -65,4 +65,20 @@ public class UsersAndAccessPage extends BasePage
 
         Log.info("Clicked on Create button");
     }
+
+    public void SelectATeamFromListOfTeams(String text) throws InterruptedException{
+                    Thread.sleep(500);
+            List<WebElement> linkResults = driver.findElements(By.cssSelector(".collection-name"));
+            Thread.sleep(500);
+            for (WebElement link : linkResults) {
+                if (link.getText().contains(text)) {
+                    Log.info("Successfully created " + text);
+                    break;
+
+                }
+            }
+
+
+        }
+
 }

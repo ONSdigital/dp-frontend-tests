@@ -1,5 +1,6 @@
 package florence_stepdefs;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -26,7 +27,7 @@ public class UsersAndAccessPageStepDefs {
 
     @Then("^I should see the text \"([^\"]*)\" in the list of users$")
     public void iShouldSeeTheTextInTheListOfUsers(String text) throws Throwable {
-           collectionsPage.SelectACollectionFromListOfCollections(text);
+           collectionsPage.SeeTheCollectionInAListOfCollections(text);
     }
 
 
@@ -44,5 +45,10 @@ public class UsersAndAccessPageStepDefs {
     @And("^I click \"([^\"]*)\" button in Census$")
     public void iClickButtonInCensus(String buttonText) throws Throwable {
         usersAndAccessPage.ClickOnCreateButtonInCensus(buttonText);
+    }
+
+    @Then("^I should see the text \"([^\"]*)\" in the list of teams$")
+    public void iShouldSeeTheTextInTheListOfTeams(String text) throws Throwable {
+        usersAndAccessPage.SelectATeamFromListOfTeams(text);
     }
 }
