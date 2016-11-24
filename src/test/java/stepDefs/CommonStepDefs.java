@@ -6,6 +6,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 //import org.junit.Assert;
 import cucumber.api.java.en.When;
+import florence_pages.CollectionsPage;
+import florence_pages.HomePage;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 //import org.testng.Assert;
@@ -25,6 +27,8 @@ public class CommonStepDefs extends Urls{
     public CommonMethods commonMethods;
     public WebDriver driver;
     private MediaPage mediaPage;
+    private HomePage homePage;
+    private CollectionsPage collectionsPage;
     private Urls uRLs;
 
     public CommonStepDefs()  {
@@ -33,6 +37,8 @@ public class CommonStepDefs extends Urls{
         commonMethods = new CommonMethods(driver);
         mediaPage = new MediaPage(driver);
         uRLs = new Urls();
+        homePage = new HomePage(driver);
+        collectionsPage = new CollectionsPage(driver);
     }
 
     @Then("^I should be on the (.*) page$")
@@ -150,6 +156,34 @@ public class CommonStepDefs extends Urls{
 
     @And("^I should see \"([^\"]*)\" dimension with (.*) option selected and \"([^\"]*)\" link$")
     public void iShouldSeeDimensionWithAgeGroupOptionSelectedAndLink(String text, String element, String linkText) throws Throwable {
+
+    }
+
+    @Given("^I logged in as an Admin$")
+    public void iLoggedInAsAnAdmin() throws Throwable {
+        homePage.NavigateToFlorenceUrl();
+        commonMethods.EnterStringIntoFiled("testuser@test.com", "Email");
+        commonMethods.EnterStringIntoFiled("one two three four", "Password");
+        commonMethods.ClickOnButton("Log in");
+
+    }
+
+    @Then("^I delete \"([^\"]*)\" if exists in list of collections$")
+    public void iDeleteIfExistsInListOfCollections(String collectionName) throws Throwable {
+
+        collectionsPage.SelectACollectionFromListOfCollections(collectionName);
+
+        collectionsPage.ClickOnThePageToReview();
+
+        commonMethods.ClickOnButton("Delete file");
+
+        commonMethods.ClickOnButton("Delete");
+        commonMethods.ClickOnButton("OK");
+        commonMethods.ClickOnButton("Delete collection");
+        commonMethods.ClickOnButton("Continue");
+        commonMethods.ClickOnButton("OK");
+
+
 
     }
 }

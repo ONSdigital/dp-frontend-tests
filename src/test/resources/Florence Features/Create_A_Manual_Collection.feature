@@ -3,6 +3,11 @@ Feature: Check a collection in florence website
   I need to create a manual collection
   So that customer can view in ONS Website
 
+  Background: There should not be any "Test Manual Publish Collection" in list of collections
+
+    Given I logged in as an Admin
+    Then I delete "Test Manual Publish Collection" if exists in list of collections
+
 
   Scenario: Create a manual publish collection
 
