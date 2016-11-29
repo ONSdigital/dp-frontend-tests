@@ -1,7 +1,6 @@
 Feature: Given a rapid prototype is developed
-          When I represent the prototype to users
-          Then I receive the feedback so that I can iterate the website functionality
-
+When I represent the prototype to users
+Then I receive the feedback so that I can iterate the website functionality
 
 
   Scenario: Check content and download entire dataset
@@ -18,20 +17,20 @@ Feature: Given a rapid prototype is developed
     And I click "Continue >" button
 
 
-   Scenario Outline: Both Sex with all age and accommodation type dataset
+  Scenario Outline: Both Sex with all age and accommodation type dataset
 
-     Given I am on the "User Testing" page
-     When I click the "Change" link for "Gender" dimension
-     Then I should be on the Change option page
-     When I select "<Gender>" check box
-     And I click "Apply changes" button
-     Then I should be on the Dimensions page
-     And I should see "Sex" dimension with <Gender> option selected and "Change" link
-     And I should see the "Download" button is enabled
+    Given I am on the "User Testing" page
+    When I click the "Change" link for "Gender" dimension
+    Then I should be on the Change option page
+    When I select "<Gender>" check box
+    And I click "Apply changes" button
+    Then I should be on the Dimensions page
+    And I should see "Sex" dimension with <Gender> option selected and "Change" link
+    And I should see the "Download" button is enabled
 
-     Examples: | Gender |
-               | Male   |
-               | Female |
+    Examples: | Gender |
+    | Male   |
+    | Female |
 
 
   Scenario Outline: Both Accommodation type with all age and sex type dataset
@@ -46,9 +45,8 @@ Feature: Given a rapid prototype is developed
     And I should see the "Download" button is enabled
 
     Examples: | Accommodation |
-              | Communal      |
-              | Household     |
-
+    | Communal      |
+    | Household     |
 
 
   Scenario Outline: All Age group with all accommodation and sex type dataset
@@ -63,10 +61,10 @@ Feature: Given a rapid prototype is developed
     And I should see the "Download" button is enabled
 
     Examples: | Age Group |
-              | 16-24     |
-              | 25-34     |
-              | 35-49     |
-              | 50+       |
+    | 16-24     |
+    | 25-34     |
+    | 35-49     |
+    | 50+       |
 
 
 

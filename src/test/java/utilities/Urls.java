@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class Urls {
 
-       public  static Map<String, String> urlMapping;
+    public static Map<String, String> urlMapping;
 
     static {
         urlMapping = new HashMap<String, String>();
