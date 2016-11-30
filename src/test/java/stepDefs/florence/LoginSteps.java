@@ -14,5 +14,9 @@ public class LoginSteps {
     public void adminLogin(){
         loginPage.openAndLogin("testuser@test.com","one two three four");
     }
+    @Given("I am logged in as a publisher$")
+    public void publisherLogin(){
+        loginPage.openAndLogin("publisher@test.com","one two three four");
+    }
 
 }

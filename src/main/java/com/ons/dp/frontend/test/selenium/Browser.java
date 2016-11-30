@@ -39,7 +39,7 @@ public class Browser {
     public static void setDriver(String browser){
         switch (browser){
             case "FIREFOX":
-                System.setProperty("webdriver.gecko.driver","/home/giri/Downloads/firefox/firefox");
+    //            System.setProperty("webdriver.gecko.driver","/home/giri/Downloads/firefox/firefox");
                 FirefoxProfile ffProfile = new FirefoxProfile();
                 ffProfile.setEnableNativeEvents(false);
                 DesiredCapabilities desiredCapabilities = DesiredCapabilities.firefox();

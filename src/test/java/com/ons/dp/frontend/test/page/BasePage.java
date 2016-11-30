@@ -147,7 +147,7 @@ public class BasePage {
     }
     public void click(By by) {
         Do.until(getDriver(), presenceOfElementLocated(by));
-        Do.until(getDriver(), elementToBeClickable(by));
+ //       Do.until(getDriver(), elementToBeClickable(by));
         getElement(by).click();
     }
 

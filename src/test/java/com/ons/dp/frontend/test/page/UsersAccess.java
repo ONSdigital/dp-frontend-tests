@@ -38,7 +38,7 @@
             public By getConfirmDelete(){
                 return getButton(buttonElement,"Delete");
             }
-            public By confirm_email_deletion =  By.xpath("//input[@type='text']");
+            public By confirm_email_deletion =  By.xpath("html/body/div[5]/fieldset/input");
             public By user_access_link = By.linkText("Users and access");
             public Map<String, WebElement> getLeftTableContents(){
                 dataTable = new DataTable();
