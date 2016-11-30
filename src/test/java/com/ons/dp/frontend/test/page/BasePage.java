@@ -27,6 +27,7 @@ public class BasePage {
         getDriver().get(url);
     }
     public WebElement getElement(final By by) {
+        Do.until(getDriver(), presenceOfElementLocated(by));
         return getDriver().findElement(by);
     }
     public WebElement getElement(final By by, long timeout) {
@@ -142,16 +143,17 @@ public class BasePage {
 
     public void clear(By by) {
         Do.until(getDriver(), presenceOfElementLocated(by));
-        getDriver().findElement(by).clear();
+       getElement(by).clear();
     }
     public void click(By by) {
         Do.until(getDriver(), presenceOfElementLocated(by));
-        getDriver().findElement(by).click();
+        Do.until(getDriver(), elementToBeClickable(by));
+        getElement(by).click();
     }
 
     public void sendKeys(By by, String text){
         Do.until(getDriver(), presenceOfElementLocated(by));
-        getDriver().findElement(by).sendKeys(text);
+       getElement(by).sendKeys(text);
     }
     public List<WebElement> findElementsBy(By by) {
         return getDriver().findElements(by);
@@ -161,6 +163,7 @@ public class BasePage {
         return getDriver().findElements(by);
     }
     public String getElementText(By by) {
+        Do.until(getDriver(), presenceOfElementLocated(by));
         return getElement(by).getText();
     }
 

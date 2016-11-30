@@ -2,6 +2,7 @@ package com.ons.dp.frontend.test.selenium;
 
 import com.ons.dp.frontend.test.core.Configuration;
 import com.ons.dp.frontend.test.util.Helper;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -38,7 +39,7 @@ public class Browser {
     public static void setDriver(String browser){
         switch (browser){
             case "FIREFOX":
-                System.setProperty("webdriver.firefox.bin","/home/giri/Downloads/firefox/firefox");
+                System.setProperty("webdriver.gecko.driver","/home/giri/Downloads/firefox/firefox");
                 FirefoxProfile ffProfile = new FirefoxProfile();
                 ffProfile.setEnableNativeEvents(false);
                 DesiredCapabilities desiredCapabilities = DesiredCapabilities.firefox();
@@ -69,6 +70,9 @@ public class Browser {
             default:
                 System.setProperty("webdriver.gecko.driver","/home/giri/Downloads/firefox/browser/firefox");
                 webDriver= new FirefoxDriver();
+        }
+        if(webDriver instanceof JavascriptExecutor) {
+            ((JavascriptExecutor) webDriver).executeScript("window.resizeTo(1024, 768);");
         }
     }
 

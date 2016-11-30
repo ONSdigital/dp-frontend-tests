@@ -5,12 +5,13 @@
     import com.ons.dp.frontend.test.util.Do;
     import org.openqa.selenium.By;
     import org.openqa.selenium.WebElement;
+    import org.openqa.selenium.support.PageFactory;
     import org.openqa.selenium.support.ui.ExpectedConditions;
 
     import java.util.Map;
 
     public class UsersAccess extends BasePage {
-
+            DataTable dataTable;
             public By  create_username = By.id("create-user-username");
             public By  create_email    = By.id("create-user-email");
             public By  create_pwd      = By.id("create-user-password");
@@ -20,6 +21,8 @@
             public By  type_visualisation_publisher = By.id("data-vis-type");
             public String buttonElement = "//button[text()[contains(.,'replace')]]";
             public By  label_select_user = By.className(".collection-name");
+            public By  confirm_ok = By.className("confirm");
+            public By  user_created_label = By.xpath("//h2[text()[contains(.,'User created')]]");
             public By getCreate_UserName_Button(){
                    return getButton(buttonElement,"Create user");
             }
@@ -37,9 +40,17 @@
             }
             public By confirm_email_deletion =  By.xpath("//input[@type='text']");
             public By user_access_link = By.linkText("Users and access");
-            public Map<String, WebElement> getTableContents(){
-                return new DataTable().getCollection();
+            public Map<String, WebElement> getLeftTableContents(){
+                dataTable = new DataTable();
+                return dataTable.getLeftData();
             }
+        public Map<String, WebElement> getRightTableContents(){
+            if(dataTable==null){dataTable = new DataTable();}
+            return dataTable.getRightData();
+        }
+        public Map<String, String> getTableContents(){
+            return dataTable.getTableContents();
+        }
 
             public void clearForm(){
                 clear(create_username);
@@ -48,6 +59,8 @@
             }
             public void goToUsersAndAccessPage(){
                  click(user_access_link);
+                 Do.until(getDriver(), ExpectedConditions.presenceOfElementLocated(create_username));
+                 dataTable= new DataTable();
             }
             public void createUser(User createUser){
                 clearForm();
@@ -72,13 +85,36 @@
 
                 }
                 click(getCreate_UserName_Button());
+                getElementText(user_created_label);
+                click(confirm_ok);
 
             }
-            public boolean doesTheUserExistOnTheList(String username){
-              return  (getTableContents().get(username)!= null) ?  true : false;
+
+            public Map getUserNames(){
+                return getLeftTableContents();
+            }
+            public Map getEmailAddresses(){
+                return getRightTableContents();
+            }
+            public boolean doesTheUserNameExists(String username){
+              return  (getUserNames().get(username)!= null) ?  true : false;
 
             }
+        public boolean doesEmailExists(String email){
+            return  (getEmailAddresses().get(email)!= null) ?  true : false;
 
+        }
+
+        public String returnEmailForUser(String username){
+            return getTableContents().get(username);
+        }
+        public void deleteUser(String username){
+            getLeftTableContents().get(username).click();
+            click(getDeleteUser_Button());
+            String getEMail = returnEmailForUser(username);
+            sendKeys(confirm_email_deletion,getEMail);
+            click(getConfirmDelete());
+        }
     /*
             public By  "Select a team", ".table.table--primary.table--fixed-height-27.js-selectable-table");
 
