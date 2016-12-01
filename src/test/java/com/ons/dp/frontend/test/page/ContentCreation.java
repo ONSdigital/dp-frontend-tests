@@ -15,15 +15,20 @@ public class ContentCreation extends BasePage {
     public By getContentIds(String content){
       return  By.xpath(content_ids.replace("replace",content));
     }
-    public By landingPage = By.cssSelector(".js-browse__item-title page__item page__item--taxonomy_landing_page");
-    public By productpage = By.cssSelector("js-browse__item-title page__item page__item--product_page");
+    public By landingPage = By.cssSelector(".js-browse__item-title.page__item.page__item--taxonomy_landing_page");
+    public By productpage = By.cssSelector(".js-browse__item-title.page__item.page__item--product_page");
+    public By directory = By.cssSelector(".js-browse__item-title.page__item.page__item--directory");
     public ArrayList<WebElement> landingPageElements = new ArrayList<>();
     public ArrayList<WebElement> productPageElements = new ArrayList<>();
+    public ArrayList<WebElement> directoryElements = new ArrayList<>();
     public void getLandingPageElements(){
         landingPageElements = (ArrayList<WebElement>) findElementsBy(landingPage);
     }
     public void getProductPageElements(){
         productPageElements = (ArrayList<WebElement>) findElementsBy(productpage);
+    }
+    public void getDirectoryElememnts(){
+        directoryElements = (ArrayList<WebElement>) findElementsBy(directory);
     }
     public void searchAndClickLP(String taxonomy){
         for(WebElement webElement: landingPageElements){
@@ -42,11 +47,21 @@ public class ContentCreation extends BasePage {
         }
     }
 
+    public void searchAndClickDirectory(String taxonomy){
+        for(WebElement webElement: directoryElements){
+            if(webElement.getText().contains(taxonomy)){
+                webElement.click();
+                break;
+            }
+        }
+    }
+
     public void goToGDP(){
         getLandingPageElements();
         searchAndClickLP("Economy");
+        getProductPageElements();
         searchAndClickPP("Gross Domestic Product (GDP)");
-
-        click(getContentIds("datasets"));
+        getDirectoryElememnts();
+        searchAndClickDirectory("datasets");
     }
 }
