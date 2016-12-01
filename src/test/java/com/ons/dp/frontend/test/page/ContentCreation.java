@@ -5,9 +5,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 
-/**
- * Created by admin on 30/11/2016.
- */
 public class ContentCreation extends BasePage {
 
     public String content_ids = "//li[@data-url='/economy')]]";
