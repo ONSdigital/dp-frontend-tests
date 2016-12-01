@@ -26,6 +26,7 @@ public class BasePage {
     public void navigateToUrl(String url){
         getDriver().get(url);
     }
+    public String buttonElement = "//button[text()[contains(.,'replace')]]";
     public WebElement getElement(final By by) {
         Do.until(getDriver(), presenceOfElementLocated(by));
         return getDriver().findElement(by);
