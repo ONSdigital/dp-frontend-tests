@@ -7,7 +7,7 @@ import cucumber.api.java.en.When;
 public class ContentCreationSteps {
 ContentCreation contentCreation = new ContentCreation();
     @When("I navigate to (.*)$")
-    public void navigateTo(String taxonomy){
+    public void navigateTo(String taxonomy) throws Exception {
         contentCreation.goToGDP();
     }
 }

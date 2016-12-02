@@ -4,6 +4,7 @@ import com.ons.dp.frontend.test.model.DataTable;
 import com.ons.dp.frontend.test.util.Do;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Collection extends BasePage{
@@ -22,13 +23,12 @@ public class Collection extends BasePage{
         boolean elementPresent = false;
             Do.until(getDriver(), ExpectedConditions.presenceOfElementLocated(collection_name));
             dataTable = new DataTable();
-        WebElement dataElement = dataTable.getLeftData().get(collectionName);
-        if (dataElement != null) {
-            dataElement.click();
+        WebElement webElement = dataTable.getLeftData().get(collectionName);
+        if (webElement != null) {
             elementPresent = true;
+            webElement.click();
         }
         return elementPresent;
-
 
         }
 
@@ -44,15 +44,17 @@ public class Collection extends BasePage{
             click(create_collection);
         }
 
-    public void deleteCollection(String collectionName) {
-        if (getCollection(collectionName)) {
+    public void deleteCollection(String name) {
+
+        if (getCollection(name)) {
             click(delete_collection);
             click(confirm_deletion);
+            Do.until(getDriver(), ExpectedConditions.invisibilityOfElementLocated(confirm_deletion));
         }
-    }
+        }
 
     public enum CollectionTypes {
-        MANUAL, SCHEDULE
+        MANUAL, SCHEDULE;
         }
 
 
