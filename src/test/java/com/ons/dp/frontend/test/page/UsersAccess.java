@@ -5,60 +5,70 @@
     import com.ons.dp.frontend.test.util.Do;
     import org.openqa.selenium.By;
     import org.openqa.selenium.WebElement;
-    import org.openqa.selenium.support.PageFactory;
     import org.openqa.selenium.support.ui.ExpectedConditions;
 
     import java.util.Map;
 
     public class UsersAccess extends BasePage {
-            DataTable dataTable;
-            public By  create_username = By.id("create-user-username");
+
+
+        public By create_username = By.id("create-user-username");
             public By  create_email    = By.id("create-user-email");
             public By  create_pwd      = By.id("create-user-password");
             public By  type_viewer     = By.id("viewer-type");
             public By  type_admin      = By.id("admin-type");
             public By  type_publisher  = By.id("publisher-type");
             public By  type_visualisation_publisher = By.id("data-vis-type");
-
             public By  label_select_user = By.className(".collection-name");
             public By  confirm_ok = By.className("confirm");
             public By  user_created_label = By.xpath("//h2[text()[contains(.,'User created')]]");
+        public By confirm_email_deletion = By.xpath("html/body/div[5]/fieldset/input");
+        DataTable dataTable;
+
             public By getCreate_UserName_Button(){
                    return getButton(buttonElement,"Create user");
             }
+
             public By getDeleteUser_Button(){
                     return getButton(buttonElement,"Delete user");
             }
+
             public By getChange_Pwd_Button(){
                 return getButton(buttonElement,"Change password");
             }
+
             public By getCancel_Button(){
                  return getButton(buttonElement,"Cancel");
             }
+
             public By getConfirmDelete(){
                 return getButton(buttonElement,"Delete");
             }
-            public By confirm_email_deletion =  By.xpath("html/body/div[5]/fieldset/input");
-            public By user_access_link = By.linkText("Users and access");
+
             public Map<String, WebElement> getLeftTableContents(){
                 dataTable = new DataTable();
                 return dataTable.getLeftData();
             }
-        public Map<String, WebElement> getRightTableContents(){
-            if(dataTable==null){dataTable = new DataTable();}
+
+        public Map<String, WebElement> getRightTableContents() {
+            if (dataTable == null) {
+                dataTable = new DataTable();
+            }
             return dataTable.getRightData();
         }
-        public Map<String, String> getTableContents(){
+
+        public Map<String, String> getTableContents() {
             return dataTable.getTableContents();
         }
 
-            public void clearForm(){
-                clear(create_username);
-                clear(create_email);
-                clear(create_pwd);
+
+        public void clearForm() {
+            clear(create_username);
+            clear(create_email);
+            clear(create_pwd);
             }
             public void goToUsersAndAccessPage(){
-                 click(user_access_link);
+                click(getlinkText("Users and access"));
                  Do.until(getDriver(), ExpectedConditions.presenceOfElementLocated(create_username));
                  dataTable= new DataTable();
             }
@@ -97,22 +107,24 @@
                 return getRightTableContents();
             }
             public boolean doesTheUserNameExists(String username){
-              return  (getUserNames().get(username)!= null) ?  true : false;
+                return (getUserNames().get(username) != null);
 
             }
-        public boolean doesEmailExists(String email){
-            return  (getEmailAddresses().get(email)!= null) ?  true : false;
+
+        public boolean doesEmailExists(String email) {
+            return (getEmailAddresses().get(email) != null);
 
         }
 
-        public String returnEmailForUser(String username){
+        public String returnEmailForUser(String username) {
             return getTableContents().get(username);
         }
-        public void deleteUser(String username){
+
+        public void deleteUser(String username) {
             getLeftTableContents().get(username).click();
             click(getDeleteUser_Button());
             String getEMail = returnEmailForUser(username);
-            sendKeys(confirm_email_deletion,getEMail);
+            sendKeys(confirm_email_deletion, getEMail);
             click(getConfirmDelete());
         }
     /*

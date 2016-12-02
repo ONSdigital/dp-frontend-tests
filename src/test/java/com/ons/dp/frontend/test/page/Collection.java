@@ -4,7 +4,6 @@ import com.ons.dp.frontend.test.model.DataTable;
 import com.ons.dp.frontend.test.util.Do;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Collection extends BasePage{
@@ -19,17 +18,21 @@ public class Collection extends BasePage{
         public By confirm_deletion = By.className("confirm");
         DataTable dataTable;
 
-        public enum CollectionTypes{
-            MANUAL, SCHEDULE;
-        }
-
-        public void getCollection(){
+    public boolean getCollection(String collectionName) {
+        boolean elementPresent = false;
             Do.until(getDriver(), ExpectedConditions.presenceOfElementLocated(collection_name));
             dataTable = new DataTable();
-            dataTable.getLeftData().get("TimeSeriesAuto").click();
+        WebElement dataElement = dataTable.getLeftData().get(collectionName);
+        if (dataElement != null) {
+            dataElement.click();
+            elementPresent = true;
+        }
+        return elementPresent;
+
 
         }
-        public void createCollection(String name, CollectionTypes collectionTypes){
+
+    public void createCollection(String name, CollectionTypes collectionTypes) {
             sendKeys(collection_name,name);
             switch(collectionTypes){
                 case MANUAL:
@@ -41,10 +44,15 @@ public class Collection extends BasePage{
             click(create_collection);
         }
 
-        public void deleteCollection(){
-            getCollection();
+    public void deleteCollection(String collectionName) {
+        if (getCollection(collectionName)) {
             click(delete_collection);
             click(confirm_deletion);
+        }
+    }
+
+    public enum CollectionTypes {
+        MANUAL, SCHEDULE
         }
 
 

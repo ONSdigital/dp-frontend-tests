@@ -6,27 +6,37 @@ import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.util.Do;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+
 public class BasePage {
+    public String buttonElement = "//button[text()[contains(.,'replace')]]";
+    public By linkText = By.linkText("text_to_replace");
+
     public WebDriver getDriver(){
      return   TestContext.getDriver();
     }
+
     public Configuration getConfig(){
         return TestContext.getConfiguration();
     }
+
     public WebDriverWait getWebDriverWait(){
         return TestContext.getWebDriverWait();
     }
+
     public void navigateToUrl(String url){
         getDriver().get(url);
     }
-    public String buttonElement = "//button[text()[contains(.,'replace')]]";
+
+    public By getlinkText(String link) {
+        return By.linkText(link);
+    }
     public WebElement getElement(final By by) {
         Do.until(getDriver(), presenceOfElementLocated(by));
         return getDriver().findElement(by);

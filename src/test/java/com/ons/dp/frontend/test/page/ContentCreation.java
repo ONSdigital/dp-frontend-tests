@@ -4,15 +4,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class ContentCreation extends BasePage {
 
-    public String content_css = ".js-browse__item[data-url='/text_to_replace']>span>span";
-    public String directory_css = ".selected > ul > li > span > span.js-browse__item-title.page__item.page__item--directory";
-    public String content_headers = "//h1[text()[contains(.,'text_to_replace')]]";
-    public By file_label_text = By.id("label");
-    public By fileUpload = By.name("files");
+    private String content_css = ".js-browse__item[data-url='/text_to_replace']>span>span";
+    private String directory_css = ".selected > ul > li > span > span.js-browse__item-title.page__item.page__item--directory";
+    private String content_headers = "//h1[text()[contains(.,'text_to_replace')]]";
+    private By file_label_text = By.id("label");
+    private By fileUpload = By.name("files");
+    private String active_dataset_buttons = ".selected > span > span >button.btn-browse-text_to_replace";
+
+    public By getActiveDatasetButtons(String buttonText) {
+        return By.cssSelector(active_dataset_buttons.replace("text_to_replace", buttonText));
+    }
 
     public ArrayList<WebElement> getDirectoryElements(){
        return (ArrayList<WebElement>) findElementsBy(By.cssSelector(directory_css));
@@ -44,14 +48,14 @@ public class ContentCreation extends BasePage {
         getDirectoryElement("datasets").click();
         click(getContentId(content_css,"economy/grossdomesticproductgdp/datasets/businessinvestment"));
         //waitUntilTextPresent(getButton(buttonElement,"Edit"), "Edit");
-        click(getButton(buttonElement,"Edit"));
+        click(getActiveDatasetButtons("Edit"));
         click(getContentHeaders("Download options"));
-        click(getButton(buttonElement,"Update / Add supplementary file"));
+        click(getActiveDatasetButtons("Update / Add supplementary file"));
         click(getContentHeaders("Versions"));
-        click(getButton(buttonElement,"Add version"));
+        click(getActiveDatasetButtons("Add version"));
         sendKeys(file_label_text, "999");
         sendKeys(fileUpload, "src/test/resources/files/cxnv.csdb");
-        click(getButton(buttonElement,"Submit"));
+        click(getActiveDatasetButtons("Submit"));
 
 
         }

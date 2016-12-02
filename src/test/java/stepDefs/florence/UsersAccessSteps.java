@@ -1,20 +1,15 @@
 package stepDefs.florence;
 
 import com.ons.dp.frontend.test.model.User;
-import com.ons.dp.frontend.test.model.User.*;
-
+import com.ons.dp.frontend.test.model.User.UserType;
 import com.ons.dp.frontend.test.page.UsersAccess;
-import cucumber.api.java.en.And;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 
 import java.util.Random;
 
-/**
- * Created by admin on 01/11/2016.
- */
 public class UsersAccessSteps {
 
 
@@ -70,6 +65,12 @@ public class UsersAccessSteps {
     @Then("^the user \"([^\"]*)\" should be added to the team$")
     public void theUserShouldBeAddedToTheTeam(String text) throws Throwable {
  //       usersAndAccessPage.IsNewUserAddedToTheTeam(text);
+    }
+
+    @Then("^I log out$")
+    public void iLogOut() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
     }
 
 
