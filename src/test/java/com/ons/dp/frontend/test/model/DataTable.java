@@ -11,19 +11,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DataTable {
-    BasePage basePage = new BasePage();
     public String collectionTableRowStr = "//table/tbody/tr";
     public By collectionTableRowID = By.xpath(collectionTableRowStr);
-
     public ArrayList<WebElement> tableRows = new ArrayList<>();
-
     public Map<String, WebElement> leftData = new HashMap<>();
-
     public Map<String, WebElement> rightData = new HashMap<>();
     public Map<String, String> tableContents = new HashMap<>();
-
     public int numberOfRows=0;
+    BasePage basePage = new BasePage();
 
+    public DataTable(String publishingQueue) {
+        populateTableRows();
+        populateLeftNameELements();
+    }
     public DataTable(){
         populateTableRows();
         populateLeftNameELements();

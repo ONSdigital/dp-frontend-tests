@@ -13,7 +13,9 @@ public class ContentCreation extends BasePage {
     public By activeEditButton = By.cssSelector(".selected>span>button");
     public By activeCreateButton = By.cssSelector(".selected>span>button>button");
     public By submit_button = By.cssSelector("form#UploadForm > div > button[type='submit']");
+    public By CurrentPage_AwaitingReview_css = By.cssSelector(".page__item.page__item--timeseries_dataset");
     private String content_css = ".js-browse__item[data-url='/text_to_replace']>span>span";
+    private String reviewFileButton_css = ".btn.btn-page-edit[data-path='/text_to_replace']";
     private String directory_css = ".selected > ul > li > span > span.js-browse__item-title.page__item.page__item--directory";
     private String content_headers = "//h1[text()[contains(.,'text_to_replace')]]";
     private By file_label_text = By.id("label");
@@ -72,6 +74,26 @@ public class ContentCreation extends BasePage {
         //  waitUntilTextPresent(getButton(buttonElement,"Update / Add supplementary file"), "Update / Add supplementary file");
         waitUntilTextPresent(getButton(buttonElement, "Save, submit for review and back to parent"), "Save, submit for review and back to parent");
         click(getButton(buttonElement, "Save, submit for review and back to parent"));
+        waitUntilTextPresent(getButton(buttonElement, "Save and submit for review"), "Save and submit for review");
         click(getButton(buttonElement, "Save and submit for review"));
+    }
+
+    public void ReviewFile() {
+        click(CurrentPage_AwaitingReview_css);
+        // waitUntilTextPresent(getContentId(reviewFileButton_css, "Review file"), "Review file");
+        click(getContentId(reviewFileButton_css, "economy/grossdomesticproductgdp/datasets/businessinvestment/current"));
+    }
+
+    public void ApproveCollection() {
+        waitUntilTextPresent(getButton(buttonElement, "Save, submit for approval and back to parent"), "Save, submit for approval and back to parent");
+        click(getButton(buttonElement, "Save, submit for approval and back to parent"));
+
+        waitUntilTextPresent(getButton(buttonElement, "Save and submit for approval"), "Save and submit for approval");
+        click(getButton(buttonElement, "Save and submit for approval"));
+
+        waitUntilTextPresent(getButton(buttonElement, "Approve collection"), "Approve collection");
+        click(getButton(buttonElement, "Approve collection"));
+
+
         }
 }
