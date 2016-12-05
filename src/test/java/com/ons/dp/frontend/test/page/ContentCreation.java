@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class ContentCreation extends BasePage {
 
@@ -66,7 +65,7 @@ public class ContentCreation extends BasePage {
         waitUntilTextPresent(getButton(buttonElement, "Add version"), "Add version");
         click(getButton(buttonElement, "Add version"));
         sendKeys(file_label_text, "999");
-        sendKeys(fileUpload, "/Users/admin/dev/FrontEndTestsProject/src/test/resources/files/cxnv.csdb");
+        sendKeys(fileUpload, "/src/test/resources/files/cxnv.csdb");
         Thread.sleep(10000);
         click(submit_button);
         Thread.sleep(10000);

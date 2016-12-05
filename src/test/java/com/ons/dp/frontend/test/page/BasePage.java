@@ -3,6 +3,7 @@ package com.ons.dp.frontend.test.page;
 
 import com.ons.dp.frontend.test.core.Configuration;
 import com.ons.dp.frontend.test.core.TestContext;
+import com.ons.dp.frontend.test.util.CacheService;
 import com.ons.dp.frontend.test.util.Do;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
@@ -15,6 +16,7 @@ import java.util.List;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class BasePage {
+
     public String buttonElement = "//button[text()[contains(.,'replace')]]";
     public By linkText = By.linkText("text_to_replace");
 
@@ -25,6 +27,7 @@ public class BasePage {
     public Configuration getConfig(){
         return TestContext.getConfiguration();
     }
+
 
     public WebDriverWait getWebDriverWait(){
         return TestContext.getWebDriverWait();
@@ -77,14 +80,19 @@ public class BasePage {
         }
     }
 
-    public void verifyElementsNotPresent(By... byItems) throws Exception{
-        for (By by : byItems) {
-            List<WebElement> elements = getDriver().findElements(by);
-            if (!elements.isEmpty()) {
-                System.out.println("No Element Present");
+    public void verifyElementsNotPresent(By... byItems) {
+        try {
+            for (By by : byItems) {
+                List<WebElement> elements = getDriver().findElements(by);
+                if (!elements.isEmpty()) {
+                    System.out.println("No Element Present");
 
+                }
             }
         }
+        catch(Exception ee){
+            ee.printStackTrace();
+            }
     }
 
     public void verifyElementsPresent(By... byItems) {

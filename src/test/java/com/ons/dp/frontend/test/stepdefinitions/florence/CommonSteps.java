@@ -1,4 +1,4 @@
-package stepDefs.florence;
+package com.ons.dp.frontend.test.stepdefinitions.florence;
 
 
 import com.ons.dp.frontend.test.page.BasePage;

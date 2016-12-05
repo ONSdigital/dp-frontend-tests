@@ -3,7 +3,6 @@ package com.ons.dp.frontend.test.model;
 
 import com.ons.dp.frontend.test.page.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -20,15 +19,17 @@ public class DataTable {
     public int numberOfRows=0;
     BasePage basePage = new BasePage();
 
-    public DataTable(String publishingQueue) {
-        populateTableRows();
-        populateLeftNameELements();
-    }
-    public DataTable(){
-        populateTableRows();
-        populateLeftNameELements();
-        populateRightNameElement();
-        populateTableContents();
+    public DataTable(boolean singleColumn) {
+        if(singleColumn) {
+            populateTableRows();
+            populateLeftNameELements();
+        }
+        else{
+            populateTableRows();
+            populateLeftNameELements();
+            populateRightNameElement();
+            populateTableContents();
+        }
     }
 
     public Map<String, WebElement> getLeftData(){

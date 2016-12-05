@@ -46,13 +46,13 @@
             }
 
             public Map<String, WebElement> getLeftTableContents(){
-                dataTable = new DataTable();
+                dataTable = new DataTable(false);
                 return dataTable.getLeftData();
             }
 
         public Map<String, WebElement> getRightTableContents() {
             if (dataTable == null) {
-                dataTable = new DataTable();
+                dataTable = new DataTable(false);
             }
             return dataTable.getRightData();
         }
@@ -70,7 +70,7 @@
             public void goToUsersAndAccessPage(){
                 click(getlinkText("Users and access"));
                  Do.until(getDriver(), ExpectedConditions.presenceOfElementLocated(create_username));
-                 dataTable= new DataTable();
+                 dataTable= new DataTable(false);
             }
             public void createUser(User createUser){
                 clearForm();
