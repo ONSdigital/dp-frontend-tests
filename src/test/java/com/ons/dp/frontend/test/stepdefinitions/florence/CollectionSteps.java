@@ -3,20 +3,17 @@ package com.ons.dp.frontend.test.stepdefinitions.florence;
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.Collection;
 import com.ons.dp.frontend.test.util.AnyData;
-import com.ons.dp.frontend.test.util.CacheService;
 import com.ons.dp.frontend.test.util.RandomStringGen;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.When;
 
 public class CollectionSteps {
     Collection collection = new Collection();
-    AnyData anyData = new AnyData();
+
     @Given("I create a (MANUAL|SCHEDULED) collection type$")
     public void createColl(String collType) {
-            String collectionName = "AutoTest"+ RandomStringGen.getRandomString(5);
-        anyData.setStringData(collectionName);
-            TestContext.getCacheService().setDataMap("collectionName", anyData);
+        String collectionName = "AutoTest_" + RandomStringGen.getRandomString(5);
+        TestContext.getCacheService().setDataMap("collectionName", new AnyData(collectionName));
             switch (collType){
             case "MANUAL":
                     collection.createCollection(collectionName,Collection.CollectionTypes.MANUAL);

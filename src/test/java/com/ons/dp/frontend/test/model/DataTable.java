@@ -32,16 +32,24 @@ public class DataTable {
         }
     }
 
+    public static void main(String[] args) {
+        System.out.println(ContentText.ECONOMY.toString());
+    }
+
     public Map<String, WebElement> getLeftData(){
         return leftData;
     }
+
     public Map<String, WebElement> getRightData(){
         return rightData;
     }
+
     public Map<String, String> getTableContents(){return tableContents;}
+
     public ArrayList<WebElement> getTableRowElements() {
         return tableRows;
     }
+
     public void populateLeftNameELements() {
         for(int row =1;row<=numberOfRows;row++) {
             String collectionName = collectionTableRowStr+"["+row+"]/td[1]";
@@ -49,24 +57,27 @@ public class DataTable {
         }
 
     }
+
     public void populateRightNameElement(){
             for(int row =1;row<=numberOfRows;row++) {
             String collectionName = collectionTableRowStr+"["+row+"]/td[2]";
             rightData.put(basePage.getElementText(By.xpath(collectionName)),basePage.getElement(By.xpath(collectionName)));
             }
     }
+
     public void populateTableRows(){
         tableRows = (ArrayList<WebElement>) basePage.findElementsBy(collectionTableRowID);
         numberOfRows = tableRows.size();
     }
+
     public void populateTableContents(){
-        for(int row =1;row<=numberOfRows;row++) {
+        for(int row = 1; row<=numberOfRows; row++) {
             String name = collectionTableRowStr+"["+row+"]/td[1]";
             String details = collectionTableRowStr+"["+row+"]/td[2]";
             tableContents.put(basePage.getElementText(By.xpath(name)),basePage.getElementText(By.xpath(details)));
         }
-    }
 
+    }
 
 
 

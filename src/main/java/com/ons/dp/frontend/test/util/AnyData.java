@@ -2,10 +2,21 @@ package com.ons.dp.frontend.test.util;
 
 
 public class AnyData {
-
     private String stringData;
     private int intData;
     private Object dataObject;
+
+    public AnyData(int intData) {
+        setIntData(intData);
+    }
+
+    public AnyData(String stringData) {
+        setStringData(stringData);
+    }
+
+    public AnyData(Object dataObject) {
+        setDataObject(dataObject);
+    }
 
     public String getStringData() {
         return stringData;

@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 public class LoginPage extends BasePage {
 
     public By input_email = By.id("email");
+    public By input_password = By.id("password");
+    public By submit = By.id("login");
 
     public By getInput_email() {
         return input_email;
@@ -19,13 +21,8 @@ public class LoginPage extends BasePage {
         return submit;
     }
 
-    public By input_password = By.id("password");
-    public By submit = By.id("login");
-
-
-
     public void openLoginPage(){
-        navigateToUrl(getConfig().getFlorence_develop());
+        navigateToUrl(getConfig().getFlorence_discovery());
 
     }
     public void login(String email, String pwd)
