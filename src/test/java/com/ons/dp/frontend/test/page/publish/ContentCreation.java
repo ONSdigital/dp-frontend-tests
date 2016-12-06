@@ -1,6 +1,8 @@
-package com.ons.dp.frontend.test.page;
+package com.ons.dp.frontend.test.page.publish;
 
 import com.ons.dp.frontend.test.model.ContentText;
+import com.ons.dp.frontend.test.page.BasePage;
+import com.ons.dp.frontend.test.util.Helper;
 import com.ons.dp.frontend.test.util.RandomStringGen;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -24,8 +26,8 @@ public class ContentCreation extends BasePage {
 	public By file_label_text = By.id("label");
 	public By fileUpload = By.name("files");
 	public String active_dataset_buttons = ".selected > span > span >button.btn-browse-text_to_replace";
-	public String fileUploadLoc = "src/test/resources/files/cxnv.csdb";
-	public By fileUploadResp = By.id("response");
+    public String fileUploadLoc = "/Users/admin/dev/FrontEndTestsProject/src/test/resources/files/cxnv.csdb";
+    public By fileUploadResp = By.id("response");
 	public int publishedVersions = 0;
 
 	public int getNumberOfPublishedVersions() {
@@ -80,42 +82,41 @@ public class ContentCreation extends BasePage {
 
 	public void upLoadFile() {
 		click(getContentHeaders(ContentText.DOWNLOAD_OPTIONS.getContentString()));
-		getPublishedVersions();
 		waitUntilTextPresent(getButton(buttonElement, ContentText.UPDATE_ADD_SUPLEMENTARY_FILE.getContentString()), ContentText.UPDATE_ADD_SUPLEMENTARY_FILE.getContentString());
 		click(getButton(buttonElement, ContentText.UPDATE_ADD_SUPLEMENTARY_FILE.getContentString()));
 		click(getContentHeaders(ContentText.VERSIONS.getContentString()));
 		waitUntilTextPresent(getButton(buttonElement, ContentText.ADD_VERSION.getContentString()), ContentText.ADD_VERSION.getContentString());
-		click(getButton(buttonElement, ContentText.ADD_VERSION.getContentString()));
+        getPublishedVersions();
+        click(getButton(buttonElement, ContentText.ADD_VERSION.getContentString()));
 		sendKeys(file_label_text, RandomStringGen.getRandomString(4));
 		sendKeys(fileUpload, fileUploadLoc);
 		getWebDriverWait().until(ExpectedConditions.invisibilityOfElementWithText(fileUploadResp, "Uploading . . ."));
 		click(submit_button);
 		getWebDriverWait().until(ExpectedConditions.invisibilityOfElementWithText(fileUploadResp, "Uploading . . ."));
-		//       click(activeEditButton);
-	}
-
-	public void save_Collection_for_review() {
-		waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_RETURN_TO_PARENT.getContentString()), ContentText.SAVE_SUBMIT_RETURN_TO_PARENT.getContentString());
-		click(getButton(buttonElement, ContentText.SAVE_SUBMIT_RETURN_TO_PARENT.getContentString()));
-		waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()), ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString());
-		click(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()));
-	}
-
-	public void goToGDP() throws Exception {
-		goToTimeSeries();
-		upLoadFile();
-
-
     }
+
+
+    public void save_Collection_for_review() throws Exception {
+        Helper.pause(10000);
+        waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_RETURN_TO_PARENT.getContentString()), ContentText.SAVE_SUBMIT_RETURN_TO_PARENT.getContentString());
+        System.out.println("SAVE AND SUBMIT BUTTONS------- " + findElementsBy(By.cssSelector("button.btn-edit-save-and-submit-for-review")).size());
+        click(By.cssSelector("button.btn-edit-save-and-submit-for-review"));
+        Helper.pause(10000);
+        waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()), ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString());
+        click(By.cssSelector("section.workspace-edit > nav > button.btn-edit-save-and-submit-for-review"));
+        Helper.pause(10000);
+
+	}
+
 
 	public void reviewFile() {
 		click(awaiting_review);
-		click(getContentId(reviewFileButt, ContentText.ECONOMY.getContentString() + "/" + ContentText.GROSS_DOMESTIC_PRODUCT_GBP.getContentString() + "/" +
-				ContentText.CURRENT.getContentString()));
-	}
+        click(getContentId(reviewFileButt, "economy/grossdomesticproductgdp/datasets/businessinvestment/current"));
+    }
 
 	public void approveCollection() {
-		waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString()), ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString());
+        Helper.pause(5000);
+        waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString()), ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString());
 		click(getButton(buttonElement, ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString()));
 
 		waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_APPROVAL.getContentString()), ContentText.SAVE_SUBMIT_FOR_APPROVAL.getContentString());
@@ -123,6 +124,7 @@ public class ContentCreation extends BasePage {
 
 		waitUntilTextPresent(getButton(buttonElement, ContentText.APPROVE_COLLECTION.getContentString()), ContentText.APPROVE_COLLECTION.getContentString());
 		click(getButton(buttonElement, ContentText.APPROVE_COLLECTION.getContentString()));
+        Helper.pause(5000);
 
 
         }

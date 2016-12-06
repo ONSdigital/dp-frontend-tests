@@ -1,7 +1,9 @@
-package com.ons.dp.frontend.test.page;
+package com.ons.dp.frontend.test.page.publish;
 
 import com.ons.dp.frontend.test.model.DataTable;
+import com.ons.dp.frontend.test.page.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 public class PublishingQueue extends BasePage {
@@ -14,6 +16,7 @@ public class PublishingQueue extends BasePage {
     DataTable dataTable;
 
     public void publishQueue() {
+        getWebDriverWait().until(ExpectedConditions.textToBe(getlinkText(publish_queue_link), publish_queue_link));
         click(getlinkText(publish_queue_link));
     }
 

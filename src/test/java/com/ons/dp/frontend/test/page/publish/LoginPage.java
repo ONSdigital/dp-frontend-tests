@@ -1,6 +1,7 @@
-package com.ons.dp.frontend.test.page;
+package com.ons.dp.frontend.test.page.publish;
 
 
+import com.ons.dp.frontend.test.page.BasePage;
 import org.openqa.selenium.By;
 
 public class LoginPage extends BasePage {
@@ -22,7 +23,7 @@ public class LoginPage extends BasePage {
     }
 
     public void openLoginPage(){
-        navigateToUrl(getConfig().getFlorence_discovery());
+        navigateToUrl(getConfig().getFlorence_develop());
 
     }
     public void login(String email, String pwd)

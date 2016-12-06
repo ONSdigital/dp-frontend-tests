@@ -1,7 +1,7 @@
 package com.ons.dp.frontend.test.stepdefinitions.florence;
 
 import com.ons.dp.frontend.test.core.TestContext;
-import com.ons.dp.frontend.test.page.Collection;
+import com.ons.dp.frontend.test.page.publish.Collection;
 import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.RandomStringGen;
 import cucumber.api.java.en.And;

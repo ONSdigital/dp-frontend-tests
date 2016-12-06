@@ -1,6 +1,7 @@
-package com.ons.dp.frontend.test.page;
+package com.ons.dp.frontend.test.page.publish;
 
 import com.ons.dp.frontend.test.model.DataTable;
+import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.Do;
 import com.ons.dp.frontend.test.util.RandomStringGen;
@@ -10,7 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 
-public class Collection extends BasePage{
+public class Collection extends BasePage {
 
     public By header = By.className("text-align-center");
     public By collection_name = By.id("collectionname");

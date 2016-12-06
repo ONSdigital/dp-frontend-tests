@@ -1,7 +1,8 @@
-    package com.ons.dp.frontend.test.page;
+package com.ons.dp.frontend.test.page.publish;
 
     import com.ons.dp.frontend.test.model.DataTable;
     import com.ons.dp.frontend.test.model.User;
+    import com.ons.dp.frontend.test.page.BasePage;
     import com.ons.dp.frontend.test.util.Do;
     import org.openqa.selenium.By;
     import org.openqa.selenium.WebElement;

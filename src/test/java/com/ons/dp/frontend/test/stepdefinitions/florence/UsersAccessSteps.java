@@ -2,7 +2,7 @@ package com.ons.dp.frontend.test.stepdefinitions.florence;
 
 import com.ons.dp.frontend.test.model.User;
 import com.ons.dp.frontend.test.model.User.UserType;
-import com.ons.dp.frontend.test.page.UsersAccess;
+import com.ons.dp.frontend.test.page.publish.UsersAccess;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

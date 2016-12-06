@@ -9,8 +9,10 @@ import java.util.logging.Logger;
 
 public class Configuration {
     public static final int DEFAULT_TIMEOUT_VALUE = 25;
+    public static int DEFAULT_TIME_OUT = 2000;
     private Logger log = Logger.getLogger(Configuration.class.getCanonicalName());
     private String onsURL;
+    private String onsdevelop_URL;
     private String florence_develop;
     private String ermintrude_develop;
     private String florence_discovery;
@@ -21,7 +23,6 @@ public class Configuration {
     private boolean browserStackTunnel;
     private String browserStackUsername;
     private String browserStackAuthkey;
-    public static int DEFAULT_TIME_OUT = 2000;
 
     public Configuration() {
         loadConfig("/files/local_config.yml");
@@ -32,6 +33,10 @@ public class Configuration {
 
      public String getOnsURL() {
         return onsURL;
+    }
+
+    public String getOnsdevelop_URL() {
+        return onsdevelop_URL;
     }
     public String getFlorence_develop() {
         return florence_develop;
@@ -87,6 +92,9 @@ public class Configuration {
         if (config.containsKey("ons_url")) {
             onsURL = (String) config.get("ons_url");
         }
+        if (config.containsKey("ons_develop")) {
+            onsdevelop_URL = (String) config.get("ons_develop");
+        }
         if (config.containsKey("florence_develop")) {
             florence_develop = (String) config.get("florence_develop");
         }
@@ -124,6 +132,10 @@ public class Configuration {
         String ons_url_value = Helper.getSetting("TEST_ONS_URL");
         if (ons_url_value != null) {
             onsURL = ons_url_value;
+        }
+        String onsdevelop_url_value = Helper.getSetting("TEST_ONSDEVELOP_URL");
+        if (onsdevelop_url_value != null) {
+            onsdevelop_URL = onsdevelop_url_value;
         }
         String florence_develop_value = Helper.getSetting("TEST_FLORENCE_DEV");
         if (florence_develop_value != null) {
@@ -172,6 +184,7 @@ public class Configuration {
     public String toString() {
         return "Configuration{" +
                 "onsURL=" + onsURL +
+                "onsdevelop_URL=" + onsdevelop_URL +
                 ", florence_develop=" + florence_develop +
                 ", ermintrude_develop=" + ermintrude_develop +
                 ", florence_discovery=" + florence_discovery +
