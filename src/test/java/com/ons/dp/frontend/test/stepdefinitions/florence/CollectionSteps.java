@@ -27,6 +27,7 @@ public class CollectionSteps {
     public void deleteCollection() throws Throwable {
         String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
         collection.deleteCollection(colName);
+
     }
     @And("^I delete all the worked on pages in the collection")
     public void deleteAllTheWorkedOnpages(){

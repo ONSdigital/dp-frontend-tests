@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 
 public class Homepage extends BasePage {
     public By search = By.id("nav-search");
-    // public String timeSeriesID = "cxnv";
 
     public void openHomePage() {
         navigateToUrl(getConfig().getOnsdevelop_URL());

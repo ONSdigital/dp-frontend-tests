@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class ContentCreation extends BasePage {
@@ -26,8 +27,8 @@ public class ContentCreation extends BasePage {
 	public By file_label_text = By.id("label");
 	public By fileUpload = By.name("files");
 	public String active_dataset_buttons = ".selected > span > span >button.btn-browse-text_to_replace";
-    public String fileUploadLoc = "/Users/admin/dev/FrontEndTestsProject/src/test/resources/files/cxnv.csdb";
-    public By fileUploadResp = By.id("response");
+	public String fileUploadLoc = "src/test/resources/files/cxnv.csdb";
+	public By fileUploadResp = By.id("response");
 	public int publishedVersions = 0;
 
 	public int getNumberOfPublishedVersions() {
@@ -89,7 +90,8 @@ public class ContentCreation extends BasePage {
         getPublishedVersions();
         click(getButton(buttonElement, ContentText.ADD_VERSION.getContentString()));
 		sendKeys(file_label_text, RandomStringGen.getRandomString(4));
-		sendKeys(fileUpload, fileUploadLoc);
+		String fileLoc = new File(fileUploadLoc).getAbsolutePath();
+		sendKeys(fileUpload, fileLoc);
 		getWebDriverWait().until(ExpectedConditions.invisibilityOfElementWithText(fileUploadResp, "Uploading . . ."));
 		click(submit_button);
 		getWebDriverWait().until(ExpectedConditions.invisibilityOfElementWithText(fileUploadResp, "Uploading . . ."));
@@ -100,11 +102,11 @@ public class ContentCreation extends BasePage {
         Helper.pause(10000);
         waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_RETURN_TO_PARENT.getContentString()), ContentText.SAVE_SUBMIT_RETURN_TO_PARENT.getContentString());
         System.out.println("SAVE AND SUBMIT BUTTONS------- " + findElementsBy(By.cssSelector("button.btn-edit-save-and-submit-for-review")).size());
-        click(By.cssSelector("button.btn-edit-save-and-submit-for-review"));
-        Helper.pause(10000);
+	    click(getButton(buttonElement, ContentText.SAVE_SUBMIT_RETURN_TO_PARENT.getContentString()));
+	    Helper.pause(10000);
         waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()), ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString());
-        click(By.cssSelector("section.workspace-edit > nav > button.btn-edit-save-and-submit-for-review"));
-        Helper.pause(10000);
+	    click(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()));
+	    Helper.pause(10000);
 
 	}
 
@@ -128,4 +130,6 @@ public class ContentCreation extends BasePage {
 
 
         }
+
+
 }

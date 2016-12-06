@@ -2,9 +2,6 @@ package Util;
 
 import org.apache.log4j.Logger;
 
-/**
- * Created by admin on 31/10/2016.
- */
 public class Log {
 
     private static Logger Log = Logger.getLogger(Log.class.getName());

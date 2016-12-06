@@ -2,9 +2,7 @@ package com.ons.dp.frontend.test.page.publish;
 
 import com.ons.dp.frontend.test.model.DataTable;
 import com.ons.dp.frontend.test.page.BasePage;
-import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.Do;
-import com.ons.dp.frontend.test.util.RandomStringGen;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -29,6 +27,7 @@ public class Collection extends BasePage {
     public By reviewed_pages = By.id("reviewed-uris");
     public By page_delete =
             By.cssSelector("li.selected>div.page__buttons--list>button.page-delete");
+    public By work_on_collection = getButton(buttonElement, "Work on collection");
     DataTable dataTable;
 
     public boolean getCollection(String collectionName) {
@@ -77,7 +76,6 @@ public class Collection extends BasePage {
         Do.until(getDriver(),ExpectedConditions.presenceOfElementLocated(completed_pages));
         ArrayList<WebElement> coll_edited_pages = (ArrayList<WebElement>) findElementsBy(pages_edited_approval);
         while(coll_edited_pages.size()>0){
-            //           getWebDriverWait().withTimeout(10000,TimeUnit.MILLISECONDS);
             getWebDriverWait().until(ExpectedConditions.elementToBeClickable(coll_edited_pages.get(0)));
             getWebDriverWait().until(ExpectedConditions.visibilityOf(coll_edited_pages.get(0)));
             ;

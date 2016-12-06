@@ -1,8 +1,6 @@
 package com.ons.dp.frontend.test.model;
 
-/**
- * Created by giridharvasudevan on 06/12/2016.
- */
+
 public enum ContentText {
 	ECONOMY("economy"),
 	GROSS_DOMESTIC_PRODUCT_GBP("grossdomesticproductgdp"),
