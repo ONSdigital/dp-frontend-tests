@@ -5,9 +5,6 @@ import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 
-/**
- * Created by admin on 12/10/2016.
- */
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features/e2e-scenarios",

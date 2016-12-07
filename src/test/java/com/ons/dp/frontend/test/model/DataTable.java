@@ -32,10 +32,6 @@ public class DataTable {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println(ContentText.ECONOMY.toString());
-    }
-
     public Map<String, WebElement> getLeftData(){
         return leftData;
     }

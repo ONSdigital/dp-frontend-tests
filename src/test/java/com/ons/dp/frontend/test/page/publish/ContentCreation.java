@@ -1,5 +1,6 @@
 package com.ons.dp.frontend.test.page.publish;
 
+
 import com.ons.dp.frontend.test.model.ContentText;
 import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.util.Helper;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.io.File;
 import java.util.ArrayList;
 
+
 public class ContentCreation extends BasePage {
 
 
@@ -20,7 +22,7 @@ public class ContentCreation extends BasePage {
 	public By submit_button = By.cssSelector("form#UploadForm > div > button[type='submit']");
 	public By awaiting_review = By.cssSelector(".page__item.page__item--timeseries_dataset");
 	public By version_rows = By.cssSelector("div#version-section>div");
-	public String content_css = ".js-browse__item[data-url='/text_to_replace']>span>span";
+	public String content_css = ".js-browse__item[data-url='text_to_replace']>span>span";
 	public String reviewFileButt = ".btn.btn-page-edit[data-path='/text_to_replace']";
 	public String directory_css = ".selected > ul > li > span > span.js-browse__item-title.page__item.page__item--directory";
 	public String content_headers = "//h1[text()[contains(.,'text_to_replace')]]";
@@ -71,15 +73,23 @@ public class ContentCreation extends BasePage {
 
 	}
 
-	public void goToTimeSeries() {
-		click(getContentId(content_css, ContentText.ECONOMY.getContentString()));
-		click(getContentId(content_css, ContentText.ECONOMY.getContentString() + "/" + ContentText.GROSS_DOMESTIC_PRODUCT_GBP.getContentString()));
-		getDirectoryElement(ContentText.DATASETS.getContentString()).click();
-		click(getContentId(content_css, ContentText.ECONOMY.getContentString() + "/" + ContentText.GROSS_DOMESTIC_PRODUCT_GBP.getContentString() + "/" +
-				ContentText.DATASETS.getContentString() + "/" + ContentText.BUSINESS_INVESTMENT.getContentString()));
-		click(activeEditButton);
 
+	public void goToCMSContentLinks(String contentFinder) {
+		String[] splitString = contentFinder.split("/");
+		StringBuilder sb = new StringBuilder();
+		for (String ss : splitString) {
+			sb.append("/" + ss);
+			try {
+				getElement(getContentId(content_css, sb.toString()));
+				click(getContentId(content_css, sb.toString()));
+			} catch (Exception ee) {
+				getDirectoryElement(ss).click();
+			}
+
+		}
+		click(activeEditButton);
 	}
+
 
 	public void upLoadFile() {
 		click(getContentHeaders(ContentText.DOWNLOAD_OPTIONS.getContentString()));

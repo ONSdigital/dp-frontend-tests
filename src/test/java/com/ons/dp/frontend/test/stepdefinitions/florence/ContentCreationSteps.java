@@ -10,9 +10,9 @@ import cucumber.api.java.en.When;
 public class ContentCreationSteps {
 ContentCreation contentCreation = new ContentCreation();
 
-    @When("I navigate to Economy$")
-    public void navigateTo() throws Exception {
-        contentCreation.goToTimeSeries();
+    @When("I browse to the content (.*) under collections$")
+    public void browseToTheContent(String contentToBrowse) throws Exception {
+        contentCreation.goToCMSContentLinks(contentToBrowse);
         contentCreation.upLoadFile();
         TestContext.getCacheService().setDataMap("versionsPublishedbefore",
                 new AnyData(contentCreation.getNumberOfPublishedVersions()));
