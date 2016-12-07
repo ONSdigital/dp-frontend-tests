@@ -111,7 +111,6 @@ public class ContentCreation extends BasePage {
     public void save_Collection_for_review() throws Exception {
         Helper.pause(10000);
         waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_RETURN_TO_PARENT.getContentString()), ContentText.SAVE_SUBMIT_RETURN_TO_PARENT.getContentString());
-        System.out.println("SAVE AND SUBMIT BUTTONS------- " + findElementsBy(By.cssSelector("button.btn-edit-save-and-submit-for-review")).size());
 	    click(getButton(buttonElement, ContentText.SAVE_SUBMIT_RETURN_TO_PARENT.getContentString()));
 	    Helper.pause(10000);
         waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()), ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString());

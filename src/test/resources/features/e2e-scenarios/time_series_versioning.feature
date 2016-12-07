@@ -1,6 +1,7 @@
+@time_series
 Feature: End to End time series versioning tests
 
-  @time_series
+
   Scenario: Creating and publishing a time series collection
     Given I am logged in as an admin
     And I create a MANUAL collection type
@@ -27,15 +28,3 @@ Feature: End to End time series versioning tests
     And I delete all the worked on pages in the collection
     And I delete the collection
     Then I log out of florence
-
-
-
-
-
-
-
-
-
-
-
-

@@ -80,6 +80,8 @@ public class Browser {
         webDriver.manage().window().setSize(dim);
     }
 
-
+    public static void closeBrowser() {
+        webDriver.close();
+    }
 
 }
