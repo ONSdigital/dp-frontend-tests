@@ -29,7 +29,7 @@ public class ContentCreation extends BasePage {
 	public By file_label_text = By.id("label");
 	public By fileUpload = By.name("files");
 	public String active_dataset_buttons = ".selected > span > span >button.btn-browse-text_to_replace";
-	public String fileUploadLoc = "src/test/resources/files/cxnv.csdb";
+
 	public By fileUploadResp = By.id("response");
 	public int publishedVersions = 0;
 
@@ -91,8 +91,8 @@ public class ContentCreation extends BasePage {
 	}
 
 
-	public void upLoadFile() {
-		click(getContentHeaders(ContentText.DOWNLOAD_OPTIONS.getContentString()));
+    public void upLoadFile(String fileType) {
+        click(getContentHeaders(ContentText.DOWNLOAD_OPTIONS.getContentString()));
 		waitUntilTextPresent(getButton(buttonElement, ContentText.UPDATE_ADD_SUPLEMENTARY_FILE.getContentString()), ContentText.UPDATE_ADD_SUPLEMENTARY_FILE.getContentString());
 		click(getButton(buttonElement, ContentText.UPDATE_ADD_SUPLEMENTARY_FILE.getContentString()));
 		click(getContentHeaders(ContentText.VERSIONS.getContentString()));
@@ -100,11 +100,29 @@ public class ContentCreation extends BasePage {
         getPublishedVersions();
         click(getButton(buttonElement, ContentText.ADD_VERSION.getContentString()));
 		sendKeys(file_label_text, RandomStringGen.getRandomString(4));
-		String fileLoc = new File(fileUploadLoc).getAbsolutePath();
-		sendKeys(fileUpload, fileLoc);
+        String fileLoc = new File(ChooseFile(fileType)).getAbsolutePath();
+        sendKeys(fileUpload, fileLoc);
 		getWebDriverWait().until(ExpectedConditions.invisibilityOfElementWithText(fileUploadResp, "Uploading . . ."));
 		click(submit_button);
 		getWebDriverWait().until(ExpectedConditions.invisibilityOfElementWithText(fileUploadResp, "Uploading . . ."));
+    }
+
+    public String ChooseFile(String fileType) {
+        String fileLocToReturn = "";
+        switch (fileType) {
+            case "CSDB":
+                fileLocToReturn = "src/test/resources/files/cxnv.csdb";
+                break;
+            case "CSV":
+                fileLocToReturn = "src/test/resources/files/cxnv.csx";
+                break;
+            case "XLS":
+                fileLocToReturn = "src/test/resources/files/cxnv.xls";
+                break;
+
+        }
+        return fileLocToReturn;
+
     }
 
 

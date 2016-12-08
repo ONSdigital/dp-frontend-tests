@@ -2,10 +2,12 @@
 Feature: End to End time series versioning tests
 
 
-  Scenario: Creating and publishing a time series collection
+  Scenario Outline: Creating and publishing a time series collection
     Given I am logged in as an admin
     And I create a MANUAL collection type
     And I browse to the content economy/grossdomesticproductgdp/datasets/businessinvestment under collections
+    And I upload a <filetype> file
+    And I submit the collection for review
     Then I log out of florence
     Then I am logged in as a lead publisher
     When I select the collection
@@ -18,7 +20,11 @@ Feature: End to End time series versioning tests
     When I navigate to Business Investment time series dataset
     And I click the previous versions
     Then I should see the new time series dataset
-
+    Examples:
+      | filetype |
+      | CSDB     |
+      | CSV      |
+      | XLS      |
 
   Scenario: Create and Delete a collection
     Given I am logged in as an admin
