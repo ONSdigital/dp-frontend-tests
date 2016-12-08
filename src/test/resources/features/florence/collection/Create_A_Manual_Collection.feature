@@ -20,17 +20,9 @@ Feature: Check a collection in florence website
     And I approve the collection
     When I click on publishing queue and publish collection
     Then I logout of florence
+    Then I navigate to the ONS Website
     Then I browse to "aboutus" on the ONS
-
-
-#
-#    Then I should see the text "ONS Stands for Office for national statistics." on the bottom of the page
-
-
-
-
-
-
+    And the ONS website contains the published changes
 
 
 
