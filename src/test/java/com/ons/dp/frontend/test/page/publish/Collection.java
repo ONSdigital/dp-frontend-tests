@@ -1,8 +1,10 @@
 package com.ons.dp.frontend.test.page.publish;
 
+import Util.Log;
 import com.ons.dp.frontend.test.model.DataTable;
 import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.util.Do;
+import com.ons.dp.frontend.test.util.Helper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,7 +30,10 @@ public class Collection extends BasePage {
     public By page_delete =
             By.cssSelector("li.selected>div.page__buttons--list>button.page-delete");
     public By work_on_collection = getButton(buttonElement, "Work on collection");
-    DataTable dataTable;
+	public String reviewFileButt = ".btn.btn-page-edit[data-path='/text_to_replace']";
+
+
+	DataTable dataTable;
 
     public boolean getCollection(String collectionName) {
         boolean elementPresent = false;
@@ -69,12 +74,42 @@ public class Collection extends BasePage {
     }
 
 
+	public void openSavedPage(String savedPage) {
+		waitAfterCollSelection();
+		ArrayList<WebElement> coll_edited_pages = (ArrayList<WebElement>) findElementsBy(pages_edited_approval);
+		try {
+			for (WebElement page : coll_edited_pages) {
+				if (page.getText().contains(savedPage)) {
+					page.click();
+					break;
+				}
+			}
+		} catch (NullPointerException ee) {
+			Log.info("Couldn't find the reviewed page");
+		}
+
+
+	}
+
+	public void reviewFile(String collectionName, String savedPage, String reviewLoc) {
+		openSavedPage(savedPage);
+		click(getContentId(reviewFileButt, reviewLoc));
+	}
+
+	public void waitAfterCollSelection() {
+		getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(progress_pages));
+		getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(reviewed_pages));
+		getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(completed_pages));
+		getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(getButton(buttonElement,
+				"Edit collection details")));
+		Helper.pause(2000);
+		getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(getButton(buttonElement, "Work on collection")));
+	}
+
     // returns true when all the pages are deleted
     public boolean deleteAllWorkedPages(String collectionName){
-        Do.until(getDriver(),ExpectedConditions.presenceOfElementLocated(progress_pages));
-        Do.until(getDriver(),ExpectedConditions.presenceOfElementLocated(reviewed_pages));
-        Do.until(getDriver(),ExpectedConditions.presenceOfElementLocated(completed_pages));
-        ArrayList<WebElement> coll_edited_pages = (ArrayList<WebElement>) findElementsBy(pages_edited_approval);
+	    waitAfterCollSelection();
+	    ArrayList<WebElement> coll_edited_pages = (ArrayList<WebElement>) findElementsBy(pages_edited_approval);
         while(coll_edited_pages.size()>0){
             getWebDriverWait().until(ExpectedConditions.elementToBeClickable(coll_edited_pages.get(0)));
             getWebDriverWait().until(ExpectedConditions.visibilityOf(coll_edited_pages.get(0)));

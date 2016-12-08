@@ -33,7 +33,7 @@ public class Browser {
         return webDriverWait;
     }
     public static void setWebDriverWait(WebDriver driver){
-        webDriverWait = new WebDriverWait(driver, 1000);
+        webDriverWait = new WebDriverWait(driver, 20);
     }
 
     public static void setDriver(String browser){

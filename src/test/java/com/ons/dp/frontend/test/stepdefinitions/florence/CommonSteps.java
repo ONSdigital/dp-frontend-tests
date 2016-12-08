@@ -7,7 +7,7 @@ import cucumber.api.java.en.And;
 public class CommonSteps {
     private BasePage basePage = new BasePage();
 
-    @And("I log out of florence")
+    @And("I logout of florence")
     public void logout_florence() {
         basePage.click(basePage.getlinkText("Logout"));
     }

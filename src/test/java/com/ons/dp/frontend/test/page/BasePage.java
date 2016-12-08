@@ -3,7 +3,6 @@ package com.ons.dp.frontend.test.page;
 
 import com.ons.dp.frontend.test.core.Configuration;
 import com.ons.dp.frontend.test.core.TestContext;
-import com.ons.dp.frontend.test.util.CacheService;
 import com.ons.dp.frontend.test.util.Do;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
@@ -227,6 +226,11 @@ public class BasePage {
                 click(by);
             }
         }
+
+    public By getContentId(String cssString, String text) {
+        String content = cssString.replace("text_to_replace", text);
+        return By.cssSelector(content);
+    }
 }
 
 

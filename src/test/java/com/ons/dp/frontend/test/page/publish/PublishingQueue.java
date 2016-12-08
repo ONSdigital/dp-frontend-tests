@@ -25,7 +25,7 @@ public class PublishingQueue extends BasePage {
         waitUntilTextPresent(collection_css, "[manual collection]");
         dataTable = new DataTable(true);
         dataTable.getLeftData().get("[manual collection]").click();
-
+        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(collection_css));
         click(collection_name_css);
         waitUntilTextPresent(getButton(buttonElement, publish_collection_link), publish_collection_link);
         click(getButton(buttonElement, publish_collection_link));
