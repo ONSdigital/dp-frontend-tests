@@ -20,10 +20,8 @@ public class ContentCreation extends BasePage {
     public By activeEditButton = By.cssSelector(".selected>span>button");
 	public By activeCreateButton = By.cssSelector(".selected>span>button>button");
 	public By submit_button = By.cssSelector("form#UploadForm > div > button[type='submit']");
-	public By awaiting_review = By.cssSelector(".page__item.page__item--timeseries_dataset");
 	public By version_rows = By.cssSelector("div#version-section>div");
 	public String content_css = ".js-browse__item[data-url='text_to_replace']>span>span";
-	public String reviewFileButt = ".btn.btn-page-edit[data-path='/text_to_replace']";
 	public String directory_css = ".selected > ul > li > span > span.js-browse__item-title.page__item.page__item--directory";
 	public String content_headers = "//h1[text()[contains(.,'text_to_replace')]]";
 	public By file_label_text = By.id("label");
@@ -31,9 +29,11 @@ public class ContentCreation extends BasePage {
 	public By selectNewPage = By.id("pagetype");
 	public By pageNameField = By.id("pagename");
 	public String active_dataset_buttons = ".selected > span > span >button.btn-browse-text_to_replace";
+	public By editAccordion = By.cssSelector("div.ui-accordion-content-active > div#sortable-content > div > div > button#content-edit");
 
 	public By fileUploadResp = By.id("response");
 	public int publishedVersions = 0;
+	public By markdownEditor = By.id("wmd-input");
 
 	public int getNumberOfPublishedVersions() {
 		return publishedVersions;
@@ -51,10 +51,11 @@ public class ContentCreation extends BasePage {
        return (ArrayList<WebElement>) findElementsBy(By.cssSelector(directory_css));
     }
 
-    public By getContentId(String cssString, String text) {
-        String content = cssString.replace("text_to_replace", text);
-        return By.cssSelector(content);
-    }
+	public void enterTextIntoMarkDownEditor(String textToEnter) {
+		clear(markdownEditor);
+		sendKeys(markdownEditor, textToEnter);
+	}
+
     public WebElement getDirectoryElement(String directoryName){
         WebElement dirnameToReturn =null;
         for(WebElement dir: getDirectoryElements()){
@@ -92,6 +93,18 @@ public class ContentCreation extends BasePage {
 		click(activeEditButton);
 	}
 
+	public void clickOnActivatedEdit() {
+		click(activeEditButton);
+	}
+
+	public void clickEditAccordion() {
+		getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(editAccordion));
+		click(editAccordion);
+	}
+
+	public void editContentHeader(ContentText contentText) {
+		click(getContentHeaders(contentText.getContentString()));
+	}
 
     public void upLoadFile(String fileType) {
         click(getContentHeaders(ContentText.DOWNLOAD_OPTIONS.getContentString()));
@@ -127,34 +140,48 @@ public class ContentCreation extends BasePage {
 
     }
 
+	public void saveSubmitForReview() {
+		try {
+			Helper.pause(5000);
+			getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(getButton(buttonElement, "Save,")));
+			click(getButton(buttonElement, "Save,"));
+			Helper.pause(5000);
 
-    public void save_Collection_for_review() throws Exception {
-        Helper.pause(10000);
-        waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_RETURN_TO_PARENT.getContentString()), ContentText.SAVE_SUBMIT_RETURN_TO_PARENT.getContentString());
-	    click(getButton(buttonElement, ContentText.SAVE_SUBMIT_RETURN_TO_PARENT.getContentString()));
-	    Helper.pause(10000);
-        waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()), ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString());
-	    click(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()));
-	    Helper.pause(10000);
+
+		} catch (Exception ee) {
+			getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(getButton(buttonElement, "Save changes and exit")));
+			click(getButton(buttonElement, "Save changes and exit"));
+		}
+		waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()), ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString());
+		click(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()));
+		Helper.pause(10000);
 
 	}
 
 
-	public void reviewFile() {
-		click(awaiting_review);
-        click(getContentId(reviewFileButt, "economy/grossdomesticproductgdp/datasets/businessinvestment/current"));
-    }
+
 
 	public void approveCollection() {
         Helper.pause(5000);
-        waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString()), ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString());
-		click(getButton(buttonElement, ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString()));
+		try {
+			waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString()), ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString());
+			click(getButton(buttonElement, ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString()));
+		} catch (Exception ee) {
+			System.out.println("save and submit for approval And Return to parent does not exist");
+		}
+		try {
+			waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_APPROVAL.getContentString()), ContentText.SAVE_SUBMIT_FOR_APPROVAL.getContentString());
+			click(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_APPROVAL.getContentString()));
+		} catch (Exception ee) {
+			System.out.println("submit for approval does not exist");
+		}
+		try {
+			waitUntilTextPresent(getButton(buttonElement, ContentText.APPROVE_COLLECTION.getContentString()), ContentText.APPROVE_COLLECTION.getContentString());
+			click(getButton(buttonElement, ContentText.APPROVE_COLLECTION.getContentString()));
+		} catch (Exception ee) {
+			System.out.println("Approve Collection does not exist");
+		}
 
-		waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_APPROVAL.getContentString()), ContentText.SAVE_SUBMIT_FOR_APPROVAL.getContentString());
-		click(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_APPROVAL.getContentString()));
-
-		waitUntilTextPresent(getButton(buttonElement, ContentText.APPROVE_COLLECTION.getContentString()), ContentText.APPROVE_COLLECTION.getContentString());
-		click(getButton(buttonElement, ContentText.APPROVE_COLLECTION.getContentString()));
         Helper.pause(5000);
 
 

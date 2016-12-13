@@ -4,10 +4,8 @@ import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.publish.Collection;
 import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.RandomStringGen;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import org.junit.Assert;
 
 public class CollectionSteps {
     Collection collection = new Collection();
@@ -36,12 +34,16 @@ public class CollectionSteps {
         String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
         collection.deleteAllWorkedPages(colName);
     }
-
     @And("^I select the collection$")
     public void selectTheCollection(){
-        AnyData collName = TestContext.getCacheService().getDataMap().get("collectionName");
-        collection.getCollection(collName.getStringData());
+	    collection.getCollection(collectionName);
+
     }
+
+	@And("^I review the (.*) files awaiting review with data-url:(.*)$")
+	public void reviewFilesInColl(String savedPage, String fileloc) throws Throwable {
+		collection.reviewFile(collectionName, savedPage, fileloc);
+	}
 
 
     @And("^the collection (does|does not) exist$")

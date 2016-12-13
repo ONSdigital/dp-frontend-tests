@@ -7,6 +7,8 @@ public enum ContentText {
 	DATASETS("datasets"),
 	BUSINESS_INVESTMENT("businessinvestment"),
 	DOWNLOAD_OPTIONS("Download options"),
+	CONTENT("Content"),
+	SAVE_CHANGES_EXIT("Save changes and exit"),
 	UPDATE_ADD_SUPLEMENTARY_FILE("Update / Add supplementary file"),
 	VERSIONS("Versions"),
 	ADD_VERSION("Add version"),

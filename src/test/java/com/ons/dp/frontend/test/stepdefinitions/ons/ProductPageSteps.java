@@ -12,17 +12,17 @@ public class ProductPageSteps {
     ProductPage productPage = new ProductPage();
 
     @When("^I navigate to Business Investment time series dataset$")
-    public void iNavigateToBusinessInvestmentTimeSeriesDataset() throws Throwable {
+    public void navigateToTimeSeries() throws Throwable {
         productPage.navigateToBusinessInvestmentDatasetPage();
     }
 
     @And("^I click the previous versions$")
-    public void iClickThePreviousVersions() throws Throwable {
+    public void clickPreviousVersions() throws Throwable {
         productPage.clickPreviousVersionsLink();
     }
 
     @Then("^I should see the new time series dataset$")
-    public void iShouldSeeTheNewTimeSeriesDataset() throws Throwable {
+    public void shouldSeeTimeSeriesDataset() throws Throwable {
         int recentPubVer = productPage.getPublishedVersionRows();
         int prevPubVer = TestContext.getCacheService().getDataMap().get("versionsPublishedbefore").getIntData();
         Assert.assertTrue("Number of published versions in ONS website  :" + recentPubVer + "/n Number of published versions in Florence : " + prevPubVer,

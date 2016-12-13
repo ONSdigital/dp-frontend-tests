@@ -1,9 +1,10 @@
 package com.ons.dp.frontend.test.stepdefinitions.florence;
 
 import com.ons.dp.frontend.test.core.TestContext;
+import com.ons.dp.frontend.test.model.ContentText;
 import com.ons.dp.frontend.test.page.publish.ContentCreation;
 import com.ons.dp.frontend.test.util.AnyData;
-import cucumber.api.PendingException;
+import com.ons.dp.frontend.test.util.RandomStringGen;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 
@@ -24,17 +25,14 @@ ContentCreation contentCreation = new ContentCreation();
 
     }
 
-    @And("^I submit the collection for review$")
-    public void iSubmitTheCollectionForReview() throws Throwable {
-        contentCreation.save_Collection_for_review();
-    }
-    @And("^I review the files awaiting review$")
-    public void reviewFilesInColl() throws Throwable {
-        contentCreation.reviewFile();
-    }
+
+	@And("^I save and submit the collection for review")
+	public void saveAndSubmitColl() {
+		contentCreation.saveSubmitForReview();
+	}
 
 
-    @And("^I approve the collection$")
+	@And("^I approve the collection$")
     public void approveTheColl() throws Throwable {
         contentCreation.approveCollection();
     }
@@ -45,4 +43,27 @@ ContentCreation contentCreation = new ContentCreation();
         contentCreation.createPageAndSaveForReview(pageName);
 
     }
+
+	@And("^I click on the content header (.*)$")
+	public void editContentHeader(String contentHeader) {
+		contentCreation.editContentHeader(ContentText.valueOf(contentHeader));
+	}
+
+	@And("^I edit the content on the collection$")
+	public void clickOnEdit() {
+		contentCreation.clickOnActivatedEdit();
+	}
+
+	@And("^I edit the content within the active accordion")
+	public void clickEditWithinAccordion() {
+		contentCreation.clickEditAccordion();
+	}
+
+	@And("^I enter text into the markdown editor$")
+	public void enterTextIntoEditor() {
+		String textToEnter = RandomStringGen.getRandomString(200);
+		TestContext.getCacheService().setDataMap("markdownText", new AnyData(textToEnter));
+		contentCreation.enterTextIntoMarkDownEditor(textToEnter);
+	}
+
 }
