@@ -4,8 +4,10 @@ import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.publish.Collection;
 import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.RandomStringGen;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import org.junit.Assert;
 
 public class CollectionSteps {
     Collection collection = new Collection();
@@ -34,10 +36,20 @@ public class CollectionSteps {
         String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
         collection.deleteAllWorkedPages(colName);
     }
+
     @And("^I select the collection$")
     public void selectTheCollection(){
         AnyData collName = TestContext.getCacheService().getDataMap().get("collectionName");
         collection.getCollection(collName.getStringData());
     }
+
+
+    @And("^the collection (does|does not) exist$")
+    public void checkForCollection(String does) {
+        boolean shouldExist = does.length() < 4 ? true : false;
+        AnyData collName = TestContext.getCacheService().getDataMap().get("collectionName");
+        Assert.assertEquals("Collection exists on the collection table", shouldExist, collection.getCollection(collName.getStringData()));
+    }
+
 
 }

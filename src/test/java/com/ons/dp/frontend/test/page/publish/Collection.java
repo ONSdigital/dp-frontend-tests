@@ -1,8 +1,10 @@
 package com.ons.dp.frontend.test.page.publish;
 
+import com.ons.dp.frontend.test.model.ContentText;
 import com.ons.dp.frontend.test.model.DataTable;
 import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.util.Do;
+import com.ons.dp.frontend.test.util.Helper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,8 +27,9 @@ public class Collection extends BasePage {
     public By progress_pages    = By.id("in-progress-uris");
     public By completed_pages = By.id("complete-uris");
     public By reviewed_pages = By.id("reviewed-uris");
-    public By page_delete =
-            By.cssSelector("li.selected>div.page__buttons--list>button.page-delete");
+    public By page_delete = By.cssSelector("li.selected>div.page__buttons--list>button.page-delete");
+    public By staticPage = By.cssSelector(".page__item.page__item--static_landing_page");
+    public By confirm_delete = By.cssSelector(".confirm");
     public By work_on_collection = getButton(buttonElement, "Work on collection");
     DataTable dataTable;
 
@@ -56,7 +59,7 @@ public class Collection extends BasePage {
         click(create_collection);
     }
 
-    public void deleteCollection(String name) {
+    public void deleteCollection(String name) throws Exception {
         refresh();
         if (getCollection(name)) {
             getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(delete_collection));
@@ -96,7 +99,4 @@ public class Collection extends BasePage {
     public enum CollectionTypes {
         MANUAL, SCHEDULE;
     }
-
-
-
 }

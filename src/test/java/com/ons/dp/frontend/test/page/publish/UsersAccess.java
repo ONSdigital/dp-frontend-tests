@@ -4,6 +4,7 @@ package com.ons.dp.frontend.test.page.publish;
     import com.ons.dp.frontend.test.model.User;
     import com.ons.dp.frontend.test.page.BasePage;
     import com.ons.dp.frontend.test.util.Do;
+    import com.ons.dp.frontend.test.util.Helper;
     import org.openqa.selenium.By;
     import org.openqa.selenium.WebElement;
     import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,6 +25,7 @@ package com.ons.dp.frontend.test.page.publish;
             public By  confirm_ok = By.className("confirm");
             public By  user_created_label = By.xpath("//h2[text()[contains(.,'User created')]]");
         public By confirm_email_deletion = By.xpath("html/body/div[5]/fieldset/input");
+        public By confirm_user_deletion = By.cssSelector(".confirm");
         DataTable dataTable;
 
             public By getCreate_UserName_Button(){
@@ -96,9 +98,13 @@ package com.ons.dp.frontend.test.page.publish;
 
                 }
                 click(getCreate_UserName_Button());
+
+
+            }
+
+        public void checkCreateNewUserConfirmation() {
                 getElementText(user_created_label);
                 click(confirm_ok);
-
             }
 
             public Map getUserNames(){
@@ -123,10 +129,15 @@ package com.ons.dp.frontend.test.page.publish;
 
         public void deleteUser(String username) {
             getLeftTableContents().get(username).click();
+            Helper.pause(1000);
             click(getDeleteUser_Button());
             String getEMail = returnEmailForUser(username);
             sendKeys(confirm_email_deletion, getEMail);
-            click(getConfirmDelete());
+            Helper.pause(500);
+            click(confirm_user_deletion);
+            Helper.pause(1000);
+
+
         }
     /*
             public By  "Select a team", ".table.table--primary.table--fixed-height-27.js-selectable-table");

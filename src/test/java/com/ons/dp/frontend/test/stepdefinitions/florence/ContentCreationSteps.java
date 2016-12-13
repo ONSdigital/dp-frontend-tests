@@ -3,6 +3,7 @@ package com.ons.dp.frontend.test.stepdefinitions.florence;
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.publish.ContentCreation;
 import com.ons.dp.frontend.test.util.AnyData;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 
@@ -36,5 +37,12 @@ ContentCreation contentCreation = new ContentCreation();
     @And("^I approve the collection$")
     public void approveTheColl() throws Throwable {
         contentCreation.approveCollection();
+    }
+
+
+    @And("^I create a new \"([^\"]*)\" and submit for review$")
+    public void iCreateANew(String pageName) throws Throwable {
+        contentCreation.createPageAndSaveForReview(pageName);
+
     }
 }

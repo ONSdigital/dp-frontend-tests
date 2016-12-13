@@ -7,7 +7,7 @@ public class Homepage extends BasePage {
     public By search = By.id("nav-search");
 
     public void openHomePage() {
-        navigateToUrl(getConfig().getOnsdevelop_URL());
+        navigateToUrl(getConfig().getOnsURL());
 
     }
 

@@ -6,6 +6,7 @@ import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.util.CacheService;
 import com.ons.dp.frontend.test.util.Do;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -213,7 +214,7 @@ public class BasePage {
         try {
             WebElement element = getElement(by);
             Select select = new Select(element);
-            select.selectByValue(value);
+            select.selectByVisibleText(value);
         } catch (Exception e) {
            e.printStackTrace();
         }
@@ -227,6 +228,49 @@ public class BasePage {
                 click(by);
             }
         }
+
+
+    public void ClickOnLink(final String linkText) throws InterruptedException {
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(By.linkText(linkText)));
+        getElement(By.linkText(linkText)).click();
+    }
+
+
+    public void getTextFromPageSource(String text) {
+
+        getDriver().getPageSource().contains(text);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 

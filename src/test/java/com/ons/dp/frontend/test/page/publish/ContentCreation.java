@@ -28,6 +28,8 @@ public class ContentCreation extends BasePage {
 	public String content_headers = "//h1[text()[contains(.,'text_to_replace')]]";
 	public By file_label_text = By.id("label");
 	public By fileUpload = By.name("files");
+	public By selectNewPage = By.id("pagetype");
+	public By pageNameField = By.id("pagename");
 	public String active_dataset_buttons = ".selected > span > span >button.btn-browse-text_to_replace";
 
 	public By fileUploadResp = By.id("response");
@@ -157,6 +159,16 @@ public class ContentCreation extends BasePage {
 
 
         }
+
+	public void createPageAndSaveForReview(String pageName) {
+		click(getButton(buttonElement, "Create"));
+		select(selectNewPage, pageName);
+		sendKeys(pageNameField, "Admin Page");
+		click(getButton(buttonElement, "Create page"));
+		Helper.pause(10000);
+		waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()), ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString());
+		click(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()));
+	}
 
 
 }
