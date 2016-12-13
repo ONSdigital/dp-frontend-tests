@@ -1,10 +1,6 @@
-Feature: User and Team Access
+Feature: Create a published schedule collection
 
-  As a florence admin
-  I want to create new user and team
-  So that new user can create a collection
-
-  Scenario: Create a user
+  Scenario: Create and publish a schedule collection
     Given I am logged in as an admin
     And browse to users and access page
     When a user with username:"New User",email: "newuser@test.com",password: "one two three four" and user type: Viewer is created

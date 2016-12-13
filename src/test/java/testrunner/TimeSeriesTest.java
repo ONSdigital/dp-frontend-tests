@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
                 "usage:target/cucumber-usage.json", "junit:target/cucumber-results.xml"},
         glue = "com.ons.dp.frontend.test",
         tags = "@time_series")
-public class RunTests extends BaseTestRunner {
+public class TimeSeriesTest extends BaseTestRunner {
 
 
 

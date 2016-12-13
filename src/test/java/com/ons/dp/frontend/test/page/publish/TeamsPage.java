@@ -30,9 +30,21 @@ public class TeamsPage extends BasePage {
         clear(team_name);
     }
 
-    public Map<String, WebElement> getLeftTableContents() {
+    public Map<String, WebElement> getTeamData() {
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(team_name));
         dataTable = new DataTable(true);
         return dataTable.getLeftData();
+    }
+
+    public boolean doesTeamExist(String teamname) {
+        boolean elementPresent = false;
+        Do.until(getDriver(), ExpectedConditions.presenceOfElementLocated(team_name));
+        WebElement webElement = getTeamData().get(teamname);
+        if (webElement != null) {
+            elementPresent = true;
+            webElement.click();
+        }
+        return elementPresent;
     }
 
     public void goToTeamsPage() {
@@ -49,7 +61,7 @@ public class TeamsPage extends BasePage {
     }
 
     public void deleteTeam(String teamname) {
-        getLeftTableContents().get(teamname).click();
+        getTeamData().get(teamname).click();
         click(getButton(buttonElement, "Delete team"));
         Helper.pause(1000);
         sendKeys(confirm_deletion_textbox, teamname);
@@ -61,10 +73,10 @@ public class TeamsPage extends BasePage {
     }
 
 
-    public boolean doesTheTeamNameExists(String teamname) {
+    public boolean doesTheTeamNameExist(String teamname) {
         refresh();
         click(By.linkText("Teams"));
-        return getLeftTableContents().get(teamname).getText().equals(teamname) ? true : false;
+        return doesTeamExist(teamname);
 
     }
 

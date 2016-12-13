@@ -4,6 +4,7 @@ package com.ons.dp.frontend.test.page;
 import com.ons.dp.frontend.test.core.Configuration;
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.util.Do;
+import com.ons.dp.frontend.test.util.Helper;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -160,16 +161,19 @@ public class BasePage {
     }
 
     public void clear(By by) {
+        Helper.pause(1000);
         Do.until(getDriver(), presenceOfElementLocated(by));
        getElement(by).clear();
     }
     public void click(By by) {
+        Helper.pause(500);
         Do.until(getDriver(), presenceOfElementLocated(by));
- //       Do.until(getDriver(), elementToBeClickable(by));
+//        Do.until(getDriver(), elementToBeClickable(by));
         getElement(by).click();
     }
 
     public void sendKeys(By by, String text){
+        Helper.pause(500);
         Do.until(getDriver(), presenceOfElementLocated(by));
        getElement(by).sendKeys(text);
     }
@@ -209,6 +213,7 @@ public class BasePage {
     }
 
     public void select(By by, String value) {
+        Helper.pause(1000);
         try {
             WebElement element = getElement(by);
             Select select = new Select(element);

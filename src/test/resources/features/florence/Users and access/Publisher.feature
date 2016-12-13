@@ -1,3 +1,4 @@
+@publisher
 Feature: Publisher - Users and access
 
   # **********************************************************************  #
@@ -12,8 +13,8 @@ Feature: Publisher - Users and access
     And I should have access to Reports
     And I should have access to Users and access
     And I should have access to Teams
-    And I log out of florence
-    Then I log out
+    And I logout of florence
+
 
   # **********************************************************************  #
                           # SCENARIO - 2 #
@@ -25,8 +26,8 @@ Feature: Publisher - Users and access
     Then browse to users and access page
     And a user with username:"New Viewer",email: "newviewer@test.com",password: "one two three four" and user type: Viewer is created
     Then I should see the text "You are not permitted to create users." on the pop-up
-    #And I click "OK" button
-    #And I click on "Logout" link
+    And I logout of florence
+
 
    # **********************************************************************  #
                           # SCENARIO - 3 #
@@ -38,8 +39,7 @@ Feature: Publisher - Users and access
     Then browse to teams page
     And a team with teamname:"New Team" is created
     Then I should see the text "You are not permitted to create teams." on the pop-up
-    #And I click "OK" button
-    And I click on "Logout" link
+    And I logout of florence
 
   # **********************************************************************  #
                           # SCENARIO - 4 #
@@ -50,12 +50,13 @@ Feature: Publisher - Users and access
     Given I am logged in as a publisher
     And I create a MANUAL collection type
     And I create a new "Static landing page" and submit for review
-    And I log out of florence
+    And I logout of florence
     Given I am logged in as a lead publisher
     And I select the collection
     Then I delete all the worked on pages in the collection
     When I delete the collection
     Then the collection does not exist
+    Then I logout of florence
 
 
 

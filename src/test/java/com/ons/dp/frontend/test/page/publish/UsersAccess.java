@@ -113,7 +113,8 @@ package com.ons.dp.frontend.test.page.publish;
             public Map getEmailAddresses(){
                 return getRightTableContents();
             }
-            public boolean doesTheUserNameExists(String username){
+
+        public boolean doesTheUserNameExists(String username){
                 return (getUserNames().get(username) != null);
 
             }

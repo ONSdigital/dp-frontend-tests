@@ -1,3 +1,4 @@
+@manual_collection
 Feature: Check a collection in florence website
   As a publish support team member
   I need to create a manual collection

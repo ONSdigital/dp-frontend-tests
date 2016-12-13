@@ -28,7 +28,7 @@ ContentCreation contentCreation = new ContentCreation();
 
 	@And("^I save and submit the collection for review")
 	public void saveAndSubmitColl() {
-		contentCreation.saveSubmitForReview();
+		contentCreation.saveChangesForReview();
 	}
 
 

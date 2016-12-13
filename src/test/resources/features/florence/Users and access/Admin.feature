@@ -1,3 +1,4 @@
+@admin
 Feature: Admin - Users and access
 
   # **********************************************************************  #
@@ -13,6 +14,7 @@ Feature: Admin - Users and access
     Then the user:"New Admin" and email:"newadmin@test.com" is displayed on the list of available users
     When I delete the user:"New Admin"
     Then the user:"New Admin" does not exist in the list
+    And I logout of florence
 
   # **********************************************************************  #
                           # SCENARIO - 2 #
@@ -27,6 +29,7 @@ Feature: Admin - Users and access
     Then the user:"New Publisher" and email:"newpublisher@test.com" is displayed on the list of available users
     When I delete the user:"New Publisher"
     Then the user:"New Publisher" does not exist in the list
+    And I logout of florence
 
 
 
@@ -43,6 +46,7 @@ Feature: Admin - Users and access
     Then the user:"New Visualisation Publisher" and email:"newvisualisationpublisher@test.com" is displayed on the list of available users
     When I delete the user:"New Visualisation Publisher"
     Then the user:"New Visualisation Publisher" does not exist in the list
+    And I logout of florence
 
   # **********************************************************************  #
                           # SCENARIO - 4 #
@@ -57,6 +61,7 @@ Feature: Admin - Users and access
     Then the user:"New Viewer" and email:"newviewer@test.com" is displayed on the list of available users
     When I delete the user:"New Viewer"
     Then the user:"New Viewer" does not exist in the list
+    And I logout of florence
 
   # **********************************************************************  #
                           # SCENARIO - 5 #
@@ -70,6 +75,7 @@ Feature: Admin - Users and access
     Then the team:"New Team" is displayed on the list of available teams
     When I delete the team:"New Team"
     Then the team:"New Team" does not exist in the list
+    And I logout of florence
 
   # **********************************************************************  #
                           # SCENARIO - 6 #
@@ -83,7 +89,7 @@ Feature: Admin - Users and access
     And I should have access to Reports
     And I should have access to Users and access
     And I should have access to Teams
-    #And I log out
+    And I logout of florence
 
 
   # **********************************************************************  #
@@ -95,8 +101,10 @@ Feature: Admin - Users and access
     Given I am logged in as an admin
     And I create a MANUAL collection type
     And I create a new "Static landing page" and submit for review
-    And I delete the file and collection
-     #And I log out
+    And I delete all the worked on pages in the collection
+    When I delete the collection
+    Then the collection does not exist
+    And I logout of florence
 
 
 

@@ -1,5 +1,6 @@
 package com.ons.dp.frontend.test.page.publish;
 
+import Util.Log;
 import com.ons.dp.frontend.test.model.DataTable;
 import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.util.Do;
@@ -102,8 +103,8 @@ public class Collection extends BasePage {
 		getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(completed_pages));
 		getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(getButton(buttonElement,
 				"Edit collection details")));
-		Helper.pause(2000);
-		getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(getButton(buttonElement, "Work on collection")));
+        Helper.pause(1000);
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(getButton(buttonElement, "Work on collection")));
 	}
 
     // returns true when all the pages are deleted

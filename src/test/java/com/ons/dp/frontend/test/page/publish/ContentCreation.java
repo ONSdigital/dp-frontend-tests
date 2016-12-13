@@ -140,29 +140,33 @@ public class ContentCreation extends BasePage {
 
     }
 
-	public void saveSubmitForReview() {
+	public void saveChangesForReview() {
 		try {
-			Helper.pause(5000);
+			Helper.pause(1000);
 			getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(getButton(buttonElement, "Save,")));
 			click(getButton(buttonElement, "Save,"));
-			Helper.pause(5000);
+			Helper.pause(1000);
 
 
 		} catch (Exception ee) {
 			getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(getButton(buttonElement, "Save changes and exit")));
 			click(getButton(buttonElement, "Save changes and exit"));
 		}
+		saveSubmitForReview();
+
+	}
+
+	public void saveSubmitForReview() {
 		waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()), ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString());
 		click(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()));
-		Helper.pause(10000);
-
+		Helper.pause(1000);
 	}
 
 
 
 
 	public void approveCollection() {
-        Helper.pause(5000);
+		Helper.pause(1000);
 		try {
 			waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString()), ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString());
 			click(getButton(buttonElement, ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString()));
@@ -182,7 +186,7 @@ public class ContentCreation extends BasePage {
 			System.out.println("Approve Collection does not exist");
 		}
 
-        Helper.pause(5000);
+		Helper.pause(1000);
 
 
         }
@@ -192,9 +196,8 @@ public class ContentCreation extends BasePage {
 		select(selectNewPage, pageName);
 		sendKeys(pageNameField, "Admin Page");
 		click(getButton(buttonElement, "Create page"));
-		Helper.pause(10000);
-		waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()), ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString());
-		click(getButton(buttonElement, ContentText.SAVE_SUBMIT_FOR_REVIEW.getContentString()));
+		Helper.pause(2000);
+		saveSubmitForReview();
 	}
 
 

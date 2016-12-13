@@ -4,6 +4,7 @@ package com.ons.dp.frontend.test.page.publish;
 import com.ons.dp.frontend.test.page.BasePage;
 import org.openqa.selenium.By;
 
+
 public class LoginPage extends BasePage {
 
     public By input_email = By.id("email");
@@ -26,8 +27,9 @@ public class LoginPage extends BasePage {
         navigateToUrl(getConfig().getFlorence_develop());
 
     }
-    public void login(String email, String pwd)
-    {   clear(input_email);
+    public void login(String email, String pwd) {
+        getDriver().manage().deleteAllCookies();
+        clear(input_email);
         clear(input_password);
         sendKeys(input_email,email);
         sendKeys(input_password,pwd);

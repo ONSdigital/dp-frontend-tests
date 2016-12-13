@@ -10,6 +10,7 @@ public class CommonSteps {
 
     @And("I logout of florence")
     public void logout_florence() {
+        basePage.refresh();
         basePage.click(basePage.getlinkText("Logout"));
     }
 

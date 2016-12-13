@@ -4,10 +4,7 @@ import com.ons.dp.frontend.test.model.User;
 import com.ons.dp.frontend.test.model.User.UserType;
 import com.ons.dp.frontend.test.page.publish.UsersAccess;
 import com.ons.dp.frontend.test.util.Helper;
-import cucumber.api.PendingException;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.*;
 import org.junit.Assert;
 
 import java.util.Random;
@@ -41,7 +38,7 @@ public class UsersAccessSteps {
     @When("I delete the user:\"([^\"]*)\"$")
     public void deleteUser(String userToDelete){
         usersAndAccessPage.deleteUser(userToDelete);
-        Helper.pause(5000);
+        Helper.pause(1000);
     }
 
     @Then("the user:\"([^\"]*)\" and email:\"([^\"]*)\" is displayed on the list of available users$")
