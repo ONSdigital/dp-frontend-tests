@@ -1,7 +1,31 @@
 dp-frontend-tests
 =================
 
-Frontend acceptance test for ONS Website.
+Acceptance tests for Florence using Selenium and Cucumber.
+This is a maven project.
+
+Getting Started
+=============== 
+Install Java, maven & git
+```
+brew install java
+brew install maven
+brew install git
+```
+
+```
+git clone https://github.com/ONSdigital/dp-frontend-tests
+```
+
+Go to the directory where the pom.xml is and run
+```
+mvn clean test
+```
+to run all the tests
+
+Reports are under /target/cucumber
+
+
 
 ### License
 
