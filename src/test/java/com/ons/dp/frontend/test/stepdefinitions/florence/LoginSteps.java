@@ -22,6 +22,11 @@ public class LoginSteps {
         loginPage.openAndLogin("publisher@test.com", "one two three four");
     }
 
+    @Given("I am logged in as a visualisation publisher$")
+    public void visualisationPublisherLogin() {
+        loginPage.openAndLogin("visualisationpublisher@test.com", "one two three four");
+    }
+
     @Given("I am logged in as a lead publisher$")
     public void leadPublisherLogin() {
         loginPage.openAndLogin("publisher2@test.com", "one two three four");
@@ -38,5 +43,8 @@ public class LoginSteps {
     }
 
 
-
+    @Given("^I am logged in as an another visualisation publisher$")
+    public void iAmLoggedInAsAnAnotherVisualisationPublisher() throws Throwable {
+        loginPage.openAndLogin("visualisationpublisher2@test.com", "one two three four");
+    }
 }

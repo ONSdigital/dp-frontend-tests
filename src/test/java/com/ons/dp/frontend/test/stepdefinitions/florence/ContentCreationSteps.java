@@ -66,4 +66,9 @@ public class ContentCreationSteps {
         contentCreation.enterTextIntoMarkDownEditor(textToEnter);
     }
 
+
+    @And("^upload visulisation and submit for review$")
+    public void uploadVisulisationAndSubmitForReview() throws Throwable {
+        contentCreation.createVisualisationPageAndSaveForReview();
+    }
 }

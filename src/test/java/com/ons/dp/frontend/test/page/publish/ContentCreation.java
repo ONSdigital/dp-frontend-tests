@@ -34,6 +34,8 @@ public class ContentCreation extends BasePage {
     public By fileUploadResp = By.id("response");
     public int publishedVersions = 0;
     public By markdownEditor = By.id("wmd-input");
+    public By visualisation_uniqueID = By.id("visualisation-uid");
+
 
     public int getNumberOfPublishedVersions() {
         return publishedVersions;
@@ -196,6 +198,17 @@ public class ContentCreation extends BasePage {
         click(getButton(buttonElement, "Create page"));
         Helper.pause(2000);
         saveSubmitForReview();
+    }
+
+    public void createVisualisationPageAndSaveForReview() {
+        click(getButton(buttonElement, "Upload visualisation"));
+        select(selectNewPage, "Visualisation");
+        sendKeys(visualisation_uniqueID, "DVC126");
+        sendKeys(pageNameField, "Visualisation Page");
+        click(getButton(buttonElement, "Create page"));
+        Helper.pause(2000);
+        saveSubmitForReview();
+
     }
 
 
