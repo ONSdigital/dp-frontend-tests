@@ -17,13 +17,13 @@ brew install git
 git clone https://github.com/ONSdigital/dp-frontend-tests
 ```
 
-Go to the directory where the pom.xml is and run
+Go to the project dir and run
 ```
-mvn clean test
+mvn clean test -DfailIfNoTests=false
 ```
 to run all the tests
 
-Reports are under /target/cucumber
+Reports are under  ```/target/cucumber-html-report/index.html```
 
 
 
