@@ -6,17 +6,9 @@ Feature: Viewer - Users and access
 
   Scenario: Check Viewer access to other options in Ermintrude Website
 
-    Given I am on the "Ermintrude" Website
-    # Login as viewer
-    When I enter "viewer@test.com" in the Email field
-    And I enter "one two three four" in the Password field
-    And I click "Log in" button
-    # Check collections access
-    When I click on "Collections" link
-    Then I should see the text "Select a collection"
-    # Check Logout access
-    When I click on "Logout" link
-    Then I should see the text "Login"
+    Given I am logged into Ermintrude website as a viewer
+    Then I should have access to Collections
+    And I logout of florence
 
   # **********************************************************************  #
                           # SCENARIO - 2 #
@@ -24,12 +16,9 @@ Feature: Viewer - Users and access
 
   Scenario: Viewer unable to access preview website
 
-    Given I am on the Florence HomePage
-    # Login as viewer
-    When I enter "viewer@test.com" in the Email field
-    And I enter "one two three four" in the Password field
-    And I click "Log in" button
-    Then I should see the text "You do not have the permissions to enter here. Please contact an administrator"
+    Given I am logged in as a viewer
+    Then I should see the text "You do not have the permissions to enter here. Please contact an administrator" on the pop-up
+
 
 
 

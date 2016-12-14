@@ -11,6 +11,7 @@ public class LoginPage extends BasePage {
     public By input_password = By.id("password");
     public By submit = By.id("login");
 
+
     public By getInput_email() {
         return input_email;
     }
@@ -28,7 +29,20 @@ public class LoginPage extends BasePage {
 
     }
 
+    public void openErmintrudeLoginPage() {
+        navigateToUrl(getConfig().getErmintrude_develop());
+    }
+
     public void login(String email, String pwd) {
+        getDriver().manage().deleteAllCookies();
+        clear(input_email);
+        clear(input_password);
+        sendKeys(input_email, email);
+        sendKeys(input_password, pwd);
+        click(submit);
+    }
+
+    public void ermintrudeLogin(String email, String pwd) {
         getDriver().manage().deleteAllCookies();
         clear(input_email);
         clear(input_password);
@@ -40,6 +54,13 @@ public class LoginPage extends BasePage {
     public void openAndLogin(String email, String pwd) {
         openLoginPage();
         login(email, pwd);
+    }
+
+    public void openAndLoginToErmintrude(String email, String pwd) {
+
+        openErmintrudeLoginPage();
+        ermintrudeLogin(email, pwd);
+
     }
 
 }

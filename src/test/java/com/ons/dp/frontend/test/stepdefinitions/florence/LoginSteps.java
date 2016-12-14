@@ -27,4 +27,16 @@ public class LoginSteps {
         loginPage.openAndLogin("publisher2@test.com", "one two three four");
     }
 
+    @Given("I am logged in as a viewer$")
+    public void viewerLogin() {
+        loginPage.openAndLogin("viewer@test.com", "one two three four");
+    }
+
+    @Given("I am logged into Ermintrude website as a viewer$")
+    public void viewerErmintudeLogin() {
+        loginPage.openAndLoginToErmintrude("viewer@test.com", "one two three four");
+    }
+
+
+
 }
