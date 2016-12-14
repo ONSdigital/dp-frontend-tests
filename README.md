@@ -23,7 +23,7 @@ mvn clean test -DfailIfNoTests=false
 ```
 to run all the tests
 
-Reports are under /target/cucumber
+Reports are under  ```/target/cucumber-html-report/index.html```
 
 
 
