@@ -19,7 +19,7 @@ git clone https://github.com/ONSdigital/dp-frontend-tests
 
 Go to the directory where the pom.xml is and run
 ```
-mvn clean test
+mvn clean test -DfailIfNoTests=false
 ```
 to run all the tests
 
