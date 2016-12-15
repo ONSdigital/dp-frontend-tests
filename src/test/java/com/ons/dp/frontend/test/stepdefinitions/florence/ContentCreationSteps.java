@@ -15,6 +15,7 @@ public class ContentCreationSteps {
     @When("^I browse to the content (.*) under collections$")
     public void browseToTheContent(String contentToBrowse) throws Exception {
         contentCreation.goToCMSContentLinks(contentToBrowse);
+
     }
 
     @And("^I upload a ([^\"]*) file$")
@@ -70,5 +71,11 @@ public class ContentCreationSteps {
     @And("^upload visulisation and submit for review$")
     public void uploadVisulisationAndSubmitForReview() throws Throwable {
         contentCreation.createVisualisationPageAndSaveForReview();
+    }
+
+    @And("^I enter keywords metadata and save for review$")
+    public void iEnterKeywordsMetadata() throws Throwable {
+        contentCreation.metaDataKeywords();
+        contentCreation.saveSubmitForReview();
     }
 }

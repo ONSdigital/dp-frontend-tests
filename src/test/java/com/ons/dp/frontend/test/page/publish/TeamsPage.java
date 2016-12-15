@@ -16,6 +16,8 @@ public class TeamsPage extends BasePage {
     public By team_name = By.id("create-team-name");
     public By confirm_deletion_textbox = By.cssSelector(".sweet-alert.show-input.showSweetAlert.visible>fieldset>input");
     public By confirm_delete_button = By.cssSelector(".confirm");
+    public By search_user = By.id("team-search-input");
+    public By active_add_button = By.cssSelector(".btn-team-add");
 
     DataTable dataTable;
 
@@ -55,6 +57,7 @@ public class TeamsPage extends BasePage {
         sendKeys(team_name, teamName);
         click(getButton(buttonElement, "Create team"));
 
+
     }
 
     public void deleteTeam(String teamname) {
@@ -77,4 +80,16 @@ public class TeamsPage extends BasePage {
 
     }
 
+    public void addUserToTheTeam() {
+
+        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(getButton(buttonElement, "Add/remove members")));
+        click(getButton(buttonElement, "Add/remove members"));
+        sendKeys(search_user, "viewer@test.com");
+        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(getButton(buttonElement, "Add")));
+        getElement(active_add_button).click();
+        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(getButton(buttonElement, "Done")));
+        click(getButton(buttonElement, "Done"));
+
+
+    }
 }

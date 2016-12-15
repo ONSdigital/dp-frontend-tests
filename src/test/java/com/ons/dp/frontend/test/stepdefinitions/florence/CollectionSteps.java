@@ -11,16 +11,19 @@ import org.junit.Assert;
 public class CollectionSteps {
     Collection collection = new Collection();
 
-    @Given("I create a (MANUAL|SCHEDULED) collection type$")
+    @Given("I create a (MANUAL|SCHEDULED_CUSTOM) collection type$")
     public void createColl(String collType) {
         String collectionName = "AutoTest_" + RandomStringGen.getRandomString(5);
         TestContext.getCacheService().setDataMap("collectionName", new AnyData(collectionName));
+        String teamName = TestContext.getCacheService().getDataMap().get("teamName").getStringData();
         switch (collType) {
             case "MANUAL":
-                collection.createCollection(collectionName, Collection.CollectionTypes.MANUAL);
+                collection.createCollection(collectionName, Collection.CollectionTypes.MANUAL, teamName);
                 break;
-            default:
-                collection.createCollection(collectionName, Collection.CollectionTypes.MANUAL);
+            case "SCHEDULED_CUSTOM":
+                collection.createCollection(collectionName, Collection.CollectionTypes.SCHEDULE_CUSTOM, teamName);
+//            default:
+//                collection.createCollection(collectionName, Collection.CollectionTypes.MANUAL,teamName);
         }
     }
 
@@ -39,6 +42,7 @@ public class CollectionSteps {
 
     @And("^I select the collection$")
     public void selectTheCollection() {
+        collection.clickOnCollectionsLink();
         String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
         collection.getCollection(colName);
 

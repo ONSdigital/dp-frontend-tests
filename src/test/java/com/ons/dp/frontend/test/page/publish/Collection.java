@@ -3,9 +3,11 @@ package com.ons.dp.frontend.test.page.publish;
 import Util.Log;
 import com.ons.dp.frontend.test.model.DataTable;
 import com.ons.dp.frontend.test.page.BasePage;
+import com.ons.dp.frontend.test.util.CustomDates;
 import com.ons.dp.frontend.test.util.Do;
 import com.ons.dp.frontend.test.util.Helper;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -15,9 +17,18 @@ public class Collection extends BasePage {
 
     public By header = By.className("text-align-center");
     public By collection_name = By.id("collectionname");
+    public By collection_table_id = By.id("collection-name");
     public By manual_publish = By.id("manualpublish");
     public By sch_publish = By.id("scheduledpublish");
+    public By team_name_id = By.id("team");
     public By custom_schedule = By.id("customschedule");
+
+    public By custom_date = By.id("date");
+    public By custom_hour = By.id("hour");
+    public By custom_min = By.id("min");
+
+
+
     public By create_collection = By.xpath("//button[text()[contains(.,'Create collection')]]");
     public By delete_collection = By.id("collection-delete");
     public By confirm_deletion = By.cssSelector("div.sa-confirm-button-container>button.confirm");
@@ -37,8 +48,9 @@ public class Collection extends BasePage {
     DataTable dataTable;
 
     public boolean getCollection(String collectionName) {
+        Helper.pause(1000);
         boolean elementPresent = false;
-        Do.until(getDriver(), ExpectedConditions.presenceOfElementLocated(collection_name));
+        Do.until(getDriver(), ExpectedConditions.presenceOfElementLocated(collection_table_id));
         dataTable = new DataTable(false);
         WebElement webElement = dataTable.getLeftData().get(collectionName);
         if (webElement != null) {
@@ -50,16 +62,29 @@ public class Collection extends BasePage {
     }
 
 
-    public void createCollection(String name, CollectionTypes collectionTypes) {
+    public void createCollection(String name, CollectionTypes collectionTypes, String teamname) {
         sendKeys(collection_name, name);
+        selectTeam(teamname);
         switch (collectionTypes) {
             case MANUAL:
                 click(manual_publish);
                 break;
-            default:
-                click(manual_publish);
+            case SCHEDULE_CUSTOM:
+                click(sch_publish);
+                click(custom_schedule);
+                // sendKeys(custom_date, CustomDates.getTomorrowsDate());
+                getDriver().findElement(By.id("date")).sendKeys(CustomDates.getTomorrowsDate());
+                getDriver().findElement(By.id("date")).sendKeys(Keys.ESCAPE);
+                select(custom_hour, "10");
+                select(custom_min, "30");
         }
         click(create_collection);
+    }
+
+    public void selectTeam(String teamname) {
+        if (teamname != null) {
+            select(team_name_id, teamname);
+        }
     }
 
     public void deleteCollection(String name) {
@@ -130,8 +155,12 @@ public class Collection extends BasePage {
         return findElementsBy(pages_edited_approval).size() == 0 ? true : false;
     }
 
+    public void clickOnCollectionsLink() {
+        click(By.linkText("Collections"));
+    }
+
     public enum CollectionTypes {
-        MANUAL, SCHEDULE;
+        MANUAL, SCHEDULE_CUSTOM;
     }
 
 

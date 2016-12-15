@@ -1,6 +1,8 @@
 package com.ons.dp.frontend.test.stepdefinitions.florence;
 
+import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.publish.TeamsPage;
+import com.ons.dp.frontend.test.util.AnyData;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -19,6 +21,7 @@ public class TeamPageSteps {
     @And("^a team with teamname:\"([^\"]*)\" is created$")
     public void aTeamWithTeamnameIsCreated(String teamName) throws Throwable {
         teamsPage.createTeam(teamName);
+        TestContext.getCacheService().setDataMap("teamName", new AnyData(teamName));
     }
 
     @Then("^the team:\"([^\"]*)\" is displayed on the list of available teams$")
@@ -36,6 +39,12 @@ public class TeamPageSteps {
         boolean exists = does.length() < 4 ? true : false;
         Assert.assertEquals("Should User exist on the page : " + exists, exists, teamsPage.doesTheTeamNameExist(team));
 
+
+    }
+
+    @And("^add a viewer to the team$")
+    public void addAViewerToTheTeam() throws Throwable {
+        teamsPage.addUserToTheTeam();
 
     }
 }

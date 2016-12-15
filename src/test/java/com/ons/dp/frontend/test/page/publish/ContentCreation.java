@@ -35,6 +35,9 @@ public class ContentCreation extends BasePage {
     public int publishedVersions = 0;
     public By markdownEditor = By.id("wmd-input");
     public By visualisation_uniqueID = By.id("visualisation-uid");
+    public By metadata_keywords = By.xpath(".//*[@id='keywordsTag']/li/input");
+    public By metadata = By.xpath("//div[@class='edit-section']/div");
+
 
 
     public int getNumberOfPublishedVersions() {
@@ -212,4 +215,9 @@ public class ContentCreation extends BasePage {
     }
 
 
+    public void metaDataKeywords() {
+        click(metadata);
+        sendKeys(metadata_keywords, "bit");
+
+    }
 }
