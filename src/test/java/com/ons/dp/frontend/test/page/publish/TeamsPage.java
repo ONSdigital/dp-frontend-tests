@@ -14,6 +14,7 @@ import java.util.Map;
 public class TeamsPage extends BasePage {
 
     public By team_name = By.id("create-team-name");
+    public By team_table_id = By.id("collection-name");
     public By confirm_deletion_textbox = By.cssSelector(".sweet-alert.show-input.showSweetAlert.visible>fieldset>input");
     public By confirm_delete_button = By.cssSelector(".confirm");
     public By search_user = By.id("team-search-input");
@@ -30,7 +31,7 @@ public class TeamsPage extends BasePage {
     }
 
     public Map<String, WebElement> getTeamData() {
-        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(team_name));
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(team_table_id));
         dataTable = new DataTable(true);
         return dataTable.getLeftData();
     }
@@ -47,9 +48,12 @@ public class TeamsPage extends BasePage {
     }
 
     public void goToTeamsPage() {
+        refresh();
         click(getlinkText("Teams"));
-        Do.until(getDriver(), ExpectedConditions.presenceOfElementLocated(team_name));
-        //  dataTable= new DataTable(false);
+        Do.until(getDriver(), ExpectedConditions.presenceOfElementLocated(team_table_id));
+        refresh();
+        click(getlinkText("Teams"));
+
     }
 
     public void createTeam(String teamName) {
@@ -80,11 +84,12 @@ public class TeamsPage extends BasePage {
 
     }
 
-    public void addUserToTheTeam() {
+    public void addUserToTheTeam(String userEmail) {
 
         getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(getButton(buttonElement, "Add/remove members")));
         click(getButton(buttonElement, "Add/remove members"));
-        sendKeys(search_user, "viewer@test.com");
+
+        sendKeys(search_user, userEmail);
         getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(getButton(buttonElement, "Add")));
         getElement(active_add_button).click();
         getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(getButton(buttonElement, "Done")));

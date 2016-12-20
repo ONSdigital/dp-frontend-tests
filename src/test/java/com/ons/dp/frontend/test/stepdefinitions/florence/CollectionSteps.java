@@ -13,6 +13,7 @@ public class CollectionSteps {
 
     @Given("I create a (MANUAL|SCHEDULED_CUSTOM) collection type$")
     public void createColl(String collType) {
+
         String collectionName = "AutoTest_" + RandomStringGen.getRandomString(5);
         TestContext.getCacheService().setDataMap("collectionName", new AnyData(collectionName));
         String teamName = TestContext.getCacheService().getDataMap().get("teamName").getStringData();

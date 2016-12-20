@@ -72,8 +72,11 @@ public class UsersAccess extends BasePage {
     }
 
     public void goToUsersAndAccessPage() {
+        refresh();
         click(getlinkText("Users and access"));
-        Do.until(getDriver(), ExpectedConditions.presenceOfElementLocated(create_username));
+        Do.until(getDriver(), ExpectedConditions.presenceOfElementLocated(label_select_user));
+        refresh();
+        click(getlinkText("Users and access"));
         dataTable = new DataTable(false);
     }
 

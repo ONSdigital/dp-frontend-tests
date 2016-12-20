@@ -42,9 +42,10 @@ public class TeamPageSteps {
 
     }
 
-    @And("^add a viewer to the team$")
-    public void addAViewerToTheTeam() throws Throwable {
-        teamsPage.addUserToTheTeam();
+    @And("^add a user (.*) to the team$")
+    public void addAViewerToTheTeam(String user) throws Throwable {
+        TestContext.getCacheService().setDataMap("user", new AnyData(user));
+        teamsPage.addUserToTheTeam(user);
 
     }
 }

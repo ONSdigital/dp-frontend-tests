@@ -19,8 +19,30 @@ Feature: Create a published schedule collection
 #    Then the user is displayed on the list of available users
 
 
-#  Scenario: Create a user, team and schedule publish a collection
-#
+  Scenario: Create a user, team and schedule publish a collection
+
+    Given I am logged in as an admin
+    And browse to users and access page
+    And a user with username:"New User",email: "newuser@test.com",password: "one two three four" and user type: Viewer is created
+    And browse to teams page
+    And a team with teamname:"Test Team" is created
+    And add a user newuser@test.com to the team
+
+    And I create a SCHEDULED_CUSTOM collection type
+    And I browse to the content businessindustryandtrade under collections
+    And I enter keywords metadata and save for review
+    Then browse to users and access page
+    And I delete the user:"New User"
+    Then browse to teams page
+    When I delete the team:"Test Team"
+    And I select the collection
+    Then I delete all the worked on pages in the collection
+    When I delete the collection
+    Then I logout of florence
+
+
+
+
 #    Given I am on the Florence HomePage
 #    When I enter "testuser@test.com" in the Email field
 #    And I enter "one two three four" in the Password field

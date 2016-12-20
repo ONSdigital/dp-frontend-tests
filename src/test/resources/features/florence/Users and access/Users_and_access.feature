@@ -5,7 +5,7 @@ Feature: End to end tests related to Authentication/Encryption
     Given I am logged in as an admin
     Then browse to teams page
     And a team with teamname:"Labour Market Team" is created
-    And add a viewer to the team
+    And add a user viewer@test.com to the team
     And I logout of florence
 
     Given I am logged in as a publisher

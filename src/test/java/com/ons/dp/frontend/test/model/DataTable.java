@@ -2,6 +2,7 @@ package com.ons.dp.frontend.test.model;
 
 
 import com.ons.dp.frontend.test.page.BasePage;
+import com.ons.dp.frontend.test.util.Helper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -48,6 +49,7 @@ public class DataTable {
     }
 
     public void populateLeftNameELements() {
+        Helper.pause(1000);
         for (int row = 1; row <= numberOfRows; row++) {
             String collectionName = collectionTableRowStr + "[" + row + "]/td[1]";
             leftData.put(basePage.getElementText(By.xpath(collectionName)), basePage.getElement(By.xpath(collectionName)));
@@ -63,6 +65,7 @@ public class DataTable {
     }
 
     public void populateTableRows() {
+        Helper.pause(1000);
         tableRows = (ArrayList<WebElement>) basePage.findElementsBy(collectionTableRowID);
         numberOfRows = tableRows.size();
     }

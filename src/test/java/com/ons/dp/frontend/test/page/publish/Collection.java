@@ -63,6 +63,7 @@ public class Collection extends BasePage {
 
 
     public void createCollection(String name, CollectionTypes collectionTypes, String teamname) {
+        clickOnCollectionsLink();
         sendKeys(collection_name, name);
         selectTeam(teamname);
         switch (collectionTypes) {
