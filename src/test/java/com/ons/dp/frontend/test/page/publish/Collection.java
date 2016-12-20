@@ -33,6 +33,7 @@ public class Collection extends BasePage {
     public By delete_collection = By.id("collection-delete");
     public By confirm_deletion = By.cssSelector("div.sa-confirm-button-container>button.confirm");
     public By pages_edited_approval = By.cssSelector("li.page-list__item");
+
     public By page_element = By.cssSelector("li.page-list__item>span");
     public By sweet_alert = By.cssSelector("div.sweet-alert.showSweetAlert.visible");
     public By progress_pages = By.id("in-progress-uris");
@@ -118,9 +119,27 @@ public class Collection extends BasePage {
 
     }
 
+    public void checkDeletedPages(String deletedPage) {
+        waitAfterCollSelection();
+        ArrayList<WebElement> coll_deleted_pages = (ArrayList<WebElement>) findElementsBy(pages_edited_approval);
+        try {
+            for (WebElement page : coll_deleted_pages) {
+                if (page.getText().contains(deletedPage)) {
+                    break;
+                }
+            }
+        } catch (NullPointerException ee) {
+            Log.info("Couldn't find the deleted page");
+        }
+    }
+
     public void reviewFile(String collectionName, String savedPage, String reviewLoc) {
         openSavedPage(savedPage);
         click(getContentId(reviewFileButt, reviewLoc));
+    }
+
+    public void deleteFile(String collectionName, String deletedPage) {
+        checkDeletedPages(deletedPage);
     }
 
     public void waitAfterCollSelection() {

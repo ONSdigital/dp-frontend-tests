@@ -10,6 +10,7 @@ Feature: Check a collection in florence website
     Given I am logged in as an admin
     And I create a MANUAL collection type
     And I browse to the content aboutus under collections
+    And I click on Edit button
     And I click on the content header CONTENT
     And I edit the content within the active accordion
     And I enter text into the markdown editor

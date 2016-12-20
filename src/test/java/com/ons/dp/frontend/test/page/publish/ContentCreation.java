@@ -18,7 +18,7 @@ public class ContentCreation extends BasePage {
 
     //  public By selectedPage = By.cssSelector(".page__buttons.page__buttons--list.selected>span>button.");
     public By activeEditButton = By.cssSelector(".selected>span>button");
-    public By activeCreateButton = By.cssSelector(".selected>span>button>button");
+    public By activeCreateButton = By.cssSelector(".selected>span>button.btn-browse-create");
     public By submit_button = By.cssSelector("form#UploadForm > div > button[type='submit']");
     public By version_rows = By.cssSelector("div#version-section>div");
     public String content_css = ".js-browse__item[data-url='text_to_replace']>span>span";
@@ -37,6 +37,8 @@ public class ContentCreation extends BasePage {
     public By visualisation_uniqueID = By.id("visualisation-uid");
     public By metadata_keywords = By.xpath(".//*[@id='keywordsTag']/li/input");
     public By metadata = By.xpath("//div[@class='edit-section']/div");
+    public By hamburger_icon = By.cssSelector(".page__container.selected>span>span>button.hamburger-icon");
+    public By activeDeleteButton = By.cssSelector(".page__container.selected>span>span>span>button.btn-browse-delete");
 
 
 
@@ -95,7 +97,15 @@ public class ContentCreation extends BasePage {
             }
 
         }
+        //  click(activeEditButton);
+    }
+
+    public void clickOnActiveEditButton() {
         click(activeEditButton);
+    }
+
+    public void clickOnActiveCreateButton() {
+        click(activeCreateButton);
     }
 
     public void clickOnActivatedEdit() {
@@ -218,6 +228,18 @@ public class ContentCreation extends BasePage {
     public void metaDataKeywords() {
         click(metadata);
         sendKeys(metadata_keywords, "bit");
+
+    }
+
+    public void deleteContent() {
+        Helper.pause(1000);
+        click(hamburger_icon);
+        Helper.pause(5000);
+        getWebDriverWait().until(ExpectedConditions.visibilityOf(getElement(activeDeleteButton)));
+
+        //getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(progress_pages));
+        click(activeDeleteButton);
+
 
     }
 }

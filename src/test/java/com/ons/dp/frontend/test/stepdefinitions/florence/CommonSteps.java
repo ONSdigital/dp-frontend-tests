@@ -4,6 +4,7 @@ package com.ons.dp.frontend.test.stepdefinitions.florence;
 import com.ons.dp.frontend.test.page.BasePage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 
 public class CommonSteps {
@@ -35,5 +36,11 @@ public class CommonSteps {
     @Then("^I should see the text \"([^\"]*)\"$")
     public void iShouldSeeTheText(String text) throws Throwable {
         basePage.getTextFromPageSource(text);
+    }
+
+    @Then("^I should see the text \"([^\"]*)\" on the \"([^\"]*)\"$")
+    public void iShouldSeeTheTextOnThe(String text, String element) throws Throwable {
+        Assert.assertTrue(basePage.getElementText(By.cssSelector(element)).equals(text));
+        Assert.assertEquals(basePage.getElementText(By.cssSelector(element)), text);
     }
 }

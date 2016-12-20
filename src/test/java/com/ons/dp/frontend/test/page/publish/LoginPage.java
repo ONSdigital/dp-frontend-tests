@@ -63,4 +63,11 @@ public class LoginPage extends BasePage {
 
     }
 
+    public void goToPage(String linkToGoTo) {
+        navigateToUrl(getConfig().getFlorence_preview() + "/" + linkToGoTo);
+    }
+
+    public void switchBackToMainTab() {
+        getDriver().switchTo().defaultContent();
+    }
 }

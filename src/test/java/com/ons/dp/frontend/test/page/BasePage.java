@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
@@ -259,6 +260,16 @@ public class BasePage {
     public void getTextFromPageSource(String text) {
 
         getDriver().getPageSource().contains(text);
+
+    }
+
+    public void openANewTab() {
+        getElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "t");
+    }
+
+    public void switchToNewTab() {
+        ArrayList<String> tabs = new ArrayList<String>(getDriver().getWindowHandles());
+        getDriver().switchTo().window(tabs.get(1));
 
     }
 

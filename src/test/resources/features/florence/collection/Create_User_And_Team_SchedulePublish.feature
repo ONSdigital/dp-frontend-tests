@@ -30,6 +30,7 @@ Feature: Create a published schedule collection
 
     And I create a SCHEDULED_CUSTOM collection type
     And I browse to the content businessindustryandtrade under collections
+    And I click on Edit button
     And I enter keywords metadata and save for review
     Then browse to users and access page
     And I delete the user:"New User"

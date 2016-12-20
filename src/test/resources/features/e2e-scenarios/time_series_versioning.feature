@@ -6,6 +6,7 @@ Feature: End to End time series versioning tests
     Given I am logged in as an admin
     And I create a MANUAL collection type
     And I browse to the content economy/grossdomesticproductgdp/datasets/businessinvestment under collections
+    And I click on Edit button
     And I upload a <filetype> file
     And I save and submit the collection for review
     And I logout of florence
@@ -30,6 +31,7 @@ Feature: End to End time series versioning tests
     Given I am logged in as an admin
     And I create a MANUAL collection type
     And I browse to the content economy/grossdomesticproductgdp/datasets/businessinvestment under collections
+    And I click on Edit button
     And I select the collection
     And I delete all the worked on pages in the collection
     And I delete the collection

@@ -14,6 +14,7 @@ public class Configuration {
     private String onsURL;
     private String onsdevelop_URL;
     private String florence_develop;
+    private String florence_preview;
     private String ermintrude_develop;
     private String florence_discovery;
     private String ermintrude_discovery;
@@ -41,6 +42,10 @@ public class Configuration {
 
     public String getFlorence_develop() {
         return florence_develop;
+    }
+
+    public String getFlorence_preview() {
+        return florence_preview;
     }
 
     public String getErmintrude_develop() {
@@ -99,6 +104,9 @@ public class Configuration {
         }
         if (config.containsKey("florence_develop")) {
             florence_develop = (String) config.get("florence_develop");
+        }
+        if (config.containsKey("florence_preview")) {
+            florence_preview = (String) config.get("florence_preview");
         }
         if (config.containsKey("ermintrude_develop")) {
             ermintrude_develop = (String) config.get("ermintrude_develop");

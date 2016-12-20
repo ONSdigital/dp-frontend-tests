@@ -18,6 +18,16 @@ public class ContentCreationSteps {
 
     }
 
+    @And("^I click on Edit button$")
+    public void clickOnActiveEditButton() {
+        contentCreation.clickOnActiveEditButton();
+    }
+
+    @And("^I click on Create button$")
+    public void clickOnActiveCreateButton() {
+        contentCreation.clickOnActiveCreateButton();
+    }
+
     @And("^I upload a ([^\"]*) file$")
     public void iUploadAFile(String fileType) throws Throwable {
         contentCreation.upLoadFile(fileType);
@@ -77,5 +87,10 @@ public class ContentCreationSteps {
     public void iEnterKeywordsMetadata() throws Throwable {
         contentCreation.metaDataKeywords();
         contentCreation.saveSubmitForReview();
+    }
+
+    @And("^I delete the content$")
+    public void iDeleteTheContent() throws Throwable {
+        contentCreation.deleteContent();
     }
 }

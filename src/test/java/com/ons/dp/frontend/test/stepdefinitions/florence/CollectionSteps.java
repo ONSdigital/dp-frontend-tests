@@ -6,6 +6,7 @@ import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.RandomStringGen;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import org.junit.Assert;
 
 public class CollectionSteps {
@@ -16,12 +17,13 @@ public class CollectionSteps {
 
         String collectionName = "AutoTest_" + RandomStringGen.getRandomString(5);
         TestContext.getCacheService().setDataMap("collectionName", new AnyData(collectionName));
-        String teamName = TestContext.getCacheService().getDataMap().get("teamName").getStringData();
+        //String teamName = TestContext.getCacheService().getDataMap().get("teamName").getStringData();
         switch (collType) {
             case "MANUAL":
-                collection.createCollection(collectionName, Collection.CollectionTypes.MANUAL, teamName);
+                collection.createCollection(collectionName, Collection.CollectionTypes.MANUAL, null);
                 break;
             case "SCHEDULED_CUSTOM":
+                String teamName = TestContext.getCacheService().getDataMap().get("teamName").getStringData();
                 collection.createCollection(collectionName, Collection.CollectionTypes.SCHEDULE_CUSTOM, teamName);
 //            default:
 //                collection.createCollection(collectionName, Collection.CollectionTypes.MANUAL,teamName);
@@ -64,4 +66,9 @@ public class CollectionSteps {
     }
 
 
+    @Then("^I review the (.*) files awaiting deletion$")
+    public void reviewDeletionFilesInColl(String deletedPage) throws Throwable {
+        String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
+        collection.deleteFile(colName, deletedPage);
+    }
 }
