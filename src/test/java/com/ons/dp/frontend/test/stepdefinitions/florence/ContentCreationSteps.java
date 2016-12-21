@@ -50,8 +50,10 @@ public class ContentCreationSteps {
 
 
     @And("^I create a new \"([^\"]*)\" and submit for review$")
-    public void iCreateANew(String pageName) throws Throwable {
-        contentCreation.createPageAndSaveForReview(pageName);
+    public void iCreateANew(String pageType) throws Throwable {
+        //String pageName = "AutoPage_" + RandomStringGen.getRandomString(5);
+        // TestContext.getCacheService().setDataMap("pageName", new AnyData(pageName));
+        contentCreation.createPageAndSaveForReview(pageType);
 
     }
 

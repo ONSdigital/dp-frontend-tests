@@ -48,9 +48,10 @@ public class HomePageSteps {
     public void getONSClassificationChanges(String exist) {
         boolean exists = exist.length() <= 4;
 
+        // AnyData pageName = TestContext.getCacheService().getDataMap().get("pageName");
         if (exists) {
             basePage.refresh();
-            Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_title).contentEquals("Admin Page"));
+            Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_title).contentEquals("xRtv2E6"));
         } else {
             basePage.refresh();
             Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_header_title).contentEquals(
@@ -60,4 +61,8 @@ public class HomePageSteps {
     }
 
 
+    @When("^I search for \"([^\"]*)\" in the ONS Website$")
+    public void iSearchForInTheONSWebsite(String text) throws Throwable {
+        homePage.searchForTimeSeriesID(text);
+    }
 }
