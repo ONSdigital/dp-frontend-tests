@@ -6,13 +6,17 @@ import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.util.Do;
 import com.ons.dp.frontend.test.util.Helper;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Assert;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
@@ -272,6 +276,85 @@ public class BasePage {
         getDriver().switchTo().window(tabs.get(1));
 
     }
+
+/*    public boolean isUrlDisplayed(String url) {
+        try {
+            return getDriver().getCurrentUrl().equalsIgnoreCase(url);
+
+        } catch (final NoSuchElementException e) {
+            return false;
+        }
+    }*/
+
+   /* public void ClickOnLink(final String linkText) throws InterruptedException {
+        Thread.sleep(500);
+
+        getDriver().findElement(By.linkText(linkText)).click();
+    }*/
+
+    public void IsResultsDisplayedInDateOrder(List<WebElement> elements) throws ParseException {
+
+        List<Date> expected = new ArrayList<>();
+        List<Date> actual = new ArrayList<>();
+
+        for (WebElement e : elements) {
+            String text = e.getText();
+            if (text.startsWith("| Released on ")) {
+                //  String dateStr = text.split("| Released on ")[1];
+                String dateStr = text.replace("| Released on ", "");
+
+                DateFormat format = new SimpleDateFormat("d MMMM yyyy", Locale.ENGLISH);
+                Date date = format.parse(dateStr);
+
+                expected.add(date);
+                actual.add(date);
+            }
+
+            Collections.sort(expected, Collections.reverseOrder());
+            Assert.assertTrue(expected.equals(actual));
+
+        }
+
+    }
+
+    public WebElement isElementLoaded(WebElement elementToBeLoaded) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 500);
+        WebElement element = wait.until(ExpectedConditions.visibilityOf(elementToBeLoaded));
+        return element;
+    }
+    public boolean IsLinkDisplayedAndEnabled(final String linkText){
+        try {
+            return getDriver().findElement(By.linkText(linkText)).isEnabled();
+        }
+        catch(final NoSuchElementException e){
+            return false;
+        }
+    }
+
+    public boolean isUrlDisplayed(String key) {
+        try {
+            String expectedurl = getConfig().getOnsURL() + key;
+            return getDriver().getCurrentUrl().equalsIgnoreCase(expectedurl);
+
+        } catch (final NoSuchElementException e) {
+            return false;
+        }
+    }
+
+
+    public void NavigateToPage(String key){
+
+        try {
+            String navigateToUrl = getConfig().getOnsURL() + key;
+            getDriver().navigate().to(navigateToUrl);
+
+        } catch (final NoSuchElementException e) {
+
+        }
+
+    }
+
+
 
 
 }

@@ -4,6 +4,7 @@ package com.ons.dp.frontend.test.stepdefinitions.ons;
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.page.webpage.Homepage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -64,5 +65,10 @@ public class HomePageSteps {
     @When("^I search for \"([^\"]*)\" in the ONS Website$")
     public void iSearchForInTheONSWebsite(String text) throws Throwable {
         homePage.searchForTimeSeriesID(text);
+    }
+
+    @Given("^I am on the ONS HomePage$")
+    public void iAmOnTheONSHomePage() throws Throwable {
+        homePage.openHomePage();
     }
 }

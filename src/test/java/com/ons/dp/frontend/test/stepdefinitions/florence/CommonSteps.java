@@ -2,8 +2,11 @@ package com.ons.dp.frontend.test.stepdefinitions.florence;
 
 
 import com.ons.dp.frontend.test.page.BasePage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
@@ -43,4 +46,29 @@ public class CommonSteps {
         Assert.assertTrue(basePage.getElementText(By.cssSelector(element)).equals(text));
         Assert.assertEquals(basePage.getElementText(By.cssSelector(element)), text);
     }
+
+    @When("^I click on \"([^\"]*)\" link$")
+    public void iClickOnLink(String linkText) throws Throwable {
+        basePage.ClickOnLink(linkText);
+    }
+
+    @Then("^I should be on the (.*) page$")
+    public void iShouldBeOnThePage(String key) throws Throwable {
+
+        Assert.assertTrue(basePage.isUrlDisplayed(key));
+
+    }
+
+    @Then("^I should not be on the (.*) page$")
+    public void iShouldNotBeOnThePage(String key) throws Throwable {
+        Assert.assertFalse(basePage.isUrlDisplayed(key));
+    }
+
+    @Given("^I am on the \"([^\"]*)\" page$")
+    public void iAmOnThePage(String Url) throws Throwable {
+
+        basePage.NavigateToPage(Url);
+
+    }
+
 }
