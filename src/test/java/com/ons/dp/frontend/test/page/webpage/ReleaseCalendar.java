@@ -33,26 +33,36 @@ public class ReleaseCalendar extends BasePage {
 	}
 
 	public void clickUpcomingReleases() {
-		click(getlinkText(upcomingReleasesTab));
+		if (isElementPresent(getlinkText(upcomingReleasesTab))) {
+			click(getlinkText(upcomingReleasesTab));
+		}
 	}
 
 	public void clickPublishedCalendar() {
-		click(getlinkText(publishedReleasesTab));
+		if (isElementPresent(getlinkText(publishedReleasesTab))) {
+			click(getlinkText(publishedReleasesTab));
+		}
 	}
 
 	public ArrayList <WebElement> getAllReleasesOnPage() {
 		return (ArrayList <WebElement>) findElementsBy(releases);
 	}
 
-	public void selectRelease(String release) {
+	public boolean selectRelease(String release) {
+		boolean present = false;
 		for (WebElement rel : getAllReleasesOnPage()) {
 			if (rel.getText().equalsIgnoreCase(release)) {
+				present = true;
 				rel.click();
 				break;
 			}
 		}
+		return present;
 	}
 
+	public By returnNextPage() {
+		return By.xpath(pageLinks.replace("replace", "Next"));
+	}
 	public void goToPageLink(String page) {
 		click(By.xpath(pageLinks.replace("replace", page)));
 	}
