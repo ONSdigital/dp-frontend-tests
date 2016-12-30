@@ -9,9 +9,7 @@ import org.openqa.selenium.WebElement;
 import java.text.ParseException;
 import java.util.List;
 
-/**
- * Created by manoj on 28/12/2016.
- */
+
 public class MediaPage extends BasePage {
 
   //  public CommonMethods commonMethods;
