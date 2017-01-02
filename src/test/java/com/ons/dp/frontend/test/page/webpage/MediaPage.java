@@ -14,7 +14,7 @@ public class MediaPage extends BasePage {
 
   //  public CommonMethods commonMethods;
     public final String MediaURL = "https://www.ons.gov.uk/news";
-
+  private UrlsPage urlsPage= new UrlsPage();
 
 
     /*public MediaPage(WebDriver driver)  {
@@ -24,7 +24,7 @@ public class MediaPage extends BasePage {
     }*/
 
     public boolean isPageDisplayed() {
-        return isUrlDisplayed(MediaURL);
+        return urlsPage.isUrlDisplayed(MediaURL);
     }
 
     public void ClickOnLink(String linkText) throws InterruptedException {
