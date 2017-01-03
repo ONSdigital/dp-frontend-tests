@@ -1,3 +1,16 @@
+Feature:
+  Create and publish a release calendar
+
+  Scenario:
+    Given I navigate to the ONS Website
+    And click on PUBLISHED release calendar
+    And search for the release with keyword, published after and published before dates
+      | Profitability of UK companies: Jan to Mar 2016 | 01/08/2016 | 15/10/2016 |
+    Then search results contains the release: Profitability of UK companies: Jan to Mar 2016
+    Then verify the release information
+      | header                                         | image | contact    | contact_email                | releaseDate   | nextRelease     |
+      | Profitability of UK companies: Jan to Mar 2016 | true  | Eric Crane | profitability@ons.gsi.gov.uk | 5 August 2016 | 13 October 2016 |
+
 #Feature: Content designer creates a content page to publish to the release calendar
 #  As a publish support team member
 #  I need to create a content page

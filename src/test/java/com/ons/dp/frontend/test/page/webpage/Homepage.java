@@ -9,7 +9,7 @@ public class Homepage extends BasePage {
     public By search_Submit = By.id("nav-search-submit");
 
     public void openHomePage() {
-        navigateToUrl(getConfig().getOnsURL());
+        navigateToUrl(getConfig().getOnsdevelop_URL());
 
     }
 

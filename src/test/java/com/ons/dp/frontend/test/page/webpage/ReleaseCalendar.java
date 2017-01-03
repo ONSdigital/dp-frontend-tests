@@ -17,15 +17,15 @@ public class ReleaseCalendar extends BasePage {
 	public By releases = By.cssSelector("h3.search-results__title > a");
 	public String pageLinks = "//a[contains(text(),'replace')]";
 	public By results_size = By.id("page-size");
-	public By releaseHeader = By.cssSelector("h1.page-intro__title>span.page-intro__type");
+	public By releaseHeader = By.cssSelector("h1.page-intro__title");
 	public By alert_title = By.cssSelector("p.alert__title margin-top-md--1");
 	public By contact_info = By.cssSelector("a[data-ga-event-category='mailto']");
-	public By releaseDate = By.xpath("//p[contains(text(),'Release date:')]");
-	public By nextReleaseDate = By.xpath("//p[contains(text(),'Next release:')]");
+	public By releaseDate = By.xpath("//*[contains(text(),'Release date:')]");
+	public By nextReleaseDate = By.xpath("//*[contains(text(),'Next release:')]");
 	public By ons_image = By.cssSelector("img.meta__image");
 
 	public void goToReleaseCalendar() {
-		getlinkText(releaseCalendar);
+		click(getlinkText(releaseCalendar));
 	}
 
 	public String getSelectedTab() {
