@@ -2,6 +2,7 @@ package com.ons.dp.frontend.test.stepdefinitions.florence;
 
 
 import com.ons.dp.frontend.test.page.BasePage;
+import com.ons.dp.frontend.test.page.webpage.UrlsPage;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -13,6 +14,7 @@ import org.openqa.selenium.By;
 public class CommonSteps {
     public By Select_a_document_to_view = By.id("docs-list");
     private BasePage basePage = new BasePage();
+    private UrlsPage urlsPage = new UrlsPage();
 
     @And("I logout of florence")
     public void logout_florence() {
@@ -55,19 +57,19 @@ public class CommonSteps {
     @Then("^I should be on the (.*) page$")
     public void iShouldBeOnThePage(String key) throws Throwable {
 
-        Assert.assertTrue(basePage.isUrlDisplayed(key));
+        Assert.assertTrue(urlsPage.isUrlDisplayed(key));
 
     }
 
     @Then("^I should not be on the (.*) page$")
     public void iShouldNotBeOnThePage(String key) throws Throwable {
-        Assert.assertFalse(basePage.isUrlDisplayed(key));
+        Assert.assertFalse(urlsPage.isUrlDisplayed(key));
     }
 
     @Given("^I am on the \"([^\"]*)\" page$")
     public void iAmOnThePage(String Url) throws Throwable {
 
-        basePage.NavigateToPage(Url);
+        urlsPage.NavigateToPage(Url);
 
     }
 

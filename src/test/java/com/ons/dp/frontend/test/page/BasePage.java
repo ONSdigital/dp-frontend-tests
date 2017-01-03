@@ -331,32 +331,6 @@ public class BasePage {
         }
     }
 
-    public boolean isUrlDisplayed(String key) {
-        try {
-            String expectedurl = getConfig().getOnsURL() + key;
-            return getDriver().getCurrentUrl().equalsIgnoreCase(expectedurl);
-
-        } catch (final NoSuchElementException e) {
-            return false;
-        }
-    }
-
-
-    public void NavigateToPage(String key){
-
-        try {
-            String navigateToUrl = getConfig().getOnsURL() + key;
-            getDriver().navigate().to(navigateToUrl);
-
-        } catch (final NoSuchElementException e) {
-
-        }
-
-    }
-
-
-
-
 }
 
 
