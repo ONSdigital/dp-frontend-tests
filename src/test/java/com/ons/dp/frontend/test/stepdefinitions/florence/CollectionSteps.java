@@ -57,6 +57,14 @@ public class CollectionSteps {
         collection.reviewFile(colName, savedPage, fileloc);
     }
 
+	@And("^I review the calendar entry files awaiting review$")
+	public void reviewFiles() throws Throwable {
+		String savedPage = TestContext.getCacheService().getDataMap().get("calendarEntry").getStringData();
+		String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
+		String fileLoc = "releases/" + savedPage;
+		collection.reviewFile(colName, savedPage, fileLoc);
+	}
+
 
     @And("^the collection (does|does not) exist$")
     public void checkForCollection(String does) {

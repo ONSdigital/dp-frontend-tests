@@ -1,5 +1,6 @@
 package com.ons.dp.frontend.test.stepdefinitions.florence;
 
+import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.publish.PublishingQueue;
 import cucumber.api.java.en.When;
 
@@ -12,7 +13,7 @@ public class PublishingQueueSteps {
     public void publishCollection() throws Throwable {
 
         publishingQueue.publishQueue();
-        publishingQueue.publishCollection();
+	    publishingQueue.publishCollection(TestContext.getCacheService().getDataMap().get("collectionName").getStringData());
 
     }
 

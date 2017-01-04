@@ -2,14 +2,24 @@ Feature:
   Create and publish a release calendar
 
   Scenario:
-    Given I navigate to the ONS Website
-    And click on PUBLISHED release calendar
+    Given I am logged in as a publisher
+    And I create a MANUAL collection type
+    And create a new calendar entry
+    And add the following details to the calendary entry
+      | image | contactName | contactEmail       | nextRelease   | telephone   |
+      | true  | QA Tester   | ptestuser@test.com | 5 August 2016 | 02920000000 |
+    Then I logout of florence
+    And I am logged in as a lead publisher
+    And I select the collection
+    And I review the calendar entry files awaiting review
+    Then I approve the collection
+    When I click on publishing queue and publish collection
+    Then I logout of florence
+    When I navigate to the ONS Website
+    And click on UPCOMING release calendar
     And search for the release with keyword, published after and published before dates
-      | Profitability of UK companies: Jan to Mar 2016 | 01/08/2016 | 15/10/2016 |
-    Then search results contains the release: Profitability of UK companies: Jan to Mar 2016
+    Then search results contains the release information
     Then verify the release information
-      | header                                         | image | contact    | contact_email                | releaseDate   | nextRelease     |
-      | Profitability of UK companies: Jan to Mar 2016 | true  | Eric Crane | profitability@ons.gsi.gov.uk | 5 August 2016 | 13 October 2016 |
 
 #Feature: Content designer creates a content page to publish to the release calendar
 #  As a publish support team member
