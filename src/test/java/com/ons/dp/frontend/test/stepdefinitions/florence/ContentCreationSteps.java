@@ -1,12 +1,16 @@
 package com.ons.dp.frontend.test.stepdefinitions.florence;
 
 import com.ons.dp.frontend.test.core.TestContext;
+import com.ons.dp.frontend.test.model.CalendarEntry;
 import com.ons.dp.frontend.test.model.ContentText;
 import com.ons.dp.frontend.test.page.publish.ContentCreation;
 import com.ons.dp.frontend.test.util.AnyData;
+import com.ons.dp.frontend.test.util.CustomDates;
 import com.ons.dp.frontend.test.util.RandomStringGen;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
+
+import java.util.List;
 
 
 public class ContentCreationSteps {
@@ -51,11 +55,24 @@ public class ContentCreationSteps {
 
     @And("^I create a new \"([^\"]*)\" and submit for review$")
     public void iCreateANew(String pageType) throws Throwable {
-        //String pageName = "AutoPage_" + RandomStringGen.getRandomString(5);
-        // TestContext.getCacheService().setDataMap("pageName", new AnyData(pageName));
-        contentCreation.createPageAndSaveForReview(pageType);
-
+	    //String pageName = "AutoPage_" + RandomStringGen.getRandomString(5);
+	    // TestContext.getCacheService().setDataMap("pageName", new AnyData(pageName));
+	    contentCreation.createPageAndSaveForReview(pageType);
     }
+
+	@And("^create a new calendar entry$")
+	public void calendarEntry() throws Throwable {
+		String pageName = RandomStringGen.getRandomString(8);
+		contentCreation.createCalendarEntry(CustomDates.getDate(1), "09:30", pageName);
+		TestContext.getCacheService().setDataMap("calendarEntry", new AnyData(pageName));
+	}
+
+	@And("^add the following details to the calendary entry$")
+	public void editCalendarEntry(List <CalendarEntry> calendarEntry) {
+		calendarEntry.get(0).setSummary(TestContext.getCacheService().getDataMap().get("collectionName").getStringData());
+		TestContext.getCacheService().setDataMap("CalendarDetails", new AnyData(calendarEntry.get(0)));
+		contentCreation.addCalendarMetaData(calendarEntry.get(0));
+	}
 
     @And("^I click on the content header (.*)$")
     public void editContentHeader(String contentHeader) {

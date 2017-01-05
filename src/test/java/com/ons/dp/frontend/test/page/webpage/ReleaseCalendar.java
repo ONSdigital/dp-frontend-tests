@@ -18,7 +18,7 @@ public class ReleaseCalendar extends BasePage {
 	public String pageLinks = "//a[contains(text(),'replace')]";
 	public By results_size = By.id("page-size");
 	public By releaseHeader = By.cssSelector("h1.page-intro__title");
-	public By alert_title = By.cssSelector("p.alert__title margin-top-md--1");
+	public By alert_title = By.cssSelector("p.alert__title");
 	public By contact_info = By.cssSelector("a[data-ga-event-category='mailto']");
 	public By releaseDate = By.xpath("//*[contains(text(),'Release date:')]");
 	public By nextReleaseDate = By.xpath("//*[contains(text(),'Next release:')]");

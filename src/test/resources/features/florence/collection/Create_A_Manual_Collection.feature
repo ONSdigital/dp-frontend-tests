@@ -16,7 +16,7 @@ Feature: Check a collection in florence website
     And I enter text into the markdown editor
     Then I save and submit the collection for review
     Then I logout of florence
-    Given I am logged in as a publisher
+    And I am logged in as a publisher
     And I select the collection
     Then I review the About us files awaiting review with data-url:aboutus
     And I approve the collection

@@ -75,8 +75,8 @@ public class Collection extends BasePage {
                 click(sch_publish);
                 click(custom_schedule);
                 // sendKeys(custom_date, CustomDates.getTomorrowsDate());
-                getDriver().findElement(By.id("date")).sendKeys(CustomDates.getTomorrowsDate());
-                getDriver().findElement(By.id("date")).sendKeys(Keys.ESCAPE);
+	            getDriver().findElement(By.id("date")).sendKeys(CustomDates.getDate(1));
+	            getDriver().findElement(By.id("date")).sendKeys(Keys.ESCAPE);
                 select(custom_hour, "10");
                 select(custom_min, "30");
         }
@@ -135,7 +135,7 @@ public class Collection extends BasePage {
 
     public void reviewFile(String collectionName, String savedPage, String reviewLoc) {
         openSavedPage(savedPage);
-        click(getContentId(reviewFileButt, reviewLoc));
+	    click(getContentId(reviewFileButt, reviewLoc.toLowerCase()));
     }
 
     public void deleteFile(String collectionName, String deletedPage) {
