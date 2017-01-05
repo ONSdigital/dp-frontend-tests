@@ -18,7 +18,7 @@ public class SearchResultsPage extends BasePage {
 
     public String no_results_text = "Sorry, no results were found that contain " + "‘" + "text" + "’";
 
-    public String results_text = "1 results containing" + "‘" + "text" + "’" + "," + "Sorted by relevance";
+    public String results_text = "1 results containing " + "‘" + "text" + "’" + "," + " sorted by relevance";
 
     public void noSearchResults(String searchText) {
 
@@ -36,7 +36,11 @@ public class SearchResultsPage extends BasePage {
 
     public void searchResults(String searchText) {
 
-        Assert.assertTrue(getElementText(search_results_text).contains(results_text));
+        //String actualText = getElementText(search_results_text);
+
+        String expectedText = results_text.replace("text", searchText);
+
+        Assert.assertTrue(getElementText(search_results_text).contains(expectedText));
 
         Assert.assertEquals("All results (1)", getElementText(allresults_tab));
 

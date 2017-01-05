@@ -4,7 +4,6 @@ package com.ons.dp.frontend.test.stepdefinitions.ons;
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.page.webpage.Homepage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -52,7 +51,7 @@ public class HomePageSteps {
         // AnyData pageName = TestContext.getCacheService().getDataMap().get("pageName");
         if (exists) {
             basePage.refresh();
-            Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_title).contentEquals("xRtv2E6"));
+            Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_title).contentEquals("bDsx5G8"));
         } else {
             basePage.refresh();
             Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_header_title).contentEquals(
