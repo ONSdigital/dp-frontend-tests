@@ -187,7 +187,6 @@ public class ContentCreation extends BasePage {
 
 
 	public void approveCollection() {
-		Helper.pause(1000);
 		try {
 			waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString()), ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString());
 			click(getButton(buttonElement, ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString()));
@@ -215,7 +214,6 @@ public class ContentCreation extends BasePage {
 		select(selectNewPage, pageType);
 		sendKeys(pageNameField, "xRtv2E6");
 		click(getButton(buttonElement, "Create page"));
-		Helper.pause(2000);
 		saveSubmitForReview();
 	}
 
@@ -237,7 +235,6 @@ public class ContentCreation extends BasePage {
 		sendKeys(visualisation_uniqueID, "DVC126");
 		sendKeys(pageNameField, "Visualisation Page");
 		click(getButton(buttonElement, "Create page"));
-		Helper.pause(2000);
 		saveSubmitForReview();
 
 	}
@@ -270,10 +267,15 @@ public class ContentCreation extends BasePage {
 		if (finalChkBox) {
 			click(finalise);
 		}
-		sendKeys(nextRelease, String.valueOf(calendarEntry.getNextRelease()));
+		sendKeys(nextRelease, CustomDates.getDate(30));
 		sendKeys(contactName, String.valueOf(calendarEntry.getContactName()));
-		sendKeys(contactEmail, String.valueOf(calendarEntry.getContactEmail()));
-		sendKeys(telephone, String.valueOf(calendarEntry.getTelephone()));
+		if (calendarEntry.getContactEmail() != null) {
+			sendKeys(contactEmail, String.valueOf(calendarEntry.getContactEmail()));
+		}
+		calendarEntry.setNextRelease(getElementText(nextRelease));
+		if (calendarEntry.getTelephone() != null) {
+			sendKeys(telephone, String.valueOf(calendarEntry.getTelephone()));
+		}
 		if (onsImgChkBox) {
 			click(onsCheckBox);
 		}

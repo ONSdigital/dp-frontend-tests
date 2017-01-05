@@ -57,23 +57,28 @@ public class ReleaseCalendarSteps {
 		// verifies the actual header contains the details from the cucumber
 		String releaseName = TestContext.getCacheService().getDataMap().get("calendarEntry").getStringData();
 		String releaseType = TestContext.getCacheService().getDataMap().get("releaseType").getStringData();
-//		String provisionalRel = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
 		CalendarEntry calendarEntry = (CalendarEntry) TestContext.getCacheService().getDataMap().get("CalendarDetails").getDataObject();
 		assertTrue(releaseCalendar.getElementText(releaseCalendar.releaseHeader).contains(releaseName),
 				"Actual Title :" + releaseCalendar.getElementText(releaseCalendar.releaseHeader) + "\n" +
 						"Expected Title :" + calendarEntry.getSummary());
 		assertEquals(releaseCalendar.getContactName(), calendarEntry.getContactName());
-		assertEquals(releaseCalendar.getContactEmail(), calendarEntry.getContactEmail());
+//		if(releaseCalendar.getContactEmail()!=null) {
+//			assertEquals(releaseCalendar.getContactEmail(), calendarEntry.getContactEmail());
+//		}
 		if (releaseCalendar.doesImageExist()) {
 			assertTrue(calendarEntry.getOnsimage().equalsIgnoreCase("true"));
 		}
 		if (releaseType.equalsIgnoreCase("UPCOMING")) {
 			assertTrue(releaseCalendar.isElementPresent(releaseCalendar.alert_title));
 		}
-//		assertTrue(releaseCalendar.getElementText(releaseCalendar.releaseDate).contains(provisionalRel));
-//		assertTrue(releaseCalendar.getElementText(releaseCalendar.nextReleaseDate).contains(releaseInfo.get(0).getNextRelease()),
-//				"Actual Title :" + releaseCalendar.getElementText(releaseCalendar.nextReleaseDate) + "\n" +
-//						"Expected Title :" + releaseInfo.get(0).getNextRelease());
+		if (calendarEntry.getProvisionalDateRange() != null) {
+			assertTrue(releaseCalendar.pageSourceContains(calendarEntry.getProvisionalDateRange()));
+		}
+		if (calendarEntry.getNextRelease() != null) {
+			assertTrue(releaseCalendar.pageSourceContains(calendarEntry.getNextRelease()));
+		}
+		assertTrue(releaseCalendar.pageSourceContains(calendarEntry.getSummary()));
+
 
 	}
 }
