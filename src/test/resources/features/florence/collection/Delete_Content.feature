@@ -52,8 +52,6 @@ Feature: Delete Content
     Then the ONS website does not contain the classifications changes
 
 
-    #### THIS TEST FAILS - KNOWN ISSUE - BUG --- INFORMED TO IAN KENT ####
-
   Scenario: Delete content should be removed from search indexes
 
      # First Navigating to the website to see the page doesn't exist

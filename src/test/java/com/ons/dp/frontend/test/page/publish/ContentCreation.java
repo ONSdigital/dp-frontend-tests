@@ -212,7 +212,7 @@ public class ContentCreation extends BasePage {
 	public void createPageAndSaveForReview(String pageType) {
 		click(getButton(buttonElement, "Create"));
 		select(selectNewPage, pageType);
-		sendKeys(pageNameField, "xRtv2E6");
+		sendKeys(pageNameField, "bDsx5G8");
 		click(getButton(buttonElement, "Create page"));
 		saveSubmitForReview();
 	}
