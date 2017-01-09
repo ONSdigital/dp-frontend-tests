@@ -1,8 +1,10 @@
 package com.ons.dp.frontend.test.page.publish;
 
 
+import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.model.CalendarEntry;
 import com.ons.dp.frontend.test.model.ContentText;
+import com.ons.dp.frontend.test.model.FoiEntry;
 import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.util.CustomDates;
 import com.ons.dp.frontend.test.util.Helper;
@@ -54,6 +56,11 @@ public class ContentCreation extends BasePage {
 	public By telephone = By.id("contactTelephone");
 	public By onsCheckBox = By.id("natStat-checkbox");
 	public By cancelled = By.name("cancelled");
+
+	public By title = By.id("title");
+	public By metaDescription = By.id("metaDescription");
+	public By content = By.xpath("//div[@id='content']/div");
+	public By contentEdit = By.id("content-edit");
 
 
 	public int getNumberOfPublishedVersions() {
@@ -283,5 +290,32 @@ public class ContentCreation extends BasePage {
 			click(cancelled);
 		}
 		saveSubmitForReview();
+	}
+
+	public void createFOIEntry(String releaseDateText, String randomPageName) {
+		click(activeCreateButton);
+		select(selectNewPage, "FOI");
+		sendKeys(releaseDate, releaseDateText);
+		getElement(releaseDate).sendKeys(Keys.ESCAPE);
+		sendKeys(pageNameField, randomPageName);
+		click(getButton(buttonElement, "Create page"));
+	}
+
+	public void addFOIEntryMetadata(FoiEntry foiEntry) {
+
+		click(metadata);
+		//sendKeys(title, foiEntry.getTitle());
+		getElementText(title).equals(TestContext.getCacheService().getDataMap().get("foiEntry").getStringData());
+		sendKeys(metadata_keywords, foiEntry.getKeywords());
+		sendKeys(metaDescription, foiEntry.getMetaDescription());
+
+		click(content);
+		click(contentEdit);
+		sendKeys(markdownEditor, foiEntry.getMarkdownText());
+		click(getButton(buttonElement, "Save changes and exit"));
+
+		saveSubmitForReview();
+
+
 	}
 }

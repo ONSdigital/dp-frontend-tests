@@ -79,4 +79,12 @@ public class CollectionSteps {
         String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
         collection.deleteFile(colName, deletedPage);
     }
+
+    @And("^I review the (.*) file awaiting review with data url (.*)$")
+    public void reviewFile(String fileName, String filePath) throws Throwable {
+        String savedPage = TestContext.getCacheService().getDataMap().get(fileName).getStringData();
+        String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
+        String fileLoc = filePath + "/" + savedPage;
+        collection.reviewFile(colName, savedPage, fileLoc);
+    }
 }

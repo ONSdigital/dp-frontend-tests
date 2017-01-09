@@ -1,6 +1,8 @@
 package com.ons.dp.frontend.test.stepdefinitions.ons;
 
+import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.webpage.SearchResultsPage;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
 public class SearchResultsPageSteps {
@@ -15,5 +17,11 @@ public class SearchResultsPageSteps {
     @Then("^there should be a search result related to \"([^\"]*)\" page$")
     public void thereShouldBeAResultRelatedToPage(String searchText) throws Throwable {
         searchResultsPage.searchResults(searchText);
+    }
+
+    @And("^I click on search result$")
+    public void iClickOnSearchResult() throws Throwable {
+        String searchResult = TestContext.getCacheService().getDataMap().get("foiEntry").getStringData();
+        searchResultsPage.findResultAndClick(searchResult);
     }
 }

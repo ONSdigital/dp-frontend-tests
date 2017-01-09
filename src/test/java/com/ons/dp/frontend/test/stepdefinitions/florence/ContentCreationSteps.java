@@ -3,6 +3,7 @@ package com.ons.dp.frontend.test.stepdefinitions.florence;
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.model.CalendarEntry;
 import com.ons.dp.frontend.test.model.ContentText;
+import com.ons.dp.frontend.test.model.FoiEntry;
 import com.ons.dp.frontend.test.page.publish.ContentCreation;
 import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.CustomDates;
@@ -111,5 +112,19 @@ public class ContentCreationSteps {
     @And("^I delete the content$")
     public void iDeleteTheContent() throws Throwable {
         contentCreation.deleteContent();
+    }
+
+    @And("^create a new FOI entry$")
+    public void createANewFOIEntry() throws Throwable {
+        String pageName = RandomStringGen.getRandomString(8);
+        contentCreation.createFOIEntry(CustomDates.getDate(-1), pageName);
+        TestContext.getCacheService().setDataMap("foiEntry", new AnyData(pageName));
+    }
+
+    @And("^add the following details to the FOI entry$")
+    public void addTheFollowingDetailsToTheFOIEntry(List<FoiEntry> fOIEntry) throws Throwable {
+        //  fOIEntry.get(0).setSummary(TestContext.getCacheService().getDataMap().get("collectionName").getStringData());
+        TestContext.getCacheService().setDataMap("FOIDetails", new AnyData(fOIEntry.get(0)));
+        contentCreation.addFOIEntryMetadata(fOIEntry.get(0));
     }
 }

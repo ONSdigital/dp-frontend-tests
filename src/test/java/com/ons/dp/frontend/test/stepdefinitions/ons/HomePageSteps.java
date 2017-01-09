@@ -2,6 +2,7 @@ package com.ons.dp.frontend.test.stepdefinitions.ons;
 
 
 import com.ons.dp.frontend.test.core.TestContext;
+import com.ons.dp.frontend.test.model.FoiEntry;
 import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.page.webpage.Homepage;
 import cucumber.api.java.en.And;
@@ -14,6 +15,8 @@ import org.openqa.selenium.By;
 public class HomePageSteps {
     public By page_title = By.cssSelector(".page-intro__title");
     public By page_header_title = By.cssSelector(".page-header__title");
+    public By content_section_text = By.cssSelector(".section__content--static-markdown>p");
+    public By column_text = By.xpath("//div[@class='col-wrap']/p");
     Homepage homePage = new Homepage();
     BasePage basePage = new BasePage();
 
@@ -70,4 +73,33 @@ public class HomePageSteps {
     public void iAmOnTheONSHomePage() throws Throwable {
         homePage.openHomePage();
     }
+
+    @And("^I navigate to (.*) on the ONS Website$")
+    public void iNavigateToBusinessInvestmentTimeSeriesDatasetOnTheONSWebsite(String urlPath) throws Throwable {
+        String pagelink = TestContext.getCacheService().getDataMap().get("foiEntry").getStringData();
+        homePage.goToPage(urlPath + pagelink);
+
+    }
+
+    @Then("^the ONS website does contain the FOI changes$")
+    public void theONSWebsiteDoesContainTheFOIChanges() throws Throwable {
+
+        String pagename = TestContext.getCacheService().getDataMap().get("foiEntry").getStringData();
+        FoiEntry foiEntry = (FoiEntry) TestContext.getCacheService().getDataMap().get("FOIDetails").getDataObject();
+
+        Assert.assertEquals(homePage.getElementText(page_title), "Freedom of Information (FOI):\n" + pagename);
+
+        Assert.assertEquals(homePage.getElementText(content_section_text), foiEntry.getMarkdownText());
+
+        // Assert.assertEquals(homePage.getElementText(column_text), CustomDates.getDate(-1).);
+
+    }
+
+    @When("^I search for the changes in the ONS Website$")
+    public void iSearchForTheChangesInTheONSWebsite() throws Throwable {
+        String text = TestContext.getCacheService().getDataMap().get("foiEntry").getStringData();
+        homePage.searchForTimeSeriesID(text);
+    }
+
+
 }
