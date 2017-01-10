@@ -2,6 +2,7 @@ package com.ons.dp.frontend.test.page.publish;
 
 
 import com.ons.dp.frontend.test.page.BasePage;
+import com.ons.dp.frontend.test.util.Helper;
 import org.openqa.selenium.By;
 
 
@@ -39,7 +40,10 @@ public class LoginPage extends BasePage {
         clear(input_password);
         sendKeys(input_email, email);
         sendKeys(input_password, pwd);
-        click(submit);
+        // click(submit);
+        Helper.pause(1000);
+        //getDriver().findElement(By.id("login")).click();
+        getDriver().findElement(By.xpath(".//*[@id='login']")).click();
     }
 
     public void ermintrudeLogin(String email, String pwd) {

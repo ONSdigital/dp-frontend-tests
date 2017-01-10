@@ -19,7 +19,7 @@ public class LoginSteps {
 
     @Given("I am logged in as an admin$")
     public void adminLogin() {
-        loginPage.openAndLogin("testuser@test.com", "one two three four");
+        loginPage.openAndLogin("admin@test.com", "one two three four");
         //      loginPage.openAndLogin("florence@magicroundabout.ons.gov.uk", "one two three four");
     }
 

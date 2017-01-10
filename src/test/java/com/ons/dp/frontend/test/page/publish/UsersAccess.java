@@ -21,7 +21,7 @@ public class UsersAccess extends BasePage {
     public By type_admin = By.id("admin-type");
     public By type_publisher = By.id("publisher-type");
     public By type_visualisation_publisher = By.id("data-vis-type");
-    public By label_select_user = By.className(".collection-name");
+    public By label_select_user = By.cssSelector(".collection-name");
     public By confirm_ok = By.className("confirm");
     public By user_created_label = By.xpath("//h2[text()[contains(.,'User created')]]");
     public By confirm_email_deletion = By.xpath("html/body/div[5]/fieldset/input");

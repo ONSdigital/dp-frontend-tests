@@ -19,7 +19,7 @@ Feature: Search Index Updates
     When I click on publishing queue and publish collection
     Then I logout of florence
 
-    # Navige to the website to see the page exist
+    # Navigate to the website to see the page exist
 
     Then I navigate to the ONS Website
     And I navigate to aboutus/transparencyandgovernance/freedomofinformationfoi/ on the ONS Website
@@ -28,3 +28,8 @@ Feature: Search Index Updates
     When I search for the changes in the ONS Website
 #    And I click on search result
 #    Then the ONS website does contain the FOI changes
+
+
+  Scenario: Publishing release calendar items should update the release calendar
+
+

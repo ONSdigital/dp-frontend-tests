@@ -26,7 +26,7 @@ public class UsersAccessSteps {
     public void createUser(String username, String email, String password, UserType userType) {
         createUser = new User(username, email, password, userType);
         usersAndAccessPage.createUser(createUser);
-        usersAndAccessPage.checkCreateNewUserConfirmation();
+
 
     }
 

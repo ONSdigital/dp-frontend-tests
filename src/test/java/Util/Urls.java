@@ -20,12 +20,12 @@ public class Urls {
         urlMapping.put("About us", "https://develop.onsdigital.co.uk/aboutus");
 
         // Media
-        urlMapping.put("Media", "https://www.ons.gov.uk/news");
-        urlMapping.put("List of all news", "https://www.ons.gov.uk/news/news/staticlist");
-        urlMapping.put("List of all statements and letters", "https://www.ons.gov.uk/news/statementsandletters/staticlist");
-        urlMapping.put("Contact Media Relations Office", "https://www.ons.gov.uk/news/contactmediarelationsoffice");
-        urlMapping.put("General and statistical enquiries", "https://www.ons.gov.uk/aboutus/contactus/generalandstatisticalenquiries");
-        urlMapping.put("Office locations", "https://www.ons.gov.uk/aboutus/contactus/officelocations");
+        urlMapping.put("Media", "https://develop.onsdigital.co.uk/news");
+        urlMapping.put("List of all news", "https://develop.onsdigital.co.uk/news/news/staticlist");
+        urlMapping.put("List of all statements and letters", "https://develop.onsdigital.co.uk/news/statementsandletters/staticlist");
+        urlMapping.put("Contact Media Relations Office", "https://develop.onsdigital.co.uk/news/contactmediarelationsoffice");
+        urlMapping.put("General and statistical enquiries", "https://develop.onsdigital.co.uk/aboutus/contactus/generalandstatisticalenquiries");
+        urlMapping.put("Office locations", "https://develop.onsdigital.co.uk/aboutus/contactus/officelocations");
 
         // Florence
         urlMapping.put("Florence Home", "https://publishing.develop.onsdigital.co.uk/florence/index.html");
