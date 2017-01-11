@@ -5,14 +5,14 @@ Feature: Delete Content
 
     Given I navigate to the ONS Website
     And I browse to "classifications/xRtv2E6" on the ONS
-    Then the ONS website does not contain the classifications changes
+    Then the ONS website does not contain the classifications changes with page "xRtv2E6"
 
     #  Create content - create a page
     Given I am logged in as a publisher
     And I create a MANUAL collection type
     And I browse to the content classifications under collections
     And I click on Create button
-    And I create a new "Generic static page" and submit for review
+    And I create a new "Generic static page" with page name "xRtv2E6" and submit for review
     Then I logout of florence
     #  Approve content/collection
     Given I am logged in as a lead publisher
@@ -24,7 +24,7 @@ Feature: Delete Content
     # Navige to the website to see the page exist
     Then I navigate to the ONS Website
     Then I browse to "classifications/xRtv2E6" on the ONS
-    Then the ONS website does contain the classifications changes
+    Then the ONS website does contain the classifications changes with page "xRtv2E6"
 
     #  Create collection to Delete content
     Given I am logged in as a publisher
@@ -49,7 +49,7 @@ Feature: Delete Content
     # Navigate to the website to see the page doesn't exist / content deleted
     Then I navigate to the ONS Website
     Then I browse to "classifications/xRtv2E6" on the ONS
-    Then the ONS website does not contain the classifications changes
+    Then the ONS website does not contain the classifications changes with page "xRtv2E6"
 
 
   Scenario: Delete content should be removed from search indexes

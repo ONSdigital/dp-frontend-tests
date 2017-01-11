@@ -224,6 +224,14 @@ public class ContentCreation extends BasePage {
 		saveSubmitForReview();
 	}
 
+	public void createPageAndSave(String pageType, String pageName) {
+		click(getButton(buttonElement, "Create"));
+		select(selectNewPage, pageType);
+		sendKeys(pageNameField, pageName);
+		click(getButton(buttonElement, "Create page"));
+		saveSubmitForReview();
+	}
+
 	public void createCalendarEntry(String releaseDateText, String releaseTime, String randomPageName) {
 		click(getButton(buttonElement, "Create"));
 		select(selectNewPage, "Calendar entry");

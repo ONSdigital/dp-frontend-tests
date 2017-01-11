@@ -43,6 +43,8 @@ public class Browser {
         switch (browser) {
             case "FIREFOX":
                 System.setProperty("webdriver.gecko.driver", "/Applications/Firefox.app/Contents/MacOS/firefox");
+                // System.setProperty("webdriver.firefox.marionette", "/Users/admin/Downloads/geckodriver");
+
                 FirefoxProfile ffProfile = new FirefoxProfile();
                 ffProfile.setEnableNativeEvents(false);
                 DesiredCapabilities desiredCapabilities = DesiredCapabilities.firefox();

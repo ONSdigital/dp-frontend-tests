@@ -24,9 +24,9 @@ Feature: End to End time series versioning tests
     Examples:
       | filetype |
       | CSDB     |
-      | CSV      |
-      | XLS      |
 
+
+  car
   Scenario: Create and Delete a collection
     Given I am logged in as an admin
     And I create a MANUAL collection type

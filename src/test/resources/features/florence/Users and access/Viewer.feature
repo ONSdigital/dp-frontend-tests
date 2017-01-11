@@ -17,7 +17,7 @@ Feature: Viewer - Users and access
 
   Scenario: Viewer unable to access preview website
 
-    Given I am logged in as a viewer
+    Given I am logged in as a viewer into florence website
     Then I should see the text "You do not have the permissions to enter here. Please contact an administrator" on the pop-up
 
 

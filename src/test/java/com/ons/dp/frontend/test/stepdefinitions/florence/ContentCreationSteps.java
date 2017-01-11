@@ -127,4 +127,9 @@ public class ContentCreationSteps {
         TestContext.getCacheService().setDataMap("FOIDetails", new AnyData(fOIEntry.get(0)));
         contentCreation.addFOIEntryMetadata(fOIEntry.get(0));
     }
+
+    @And("^I create a new \"([^\"]*)\" with page name \"([^\"]*)\" and submit for review$")
+    public void iCreateANewWithPageNameAndSubmitForReview(String pageType, String pageName) throws Throwable {
+        contentCreation.createPageAndSave(pageType, pageName);
+    }
 }

@@ -30,6 +30,6 @@ Feature: Search Index Updates
 #    Then the ONS website does contain the FOI changes
 
 
-  Scenario: Publishing release calendar items should update the release calendar
+#  Scenario: Publishing release calendar items should update the release calendar
 
 

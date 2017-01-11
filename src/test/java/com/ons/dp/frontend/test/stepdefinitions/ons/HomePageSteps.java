@@ -63,6 +63,21 @@ public class HomePageSteps {
 
     }
 
+    @Then("^the ONS website (does|does not) contain the classifications changes with page \"([^\"]*)\"$")
+    public void theONSWebsiteDoesContainTheClassificationsChangesWithPage(String exist, String pageName) throws Throwable {
+
+        boolean exists = exist.length() <= 4;
+
+        if (exists) {
+            basePage.refresh();
+            Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_title).contentEquals(pageName));
+        } else {
+            basePage.refresh();
+            Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_header_title).contentEquals(
+                    "404 - The webpage you are requesting does not exist on the site"));
+        }
+    }
+
 
     @When("^I search for \"([^\"]*)\" in the ONS Website$")
     public void iSearchForInTheONSWebsite(String text) throws Throwable {

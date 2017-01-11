@@ -4,6 +4,7 @@ package com.ons.dp.frontend.test.page.publish;
 import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.util.Helper;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 public class LoginPage extends BasePage {
@@ -36,6 +37,7 @@ public class LoginPage extends BasePage {
 
     public void login(String email, String pwd) {
         getDriver().manage().deleteAllCookies();
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(input_email));
         clear(input_email);
         clear(input_password);
         sendKeys(input_email, email);
@@ -58,6 +60,9 @@ public class LoginPage extends BasePage {
     public void openAndLogin(String email, String pwd) {
         openLoginPage();
         login(email, pwd);
+        if (!getElement(By.linkText("Logout")).isEnabled()) {
+            login(email, pwd);
+        }
     }
 
     public void openAndLoginToErmintrude(String email, String pwd) {
@@ -73,5 +78,10 @@ public class LoginPage extends BasePage {
 
     public void switchBackToMainTab() {
         getDriver().switchTo().defaultContent();
+    }
+
+    public void openAndLoginIntoFlorence(String email, String pwd) {
+        openLoginPage();
+        login(email, pwd);
     }
 }

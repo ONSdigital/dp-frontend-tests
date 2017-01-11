@@ -20,6 +20,7 @@ public class LoginSteps {
     @Given("I am logged in as an admin$")
     public void adminLogin() {
         loginPage.openAndLogin("admin@test.com", "one two three four");
+
         //      loginPage.openAndLogin("florence@magicroundabout.ons.gov.uk", "one two three four");
     }
 
@@ -38,9 +39,9 @@ public class LoginSteps {
         loginPage.openAndLogin("publisher2@test.com", "one two three four");
     }
 
-    @Given("I am logged in as a viewer$")
+    @Given("I am logged in as a viewer into florence website$")
     public void viewerLogin() {
-        loginPage.openAndLogin("viewer@test.com", "one two three four");
+        loginPage.openAndLoginIntoFlorence("viewer@test.com", "one two three four");
     }
 
     @Given("I am logged into Ermintrude website as a viewer$")
