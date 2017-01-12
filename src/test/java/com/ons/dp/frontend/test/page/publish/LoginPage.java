@@ -43,7 +43,7 @@ public class LoginPage extends BasePage {
         sendKeys(input_email, email);
         sendKeys(input_password, pwd);
         // click(submit);
-        Helper.pause(1000);
+        Helper.pause(500);
         //getDriver().findElement(By.id("login")).click();
         getDriver().findElement(By.xpath(".//*[@id='login']")).click();
     }

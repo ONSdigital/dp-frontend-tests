@@ -121,11 +121,15 @@ public class UsersAccess extends BasePage {
     }
 
     public boolean doesTheUserNameExists(String username) {
+        refresh();
+        click(By.linkText("Users and access"));
         return (getUserNames().get(username) != null);
 
     }
 
     public boolean doesEmailExists(String email) {
+        refresh();
+        click(By.linkText("Users and access"));
         return (getEmailAddresses().get(email) != null);
 
     }

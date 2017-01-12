@@ -1,3 +1,4 @@
+@users_and_access
 Feature: End to end tests related to Authentication/Encryption
 
   Scenario: Publisher create a collection and viewer views the same collection

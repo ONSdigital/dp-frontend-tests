@@ -1,3 +1,4 @@
+@release_calendar
 Feature:
   Create and publish a release calendar
 

@@ -55,6 +55,7 @@ public class UsersAccessSteps {
     @Then("the user:\"([^\"]*)\" (does|does not) exist in the list$")
     public void check_user_in_the_list(String user, String does) {
         boolean exists = does.length() < 4 ? true : false;
+
         Assert.assertEquals("Should User exist on the page : " + exists, exists, usersAndAccessPage.doesTheUserNameExists(user));
 
     }

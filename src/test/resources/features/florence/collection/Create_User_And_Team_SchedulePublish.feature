@@ -1,3 +1,4 @@
+@schedule_collection
 Feature: Create a published schedule collection
 
   Scenario: Create and publish a schedule collection
@@ -8,6 +9,7 @@ Feature: Create a published schedule collection
     And browse to users and access page
     When I delete the user:"New User"
     Then the user:"New User" does not exist in the list
+    Then I logout of florence
 
 
   Scenario: Create a user, team and schedule publish a collection

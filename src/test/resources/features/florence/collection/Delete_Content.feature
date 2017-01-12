@@ -1,3 +1,4 @@
+@delete_content
 Feature: Delete Content
   As a publisher I am able to delete the content
 

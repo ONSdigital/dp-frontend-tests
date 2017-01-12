@@ -1,3 +1,4 @@
+@searchindex_updates
 Feature: Search Index Updates
   Any published content in florence should publish in ONS Website and update seach indexes
 

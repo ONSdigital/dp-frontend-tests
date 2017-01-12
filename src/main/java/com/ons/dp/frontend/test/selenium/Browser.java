@@ -86,7 +86,8 @@ public class Browser {
     }
 
     public static void closeBrowser() {
-        webDriver.close();
+        // webDriver.close();
+        webDriver.quit();
     }
 
 }

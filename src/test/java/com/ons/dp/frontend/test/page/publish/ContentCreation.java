@@ -247,7 +247,9 @@ public class ContentCreation extends BasePage {
 	public void createVisualisationPageAndSaveForReview() {
 		click(getButton(buttonElement, "Upload visualisation"));
 		select(selectNewPage, "Visualisation");
-		sendKeys(visualisation_uniqueID, "DVC126");
+
+		//sendKeys(visualisation_uniqueID, "DVC126");
+		sendKeys(visualisation_uniqueID, RandomStringGen.getRandomString(5));
 		sendKeys(pageNameField, "Visualisation Page");
 		click(getButton(buttonElement, "Create page"));
 		saveSubmitForReview();
