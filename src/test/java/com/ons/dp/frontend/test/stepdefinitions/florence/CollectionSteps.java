@@ -2,6 +2,7 @@ package com.ons.dp.frontend.test.stepdefinitions.florence;
 
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.publish.Collection;
+import com.ons.dp.frontend.test.page.publish.ContentCreation;
 import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.RandomStringGen;
 import cucumber.api.java.en.And;
@@ -11,8 +12,9 @@ import org.junit.Assert;
 
 public class CollectionSteps {
     Collection collection = new Collection();
+    ContentCreation contentCreation = new ContentCreation();
 
-    @Given("I create a (MANUAL|SCHEDULED_CUSTOM) collection type$")
+    @Given("I create a (MANUAL|SCHEDULED_CUSTOM|SCHEDULED_CALENDAR_ENTRY) collection type$")
     public void createColl(String collType) {
 
         String collectionName = "AutoTest_" + RandomStringGen.getRandomString(5);
@@ -25,6 +27,10 @@ public class CollectionSteps {
             case "SCHEDULED_CUSTOM":
                 String teamName = TestContext.getCacheService().getDataMap().get("teamName").getStringData();
                 collection.createCollection(collectionName, Collection.CollectionTypes.SCHEDULE_CUSTOM, teamName);
+            case "SCHEDULED_CALENDAR_ENTRY":
+                collection.createCollection(collectionName, Collection.CollectionTypes.SCHEDULE_CALENDAR_ENTRY, null);
+
+
 //            default:
 //                collection.createCollection(collectionName, Collection.CollectionTypes.MANUAL,teamName);
         }
@@ -57,6 +63,13 @@ public class CollectionSteps {
         collection.reviewFile(colName, savedPage, fileloc);
     }
 
+    @And("^I review the (.*) bulletin file awaiting review with data-url:(.*)$")
+    public void reviewBulletinFileInColl(String savedPage, String fileloc) throws Throwable {
+        String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
+        TestContext.getCacheService().setDataMap("bulletinPage", new AnyData(savedPage));
+        collection.reviewBulletionFile(colName, savedPage, fileloc);
+    }
+
 	@And("^I review the calendar entry files awaiting review$")
 	public void reviewFiles() throws Throwable {
 		String savedPage = TestContext.getCacheService().getDataMap().get("calendarEntry").getStringData();
@@ -64,6 +77,15 @@ public class CollectionSteps {
 		String fileLoc = "releases/" + savedPage;
 		collection.reviewFile(colName, savedPage, fileLoc);
 	}
+
+    @And("^I edit the pages in progress and save for review$")
+    public void iReviewThePagesInProgressAndSaveForReview() throws Throwable {
+        String savedPage = TestContext.getCacheService().getDataMap().get("calendarEntry").getStringData();
+        String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
+        String fileLoc = "releases/" + savedPage;
+        collection.editFile(colName, savedPage, fileLoc);
+        contentCreation.saveSubmitForReview();
+    }
 
 
     @And("^the collection (does|does not) exist$")
@@ -86,5 +108,11 @@ public class CollectionSteps {
         String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
         String fileLoc = filePath + "/" + savedPage;
         collection.reviewFile(colName, savedPage, fileLoc);
+    }
+
+
+    @And("^I change the Scheduled collection to Manual collection$")
+    public void iChangeTheScheduledCollectionToManualCollection() throws Throwable {
+        collection.changeScheduledToManualCollection();
     }
 }

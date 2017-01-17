@@ -28,8 +28,8 @@ public class MediaPage extends BasePage {
     }
 
     public void ClickOnLink(String linkText) throws InterruptedException {
-        ClickOnLink(linkText);
-       // click(linkText);
+        // ClickOnLink(linkText);
+        click(By.linkText(linkText));
         Log.info("Clicked on " + linkText + " link");
     }
 

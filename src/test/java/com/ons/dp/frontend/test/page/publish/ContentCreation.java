@@ -28,6 +28,7 @@ public class ContentCreation extends BasePage {
 	public By version_rows = By.cssSelector("div#version-section>div");
 	public String content_css = ".js-browse__item[data-url='text_to_replace']>span>span";
 	public String directory_css = ".selected > ul > li > span > span.js-browse__item-title.page__item.page__item--directory";
+	public String child_directory_css = ".active > li > span > span.js-browse__item-title.page__item.page__item--directory";
 	public String content_headers = "//h1[text()[contains(.,'text_to_replace')]]";
 	public By file_label_text = By.id("label");
 	public By fileUpload = By.name("files");
@@ -62,6 +63,9 @@ public class ContentCreation extends BasePage {
 	public By content = By.xpath("//div[@id='content']/div");
 	public By contentEdit = By.id("content-edit");
 
+	public By releasesFolder = By.xpath(".//*[@id='browse-tree']/section/nav/ul/li/ul/li[14]/span/span[1]");
+	public By create_link = By.linkText("Create");
+
 
 	public int getNumberOfPublishedVersions() {
 		return publishedVersions;
@@ -79,6 +83,10 @@ public class ContentCreation extends BasePage {
 		return (ArrayList <WebElement>) findElementsBy(By.cssSelector(directory_css));
 	}
 
+	public ArrayList<WebElement> getChildDirectoryElements() {
+		return (ArrayList<WebElement>) findElementsBy(By.cssSelector(child_directory_css));
+	}
+
 	public void enterTextIntoMarkDownEditor(String textToEnter) {
 		clear(markdownEditor);
 		sendKeys(markdownEditor, textToEnter);
@@ -86,14 +94,26 @@ public class ContentCreation extends BasePage {
 
 	public WebElement getDirectoryElement(String directoryName) {
 		WebElement dirnameToReturn = null;
+		//try {
+		//WebElement dirnameToReturn = null;
 		for (WebElement dir : getDirectoryElements()) {
 			if (dir.getText().contains(directoryName)) {
 				dirnameToReturn = dir;
 				break;
 			}
+			}
+		if (dirnameToReturn == null) {
+			for (WebElement dir : getChildDirectoryElements()) {
+				if (dir.getText().contains(directoryName)) {
+					dirnameToReturn = dir;
+					break;
+				}
+			}
+
 		}
 		return dirnameToReturn;
-	}
+		}
+
 
 	public By getContentHeaders(String title) {
 		return By.xpath(content_headers.replace("text_to_replace", title));
@@ -119,6 +139,13 @@ public class ContentCreation extends BasePage {
 
 		}
 		//  click(activeEditButton);
+	}
+
+	public void goToReleasesFolder() {
+
+		click(releasesFolder);
+		//createCalendarEntry();
+		click(create_link);
 	}
 
 	public void clickOnActiveEditButton() {
@@ -244,6 +271,19 @@ public class ContentCreation extends BasePage {
 		click(getButton(buttonElement, "Create page"));
 	}
 
+	public void createReleaseCalendarEntry(String releaseDateText, String releaseTime, String randomPageName) {
+
+		select(selectNewPage, "Calendar entry");
+		sendKeys(releaseDate, releaseDateText);
+		getElement(releaseDate).sendKeys(Keys.ESCAPE);
+		String times[] = releaseTime.split(":");
+		select(hour, times[0]);
+		select(min, times[1]);
+		sendKeys(pageNameField, randomPageName);
+		click(getButton(buttonElement, "Create page"));
+		saveSubmitForReview();
+	}
+
 	public void createVisualisationPageAndSaveForReview() {
 		click(getButton(buttonElement, "Upload visualisation"));
 		select(selectNewPage, "Visualisation");
@@ -258,7 +298,9 @@ public class ContentCreation extends BasePage {
 
 
 	public void metaDataKeywords() {
+		Helper.pause(1000);
 		click(metadata);
+		Helper.pause(1000);
 		sendKeys(metadata_keywords, "bit");
 
 	}
@@ -328,4 +370,6 @@ public class ContentCreation extends BasePage {
 
 
 	}
+
+
 }

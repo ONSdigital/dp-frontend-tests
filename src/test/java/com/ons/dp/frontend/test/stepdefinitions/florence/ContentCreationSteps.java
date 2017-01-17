@@ -23,6 +23,17 @@ public class ContentCreationSteps {
 
     }
 
+    @And("^I browse to the releases content under collections$")
+    public void iBrowseToTheReleasesContentUnderCollections() throws Throwable {
+        contentCreation.goToReleasesFolder();
+    }
+
+
+
+
+
+
+
     @And("^I click on Edit button$")
     public void clickOnActiveEditButton() {
         contentCreation.clickOnActiveEditButton();
@@ -67,6 +78,18 @@ public class ContentCreationSteps {
 		contentCreation.createCalendarEntry(CustomDates.getDate(1), "09:30", pageName);
 		TestContext.getCacheService().setDataMap("calendarEntry", new AnyData(pageName));
 	}
+
+    @And("^create a new release calendar entry and submit for review$")
+    public void createANewReleaseCalendarEntry() throws Throwable {
+        String pageName = RandomStringGen.getRandomString(8);
+        contentCreation.createReleaseCalendarEntry(CustomDates.getDate(1), "09:30", pageName);
+        TestContext.getCacheService().setDataMap("calendarEntry", new AnyData(pageName));
+    }
+
+
+
+
+
 
 	@And("^add the following details to the calendary entry$")
 	public void editCalendarEntry(List <CalendarEntry> calendarEntry) {
@@ -132,4 +155,6 @@ public class ContentCreationSteps {
     public void iCreateANewWithPageNameAndSubmitForReview(String pageType, String pageName) throws Throwable {
         contentCreation.createPageAndSave(pageType, pageName);
     }
+
+
 }

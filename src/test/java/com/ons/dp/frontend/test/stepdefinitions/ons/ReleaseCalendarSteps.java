@@ -7,6 +7,7 @@ import com.ons.dp.frontend.test.page.webpage.ReleaseCalendar;
 import com.ons.dp.frontend.test.page.webpage.SearchReleases;
 import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.CustomDates;
+import com.ons.dp.frontend.test.util.Helper;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -78,6 +79,18 @@ public class ReleaseCalendarSteps {
 			assertTrue(releaseCalendar.pageSourceContains(calendarEntry.getNextRelease()));
 		}
 		assertTrue(releaseCalendar.pageSourceContains(calendarEntry.getSummary()));
+
+
+	}
+
+	@And("^search results contains the bulletin information$")
+	public void searchResultsContainsTheBulletinInformation() throws Throwable {
+		String bulletinPage = TestContext.getCacheService().getDataMap().get("bulletinPage").getStringData();
+		releaseCalendar.refresh();
+		Helper.pause(1000);
+		releaseCalendar.refresh();
+
+		assertTrue(releaseCalendar.pageSourceContains(bulletinPage.replace(" ()", "")));
 
 
 	}

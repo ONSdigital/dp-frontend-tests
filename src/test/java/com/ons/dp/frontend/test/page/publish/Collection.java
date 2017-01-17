@@ -1,6 +1,7 @@
 package com.ons.dp.frontend.test.page.publish;
 
 import Util.Log;
+import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.model.DataTable;
 import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.util.CustomDates;
@@ -12,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Collection extends BasePage {
 
@@ -19,9 +21,15 @@ public class Collection extends BasePage {
     public By collection_name = By.id("collectionname");
     public By collection_table_id = By.id("collection-name");
     public By manual_publish = By.id("manualpublish");
+    public By edit_collection_manual_publish = By.id("collection-editor-manual");
     public By sch_publish = By.id("scheduledpublish");
     public By team_name_id = By.id("team");
     public By custom_schedule = By.id("customschedule");
+    public By calendar_entry_schedule = By.id("releaseschedule");
+    public By select_a_calendar_entry = By.cssSelector(".btn.btn--primary.btn--inline-block.btn-select-release");
+    public By search_for_a_release = By.id("release-search-input");
+    public By calendar_entry_list = By.id("release-list");
+
 
     public By custom_date = By.id("date");
     public By custom_hour = By.id("hour");
@@ -33,6 +41,7 @@ public class Collection extends BasePage {
     public By delete_collection = By.id("collection-delete");
     public By confirm_deletion = By.cssSelector("div.sa-confirm-button-container>button.confirm");
     public By pages_edited_approval = By.cssSelector("li.page-list__item");
+    public By bulletin_pages_edited_approval = By.cssSelector(".page__item.page__item--bulletin");
 
     public By page_element = By.cssSelector("li.page-list__item>span");
     public By sweet_alert = By.cssSelector("div.sweet-alert.showSweetAlert.visible");
@@ -43,6 +52,8 @@ public class Collection extends BasePage {
     public By staticPage = By.cssSelector(".page__item.page__item--static_landing_page");
     public By confirm_delete = By.cssSelector(".confirm");
     public By work_on_collection = getButton(buttonElement, "Work on collection");
+    public By edit_collection_details = getButton(buttonElement, "Edit collection details");
+    public By save_changes_button = getButton(buttonElement, "Save changes");
     public String reviewFileButt = ".btn.btn-page-edit[data-path='/text_to_replace']";
 
 
@@ -79,8 +90,34 @@ public class Collection extends BasePage {
 	            getDriver().findElement(By.id("date")).sendKeys(Keys.ESCAPE);
                 select(custom_hour, "10");
                 select(custom_min, "30");
+            case SCHEDULE_CALENDAR_ENTRY:
+                click(sch_publish);
+                click(calendar_entry_schedule);
+
+                click(select_a_calendar_entry);
+                Helper.pause(1000);
+                String releaseName = TestContext.getCacheService().getDataMap().get("calendarEntry").getStringData();
+                sendKeys(search_for_a_release, releaseName);
+                Helper.pause(2000);
+                selectACalendarEntry(releaseName);
         }
         click(create_collection);
+    }
+
+    public List<WebElement> getAllCalendarEntryReleases() {
+        return (List<WebElement>) findElementsBy(calendar_entry_list);
+    }
+
+    public void selectACalendarEntry(String entryName) {
+        //boolean present = false;
+        for (WebElement entry : getAllCalendarEntryReleases()) {
+            if (entry.getText().contains(entryName)) {
+                // present = true;
+                entry.click();
+                break;
+            }
+        }
+        // return present;
     }
 
     public void selectTeam(String teamname) {
@@ -119,6 +156,24 @@ public class Collection extends BasePage {
 
     }
 
+    public void openBulletinSavedPage(String savedPage) {
+        waitAfterCollSelection();
+        ArrayList<WebElement> coll_edited_pages = (ArrayList<WebElement>) findElementsBy(bulletin_pages_edited_approval);
+        try {
+            for (WebElement page : coll_edited_pages) {
+                if (page.getText().contains(savedPage)) {
+                    page.click();
+                    break;
+                }
+            }
+        } catch (NullPointerException ee) {
+            Log.info("Couldn't find the bulletin reviewed page");
+        }
+
+
+    }
+
+
     public void checkDeletedPages(String deletedPage) {
         waitAfterCollSelection();
         ArrayList<WebElement> coll_deleted_pages = (ArrayList<WebElement>) findElementsBy(pages_edited_approval);
@@ -136,6 +191,17 @@ public class Collection extends BasePage {
     public void reviewFile(String collectionName, String savedPage, String reviewLoc) {
         openSavedPage(savedPage);
 	    click(getContentId(reviewFileButt, reviewLoc.toLowerCase()));
+    }
+
+    public void reviewBulletionFile(String collectionName, String savedPage, String reviewLoc) {
+        openBulletinSavedPage(savedPage);
+        click(getContentId(reviewFileButt, reviewLoc.toLowerCase()));
+    }
+
+
+    public void editFile(String collectionName, String savedPage, String editLoc) {
+        openSavedPage(savedPage);
+        click(getContentId(reviewFileButt, editLoc.toLowerCase()));
     }
 
     public void deleteFile(String collectionName, String deletedPage) {
@@ -179,8 +245,19 @@ public class Collection extends BasePage {
         click(By.linkText("Collections"));
     }
 
+    public void changeScheduledToManualCollection() {
+        Helper.pause(500);
+        click(edit_collection_details);
+        Helper.pause(2000);
+        click(edit_collection_manual_publish);
+        Helper.pause(2000);
+        click(save_changes_button);
+        Helper.pause(500);
+        refresh();
+    }
+
     public enum CollectionTypes {
-        MANUAL, SCHEDULE_CUSTOM;
+        MANUAL, SCHEDULE_CUSTOM, SCHEDULE_CALENDAR_ENTRY;
     }
 
 
