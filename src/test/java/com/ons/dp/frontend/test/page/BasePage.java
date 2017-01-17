@@ -39,7 +39,8 @@ public class BasePage {
     }
 
     public void navigateToUrl(String url) {
-        getDriver().get(url);
+	    deleteCookies();
+	    getDriver().get(url);
     }
 
     public By getlinkText(String link) {
@@ -130,7 +131,11 @@ public class BasePage {
         }
     }
 
-    public boolean isAttributePresent(By elementCss, String attributeName) {
+	public void deleteCookies() {
+		getDriver().manage().deleteAllCookies();
+	}
+
+	public boolean isAttributePresent(By elementCss, String attributeName) {
         final WebElement element = getElement(elementCss);
         return element != null && element.isDisplayed() && StringUtils.isNotBlank(element.getAttribute(attributeName));
     }
