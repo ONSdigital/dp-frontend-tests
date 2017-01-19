@@ -27,8 +27,10 @@ public class CollectionSteps {
             case "SCHEDULED_CUSTOM":
                 String teamName = TestContext.getCacheService().getDataMap().get("teamName").getStringData();
                 collection.createCollection(collectionName, Collection.CollectionTypes.SCHEDULE_CUSTOM, teamName);
+                break;
             case "SCHEDULED_CALENDAR_ENTRY":
                 collection.createCollection(collectionName, Collection.CollectionTypes.SCHEDULE_CALENDAR_ENTRY, null);
+                break;
 
 
 //            default:

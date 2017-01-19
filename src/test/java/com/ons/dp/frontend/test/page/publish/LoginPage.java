@@ -73,7 +73,19 @@ public class LoginPage extends BasePage {
     }
 
     public void goToPage(String linkToGoTo) {
+        Helper.pause(100);
         navigateToUrl(getConfig().getFlorence_preview() + "/" + linkToGoTo);
+    }
+
+    public void goToFlorencePreviewPage(String linkToGoTo) {
+        Helper.pause(100);
+        //navigateToUrl(getConfig().getFlorence_preview() + "/" + linkToGoTo);
+        getDriver().navigate().to(getConfig().getFlorence_preview() + "/" + linkToGoTo);
+    }
+
+    public void goToFlorence() {
+        Helper.pause(100);
+        getDriver().navigate().to(getConfig().getFlorence_develop());
     }
 
     public void switchBackToMainTab() {

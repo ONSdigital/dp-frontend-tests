@@ -90,6 +90,7 @@ public class Collection extends BasePage {
 	            getDriver().findElement(By.id("date")).sendKeys(Keys.ESCAPE);
                 select(custom_hour, "10");
                 select(custom_min, "30");
+                break;
             case SCHEDULE_CALENDAR_ENTRY:
                 click(sch_publish);
                 click(calendar_entry_schedule);
@@ -100,6 +101,7 @@ public class Collection extends BasePage {
                 sendKeys(search_for_a_release, releaseName);
                 Helper.pause(2000);
                 selectACalendarEntry(releaseName);
+                break;
         }
         click(create_collection);
     }

@@ -140,7 +140,7 @@ public class ContentCreationSteps {
     @And("^create a new FOI entry$")
     public void createANewFOIEntry() throws Throwable {
         String pageName = RandomStringGen.getRandomString(8);
-        contentCreation.createFOIEntry(CustomDates.getDate(-1), pageName);
+        contentCreation.createFOIEntry(CustomDates.getDateInDiffFormat(-1), pageName);
         TestContext.getCacheService().setDataMap("foiEntry", new AnyData(pageName));
     }
 

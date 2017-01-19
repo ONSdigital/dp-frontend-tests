@@ -17,4 +17,14 @@ public class CustomDates {
 
     }
 
+    public static String getDateInDiffFormat(int beforeAfterToday) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM YYY");
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date()); // Now use today date.
+        c.add(Calendar.DATE, beforeAfterToday);
+        return sdf.format(c.getTime());
+
+    }
+
 }

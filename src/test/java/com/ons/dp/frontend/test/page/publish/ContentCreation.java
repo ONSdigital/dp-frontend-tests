@@ -65,6 +65,7 @@ public class ContentCreation extends BasePage {
 
 	public By releasesFolder = By.xpath(".//*[@id='browse-tree']/section/nav/ul/li/ul/li[14]/span/span[1]");
 	public By create_link = By.linkText("Create");
+	public By create_page_btn = By.cssSelector(".btn-page-create");
 
 
 	public int getNumberOfPublishedVersions() {
@@ -350,7 +351,8 @@ public class ContentCreation extends BasePage {
 		sendKeys(releaseDate, releaseDateText);
 		getElement(releaseDate).sendKeys(Keys.ESCAPE);
 		sendKeys(pageNameField, randomPageName);
-		click(getButton(buttonElement, "Create page"));
+		//click(getButton(buttonElement, "Create page"));
+		click(create_page_btn);
 	}
 
 	public void addFOIEntryMetadata(FoiEntry foiEntry) {

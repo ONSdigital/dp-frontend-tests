@@ -6,6 +6,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginSteps {
     public By page_title = By.cssSelector(".page-intro__title");
@@ -58,10 +59,16 @@ public class LoginSteps {
 
     @When("^I browse to \"([^\"]*)\" in a new tab on florence$")
     public void iBrowseToInANewTabOnFlorence(String url) throws Throwable {
-
-        // loginPage.openANewTab();
-        // loginPage.switchToNewTab();
-        loginPage.goToPage(url);
+        loginPage.refresh();
+        //   loginPage.openANewTab();
+        //   loginPage.switchToNewTab();
+        loginPage.goToFlorencePreviewPage((url));
+        if (loginPage.getDriver().getPageSource().contains("Restricted")) {
+            loginPage.getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(By.linkText("log in")));
+            loginPage.click(By.linkText("log in"));
+            loginPage.openAndLogin("publisher@test.com", "one two three four");
+            loginPage.goToFlorencePreviewPage((url));
+        }
     }
 
     @And("^the Florence website (does|does not) contain the classifications changes$")
@@ -86,6 +93,6 @@ public class LoginSteps {
 
     @And("^I browse to florence$")
     public void iBrowseToFlorence() throws Throwable {
-        loginPage.openLoginPage();
+        loginPage.goToFlorence();
     }
 }
