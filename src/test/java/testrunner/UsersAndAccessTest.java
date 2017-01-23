@@ -5,6 +5,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
+
 @RunWith(Cucumber.class)
 @ExtendedCucumberOptions(
         jsonReport = "target/cucumber.json",
@@ -21,6 +22,10 @@ import org.junit.runner.RunWith;
         glue = "com.ons.dp.frontend.test",
         //  tags = {"@admin,@publisher,@users_and_access,@viewer,@visualisation_publisher,@time_series,@release_calendar,@searchindex_updates,@Media"})
         tags = {"@time_series,@manual_collection,@schedule_collection,@delete_content,@release_calendar,@searchindex_updates,@admin,@publisher,@users_and_access,@viewer,@visualisation_publisher,@Media"})
-
+// tags = {"@Media"})
 public class UsersAndAccessTest extends BaseTestRunner {
+
+
 }
+
+

@@ -35,6 +35,21 @@ public class Helper {
         }
     }
 
+    public static String getFirefoxDriverLocation() {
+        if (OS_NAME.toLowerCase().contains("mac os x")) {
+            return librariesFolder + "firefoxdriver/" + "firefoxdriver_mac";
+        } else if (OS_NAME.toLowerCase().contains("windows")) {
+            return librariesFolder + "firefoxdriver/" + "firefoxdriver_win_64.exe";
+        } else {
+            String arch = System.getProperty("os.arch");
+            if (arch.contains("64")) {
+                return librariesFolder + "firefoxdriver/" + "firefoxdriver_linux_64";
+            } else {
+                return librariesFolder + "firefoxdriver/" + "firefoxdriver_linux_32";
+            }
+        }
+    }
+
     public static String getIEDriverFileLocation() {
         String windowsArchitecture = System.getProperty("os.arch");
         if (windowsArchitecture.contains("64")) {

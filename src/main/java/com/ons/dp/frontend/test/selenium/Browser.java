@@ -10,9 +10,11 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Logger;
 
@@ -36,13 +38,22 @@ public class Browser {
     }
 
     public static void setWebDriverWait(WebDriver driver) {
-        webDriverWait = new WebDriverWait(driver, 20);
+        webDriverWait = new WebDriverWait(driver, 50);
     }
 
     public static void setDriver(String browser) {
         switch (browser) {
             case "FIREFOX":
-                System.setProperty("webdriver.gecko.driver", "/Applications/Firefox.app/Contents/MacOS/firefox");
+
+                URL resource = Browser.class.getResource(Helper.getFirefoxDriverLocation());
+                File file = new File(resource.getPath());
+                if (file.exists()) {
+                    log.info("Firefox DRIVER exists:" + file.getAbsolutePath());
+                    file.setExecutable(true);
+                }
+
+                System.setProperty("webdriver.firefox.marionette", resource.getPath());
+                // System.setProperty("webdriver.gecko.driver", resource.getPath());
                 // System.setProperty("webdriver.firefox.marionette", "/Users/admin/Downloads/geckodriver");
 
                 FirefoxProfile ffProfile = new FirefoxProfile();
@@ -54,14 +65,14 @@ public class Browser {
 
                 break;
             case "CHROME":
-                URL resource = Browser.class.getResource(Helper.getChromeDriverFileLocation());
-                File file = new File(resource.getPath());
-                if (file.exists()) {
-                    log.info("CHROME DRIVER exists:" + file.getAbsolutePath());
-                    file.setExecutable(true);
+                URL chrome_resource = Browser.class.getResource(Helper.getChromeDriverFileLocation());
+                File chrome_file = new File(chrome_resource.getPath());
+                if (chrome_file.exists()) {
+                    log.info("CHROME DRIVER exists:" + chrome_file.getAbsolutePath());
+                    chrome_file.setExecutable(true);
                 }
 
-                System.setProperty("webdriver.chrome.driver", resource.getPath());
+                System.setProperty("webdriver.chrome.driver", chrome_resource.getPath());
                 DesiredCapabilities desiredCapabilitiesChrome = DesiredCapabilities.chrome();
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--start-maximized");
@@ -72,6 +83,20 @@ public class Browser {
             case "BROWSERSTACK":
                 // INIT browserstack class which will use the browser.json.
                 // more work to be done here.
+
+                DesiredCapabilities caps = new DesiredCapabilities();
+                caps.setCapability("browser", "Chrome");
+                caps.setCapability("browser_version", "54.0");
+                caps.setCapability("os", "Windows");
+                caps.setCapability("os_version", "8");
+                caps.setCapability("resolution", "1024x768");
+                caps.setCapability("browserstack.debug", true);
+                caps.setCapability("browserstack.local", true);
+                try {
+                    webDriver = new RemoteWebDriver(new URL("https://iankent4:xDSMJuAtGbyf3Gzgsg5q@hub-cloud.browserstack.com/wd/hub"), caps);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
                 break;
             default:
                 System.setProperty("webdriver.gecko.driver", "/home/giri/Downloads/firefox/browser/firefox");
