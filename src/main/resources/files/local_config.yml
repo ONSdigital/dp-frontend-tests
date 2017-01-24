@@ -7,7 +7,7 @@ config:
   florence_discovery: https://publishing.discovery.onsdigital.co.uk/florence/index.html
   ermintrude_discovery: https://preview.discovery.onsdigital.co.uk/ermintrude/index.html
   prototypes_discovery: https://onsdigital.github.io/dp-prototypes/
-  browser: FIREFOX
+  browser: BROWSERSTACK
   browserStackBrowser: CHROME
   browserStackTunnel: false
 
