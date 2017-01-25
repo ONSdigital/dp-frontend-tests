@@ -24,4 +24,7 @@ public class Homepage extends BasePage {
         navigateToUrl(getConfig().getOnsdevelop_URL() + linkToGoTo);
     }
 
+    public void openLiveHomePage() {
+        navigateToUrl(getConfig().getOnsURL());
+    }
 }

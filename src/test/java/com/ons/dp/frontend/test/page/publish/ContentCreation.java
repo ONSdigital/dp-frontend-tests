@@ -180,7 +180,7 @@ public class ContentCreation extends BasePage {
 		click(getButton(buttonElement, ContentText.ADD_VERSION.getContentString()));
 		sendKeys(file_label_text, RandomStringGen.getRandomString(4));
 		String fileLoc = new File(ChooseFile(fileType)).getAbsolutePath();
-		sendKeys(fileUpload, fileLoc);
+		sendKeys(fileUpload, "C:\\Users\\hello\\Downloads\\cxnv.csdb");
 		getWebDriverWait().until(ExpectedConditions.invisibilityOfElementWithText(fileUploadResp, "Uploading . . ."));
 		click(submit_button);
 		getWebDriverWait().until(ExpectedConditions.invisibilityOfElementWithText(fileUploadResp, "Uploading . . ."));

@@ -3,6 +3,11 @@ Feature: End to End time series versioning tests
 
 
   Scenario Outline: Creating and publishing a time series collection
+
+    Given I am on the ONS HomePage
+    And I navigate to Business Investment time series dataset
+    And I click on "structured text (191.1 kB)" link
+
     Given I am logged in as an admin
     And I create a MANUAL collection type
     And I browse to the content economy/grossdomesticproductgdp/datasets/businessinvestment under collections

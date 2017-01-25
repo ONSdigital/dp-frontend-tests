@@ -89,6 +89,11 @@ public class HomePageSteps {
         homePage.openHomePage();
     }
 
+    @Given("^I am on the ONS Live Website$")
+    public void iAmOnTheONSLiveWeb() throws Throwable {
+        homePage.openLiveHomePage();
+    }
+
     @And("^I navigate to (.*) on the ONS Website$")
     public void iNavigateToBusinessInvestmentTimeSeriesDatasetOnTheONSWebsite(String urlPath) throws Throwable {
         String pagelink = TestContext.getCacheService().getDataMap().get("foiEntry").getStringData();
