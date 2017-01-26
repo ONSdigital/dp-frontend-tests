@@ -17,6 +17,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.io.File;
 import java.util.ArrayList;
 
+import static com.ons.dp.frontend.test.core.TestContext.configuration;
+
 
 public class ContentCreation extends BasePage {
 
@@ -180,7 +182,12 @@ public class ContentCreation extends BasePage {
 		click(getButton(buttonElement, ContentText.ADD_VERSION.getContentString()));
 		sendKeys(file_label_text, RandomStringGen.getRandomString(4));
 		String fileLoc = new File(ChooseFile(fileType)).getAbsolutePath();
-		sendKeys(fileUpload, "C:\\Users\\hello\\Downloads\\cxnv.csdb");
+		if (configuration.getBrowser().toUpperCase().contains("BROWSERSTACK")) {
+			sendKeys(fileUpload, "C:\\Users\\hello\\Downloads\\cxnv.csdb");
+		} else {
+			sendKeys(fileUpload, fileLoc);
+		}
+
 		getWebDriverWait().until(ExpectedConditions.invisibilityOfElementWithText(fileUploadResp, "Uploading . . ."));
 		click(submit_button);
 		getWebDriverWait().until(ExpectedConditions.invisibilityOfElementWithText(fileUploadResp, "Uploading . . ."));
