@@ -1,5 +1,6 @@
 package com.ons.dp.frontend.test.stepdefinitions.florence;
 
+import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.publish.LoginPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -21,8 +22,6 @@ public class LoginSteps {
     @Given("I am logged in as an admin$")
     public void adminLogin() {
         loginPage.openAndLogin("admin@test.com", "one two three four");
-
-        //      loginPage.openAndLogin("florence@magicroundabout.ons.gov.uk", "one two three four");
     }
 
     @Given("I am logged in as a publisher$")
@@ -62,12 +61,14 @@ public class LoginSteps {
         loginPage.refresh();
         //   loginPage.openANewTab();
         //   loginPage.switchToNewTab();
-        loginPage.goToFlorencePreviewPage((url));
+        String randomPageName = TestContext.getCacheService().getDataMap().get("pageName").getStringData();
+
+        loginPage.goToFlorencePreviewPage((url.replace("random page", randomPageName)));
         if (loginPage.getDriver().getPageSource().contains("Restricted")) {
             loginPage.getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(By.linkText("log in")));
             loginPage.click(By.linkText("log in"));
             loginPage.openAndLogin("publisher@test.com", "one two three four");
-            loginPage.goToFlorencePreviewPage((url));
+            loginPage.goToFlorencePreviewPage((url.replace("random page", randomPageName)));
         }
     }
 

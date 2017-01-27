@@ -4,7 +4,6 @@ import com.ons.dp.frontend.test.page.webpage.MediaPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.WebDriver;
 
 /**
  * Created by manoj on 28/12/2016.
@@ -12,22 +11,6 @@ import org.openqa.selenium.WebDriver;
 public class MediaPageSteps {
 
     private MediaPage mediaPage = new MediaPage();
-    //public WebDriver driver;
-   // private CommonMethods commonMethods;
-
-   /* public MediaStefDefs()  {
-        driver = Hooks.driver;
-
-        mediaPage = new MediaPage(driver);
-        commonMethods = new CommonMethods(driver);
-    }*/
-
-   /* @When("^I click on (.*) link$")
-    public void iClickOnMediaLink(String linkText) throws Throwable {
-
-        mediaPage.ClickOnLink(linkText);
-
-    }*/
 
     @Then("^I should be provided with clickable links to all ONS published news$")
     public void i_should_be_provided_with_clickable_links_to_all_ONS_published_news() throws Throwable {
@@ -120,31 +103,13 @@ public class MediaPageSteps {
 
     @Then("^I should see the \"([^\"]*)\" link displayed$")
     public void iShouldSeeTheLinkDisplayed(String linkText) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
         mediaPage.IsMediaHeaderDisplayed(linkText);
     }
 
     @And("^Provided with a clickable link to the \"([^\"]*)\" section$")
     public void providedWithAClickableLinkToTheSection(String linkText) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
         mediaPage.IsLinkDisplayedAndEnabled(linkText);
     }
-
-    /*@Then("^I should be on the media page$")
-    public void iShouldBeOnTheMediaPage() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-      //  Assert.assertTrue(driver.getCurrentUrl().equalsIgnoreCase("https://www.ons.gov.uk/news"));
-      //  Assert.assertTrue(driver.getPageSource().contains("Media"));
-        Assert.assertTrue(mediaPage.isPageDisplayed());
-    }*/
-
-    /*@When("^I click on the News link$")
-    public void iClickOnTheNewsLink() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-       // driver.findElement(By.linkText("News")).click();
-        mediaPage.ClickOnLink(linkText);
-    }*/
-
 
 }
 

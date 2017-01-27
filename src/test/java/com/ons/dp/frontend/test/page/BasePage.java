@@ -282,21 +282,6 @@ public class BasePage {
 
     }
 
-/*    public boolean isUrlDisplayed(String url) {
-        try {
-            return getDriver().getCurrentUrl().equalsIgnoreCase(url);
-
-        } catch (final NoSuchElementException e) {
-            return false;
-        }
-    }*/
-
-   /* public void ClickOnLink(final String linkText) throws InterruptedException {
-        Thread.sleep(500);
-
-        getDriver().findElement(By.linkText(linkText)).click();
-    }*/
-
     public void IsResultsDisplayedInDateOrder(List<WebElement> elements) throws ParseException {
 
         List<Date> expected = new ArrayList<>();

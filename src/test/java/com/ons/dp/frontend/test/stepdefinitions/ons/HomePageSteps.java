@@ -5,6 +5,8 @@ import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.model.FoiEntry;
 import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.page.webpage.Homepage;
+import com.ons.dp.frontend.test.util.AnyData;
+import com.ons.dp.frontend.test.util.RandomStringGen;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -33,13 +35,21 @@ public class HomePageSteps {
     @When("I browse to (.*) on the ONS page")
     public void gotoThePage(String pageToGo) {
         homePage.goToPage(pageToGo);
-        System.out.println("Test");
     }
 
     @Then("^I browse to \"([^\"]*)\" on the ONS$")
     public void browseToAboutUs(String pagelink) {
-        homePage.goToPage(pagelink);
-        System.out.println("Test");
+        // RandomStringGen.getRandomString(5);
+        String pageName = RandomStringGen.getRandomString(7);
+        homePage.goToPage(pagelink.replace("random page", pageName));
+        TestContext.getCacheService().setDataMap("pageName", new AnyData(pageName));
+    }
+
+    @Then("^I browse to classifications/random page on the ONS$")
+    public void browseToAPage() {
+        String pageName = TestContext.getCacheService().getDataMap().get("pageName").getStringData();
+        homePage.goToPage("classifications/" + pageName);
+
     }
 
     @And("^the ONS website contains the published changes$")
@@ -51,10 +61,10 @@ public class HomePageSteps {
     public void getONSClassificationChanges(String exist) {
         boolean exists = exist.length() <= 4;
 
-        // AnyData pageName = TestContext.getCacheService().getDataMap().get("pageName");
+        String pageName = TestContext.getCacheService().getDataMap().get("pageName").getStringData();
         if (exists) {
             basePage.refresh();
-            Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_title).contentEquals("bDsx5G8"));
+            Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_title).contentEquals(pageName.toString()));
         } else {
             basePage.refresh();
             Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_header_title).contentEquals(
@@ -70,7 +80,7 @@ public class HomePageSteps {
 
         if (exists) {
             basePage.refresh();
-            Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_title).contentEquals(pageName));
+            Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_title).contentEquals(TestContext.getCacheService().getDataMap().get("pageName").getStringData()));
         } else {
             basePage.refresh();
             Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_header_title).contentEquals(
@@ -81,7 +91,8 @@ public class HomePageSteps {
 
     @When("^I search for \"([^\"]*)\" in the ONS Website$")
     public void iSearchForInTheONSWebsite(String text) throws Throwable {
-        homePage.searchForTimeSeriesID(text);
+
+        homePage.searchForTimeSeriesID(TestContext.getCacheService().getDataMap().get("pageName").getStringData());
     }
 
     @Given("^I am on the ONS HomePage$")
@@ -110,8 +121,6 @@ public class HomePageSteps {
         Assert.assertEquals(homePage.getElementText(page_title), "Freedom of Information (FOI):\n" + pagename);
 
         Assert.assertEquals(homePage.getElementText(content_section_text), foiEntry.getMarkdownText());
-
-        // Assert.assertEquals(homePage.getElementText(column_text), CustomDates.getDate(-1).);
 
     }
 

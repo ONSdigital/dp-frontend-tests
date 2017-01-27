@@ -32,9 +32,6 @@ public class CollectionSteps {
                 collection.createCollection(collectionName, Collection.CollectionTypes.SCHEDULE_CALENDAR_ENTRY, null);
                 break;
 
-
-//            default:
-//                collection.createCollection(collectionName, Collection.CollectionTypes.MANUAL,teamName);
         }
     }
 
@@ -63,6 +60,13 @@ public class CollectionSteps {
     public void reviewFilesInColl(String savedPage, String fileloc) throws Throwable {
         String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
         collection.reviewFile(colName, savedPage, fileloc);
+    }
+
+    @And("^I review the files awaiting review with data-url:(.*)$")
+    public void reviewFilesInTheColl(String fileloc) throws Throwable {
+        String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
+        String randonPageName = TestContext.getCacheService().getDataMap().get("pageName").getStringData();
+        collection.reviewFile(colName, randonPageName, fileloc.replace("random page", randonPageName));
     }
 
     @And("^I review the (.*) bulletin file awaiting review with data-url:(.*)$")
@@ -102,6 +106,12 @@ public class CollectionSteps {
     public void reviewDeletionFilesInColl(String deletedPage) throws Throwable {
         String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
         collection.deleteFile(colName, deletedPage);
+    }
+
+    @Then("^I review the file awaiting deletion$")
+    public void reviewDeletionRandomFilesInColl() throws Throwable {
+        String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
+        collection.deleteFile(colName, TestContext.getCacheService().getDataMap().get("pageName").getStringData());
     }
 
     @And("^I review the (.*) file awaiting review with data url (.*)$")

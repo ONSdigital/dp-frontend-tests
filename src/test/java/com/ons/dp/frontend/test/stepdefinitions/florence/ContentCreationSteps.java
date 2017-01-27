@@ -19,6 +19,10 @@ public class ContentCreationSteps {
 
     @When("^I browse to the content (.*) under collections$")
     public void browseToTheContent(String contentToBrowse) throws Exception {
+        if (contentToBrowse.contains("random page")) {
+            String pageName = TestContext.getCacheService().getDataMap().get("pageName").getStringData();
+            contentToBrowse = contentToBrowse.replace("random page", pageName.toLowerCase());
+        }
         contentCreation.goToCMSContentLinks(contentToBrowse);
 
     }
@@ -27,12 +31,6 @@ public class ContentCreationSteps {
     public void iBrowseToTheReleasesContentUnderCollections() throws Throwable {
         contentCreation.goToReleasesFolder();
     }
-
-
-
-
-
-
 
     @And("^I click on Edit button$")
     public void clickOnActiveEditButton() {
@@ -52,7 +50,6 @@ public class ContentCreationSteps {
 
     }
 
-
     @And("^I save and submit the collection for review")
     public void saveAndSubmitColl() {
         contentCreation.saveChangesForReview();
@@ -64,12 +61,18 @@ public class ContentCreationSteps {
         contentCreation.approveCollection();
     }
 
-
     @And("^I create a new \"([^\"]*)\" and submit for review$")
     public void iCreateANew(String pageType) throws Throwable {
-	    //String pageName = "AutoPage_" + RandomStringGen.getRandomString(5);
-	    // TestContext.getCacheService().setDataMap("pageName", new AnyData(pageName));
-	    contentCreation.createPageAndSaveForReview(pageType);
+        // String pageName = "AutoPage" + RandomStringGen.getRandomString(5);
+        //  TestContext.getCacheService().setDataMap("pageName", new AnyData(pageName));
+        contentCreation.createPageAndSaveForReview(pageType, TestContext.getCacheService().getDataMap().get("pageName").getStringData());
+    }
+
+    @And("^I create a \"([^\"]*)\" and submit for review$")
+    public void iCreateAPage(String pageType) throws Throwable {
+        String pageName = "AutoPage" + RandomStringGen.getRandomString(5);
+        TestContext.getCacheService().setDataMap("pageName", new AnyData(pageName));
+        contentCreation.createPageAndSaveForReview(pageType, TestContext.getCacheService().getDataMap().get("pageName").getStringData());
     }
 
 	@And("^create a new calendar entry$")
@@ -86,13 +89,8 @@ public class ContentCreationSteps {
         TestContext.getCacheService().setDataMap("calendarEntry", new AnyData(pageName));
     }
 
-
-
-
-
-
-	@And("^add the following details to the calendary entry$")
-	public void editCalendarEntry(List <CalendarEntry> calendarEntry) {
+    @And("^add the following details to the calendar entry$")
+    public void editCalendarEntry(List <CalendarEntry> calendarEntry) {
 		calendarEntry.get(0).setSummary(TestContext.getCacheService().getDataMap().get("collectionName").getStringData());
 		TestContext.getCacheService().setDataMap("CalendarDetails", new AnyData(calendarEntry.get(0)));
 		contentCreation.addCalendarMetaData(calendarEntry.get(0));
@@ -119,7 +117,6 @@ public class ContentCreationSteps {
         TestContext.getCacheService().setDataMap("markdownText", new AnyData(textToEnter));
         contentCreation.enterTextIntoMarkDownEditor(textToEnter);
     }
-
 
     @And("^upload visulisation and submit for review$")
     public void uploadVisulisationAndSubmitForReview() throws Throwable {
@@ -155,6 +152,4 @@ public class ContentCreationSteps {
     public void iCreateANewWithPageNameAndSubmitForReview(String pageType, String pageName) throws Throwable {
         contentCreation.createPageAndSave(pageType, pageName);
     }
-
-
 }

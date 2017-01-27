@@ -1,8 +1,9 @@
 package com.ons.dp.frontend.test.stepdefinitions.florence;
 
+import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.model.User;
-import com.ons.dp.frontend.test.model.User.UserType;
 import com.ons.dp.frontend.test.page.publish.UsersAccess;
+import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.Helper;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -10,6 +11,8 @@ import cucumber.api.java.en.When;
 import org.junit.Assert;
 
 import java.util.Random;
+
+//import com.ons.dp.frontend.test.model.User.UserType;
 
 public class UsersAccessSteps {
 
@@ -22,27 +25,28 @@ public class UsersAccessSteps {
         usersAndAccessPage.goToUsersAndAccessPage();
     }
 
-    @Then("a user with username:\"([^\"]*)\",email: \"([^\"]*)\",password: \"([^\"]*)\" and user type: (Administrator|Publisher|Visualisation_Publisher|Viewer) is created$")
-    public void createUser(String username, String email, String password, UserType userType) {
-        createUser = new User(username, email, password, userType);
-        usersAndAccessPage.createUser(createUser);
-
-
-    }
-
-    @Then("I create a new user")
-    public void createUser() {
+    @Then("I create a new (.*) user")
+    public void createRandomUser(String userType) {
         Random random = new Random();
         int number = random.nextInt(1000);
         String randomNumber = String.format("%03d", number);
-        randomUser = new User("AutomatedUser" + randomNumber, "AutomatedUser" + randomNumber + "@testmail.com",
-                "AutomatedUser" + randomNumber, UserType.Viewer);
-        //       usersAndAccessPage.createUser(randomUser);
+        String randomUsername = "AutomatedUser" + randomNumber;
+        String randomUserEmail = "automateduser" + randomNumber + "@testmail.com";
+        randomUser = new User(randomUsername, randomUserEmail, "AutomatedUser" + randomNumber, userType);
+        TestContext.getCacheService().setDataMap("userName", new AnyData(randomUsername));
+        TestContext.getCacheService().setDataMap("userEmail", new AnyData(randomUserEmail));
+        usersAndAccessPage.createUser(randomUser, userType);
     }
 
     @When("I delete the user:\"([^\"]*)\"$")
     public void deleteUser(String userToDelete) {
         usersAndAccessPage.deleteUser(userToDelete);
+        Helper.pause(1000);
+    }
+
+    @When("I delete the user$")
+    public void deleteRandomUser() {
+        usersAndAccessPage.deleteUser(TestContext.getCacheService().getDataMap().get("userName").getStringData());
         Helper.pause(1000);
     }
 
@@ -52,11 +56,26 @@ public class UsersAccessSteps {
         Assert.assertTrue(usersAndAccessPage.doesEmailExists(email));
     }
 
+    @Then("the user is displayed on the list of available users$")
+    public void checkUserDisplayed() {
+        Assert.assertTrue(usersAndAccessPage.doesTheUserNameExists(TestContext.getCacheService().getDataMap().get("userName").getStringData()));
+
+        Assert.assertTrue(usersAndAccessPage.doesEmailExists(TestContext.getCacheService().getDataMap().get("userEmail").getStringData()));
+    }
+
     @Then("the user:\"([^\"]*)\" (does|does not) exist in the list$")
     public void check_user_in_the_list(String user, String does) {
         boolean exists = does.length() < 4 ? true : false;
 
         Assert.assertEquals("Should User exist on the page : " + exists, exists, usersAndAccessPage.doesTheUserNameExists(user));
+
+    }
+
+    @Then("the user (does|does not) exist in the list$")
+    public void check_random_user_in_the_list(String does) {
+        boolean exists = does.length() < 4 ? true : false;
+
+        Assert.assertEquals("Should User exist on the page : " + exists, exists, usersAndAccessPage.doesTheUserNameExists(TestContext.getCacheService().getDataMap().get("userName").getStringData()));
 
     }
 
@@ -99,20 +118,4 @@ public class UsersAccessSteps {
         usersAndAccessPage.checkCreateNewUserConfirmation();
     }
 
-
-//
-//    @When("^I click on \"([^\"]*)\" page$")
-//    public void iClickOnPage(String text) throws Throwable {
-//        usersAndAccessPage.ClickOnCensusHomePage(text);
-//    }
-//
-//    @And("^I click \"([^\"]*)\" button in Census$")
-//    public void iClickButtonInCensus(String buttonText) throws Throwable {
-//        usersAndAccessPage.ClickOnCreateButtonInCensus(buttonText);
-//    }
-//
-//    @Then("^I should see the text \"([^\"]*)\" in the list of teams$")
-//    public void iShouldSeeTheTextInTheListOfTeams(String text) throws Throwable {
-//        usersAndAccessPage.SelectATeamFromListOfTeams(text);
-//    }
 }

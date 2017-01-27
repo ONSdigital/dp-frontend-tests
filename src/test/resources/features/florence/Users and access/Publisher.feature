@@ -24,7 +24,7 @@ Feature: Publisher - Users and access
 
     Given I am logged in as a publisher
     Then browse to users and access page
-    And a user with username:"New Viewer",email: "newviewer@test.com",password: "one two three four" and user type: Viewer is created
+    And I create a new Viewer user
     Then I should see the text "You are not permitted to create users." on the pop-up
     And I logout of florence
 
@@ -37,7 +37,7 @@ Feature: Publisher - Users and access
 
     Given I am logged in as a publisher
     Then browse to teams page
-    And a team with teamname:"New Team" is created
+    And a new team is created
     Then I should see the text "You are not permitted to create teams." on the pop-up
     And I logout of florence
 
@@ -49,7 +49,7 @@ Feature: Publisher - Users and access
 
     Given I am logged in as a publisher
     And I create a MANUAL collection type
-    And I create a new "Static landing page" and submit for review
+    And I create a "Static landing page" and submit for review
     And I logout of florence
     Given I am logged in as a lead publisher
     And I select the collection
@@ -58,6 +58,9 @@ Feature: Publisher - Users and access
     Then the collection does not exist
     Then I logout of florence
 
+   # **********************************************************************  #
+                       #  END OF SCENARIOS #
+  # **********************************************************************  #
 
 
 

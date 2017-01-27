@@ -38,9 +38,8 @@ public class ContentCreation extends BasePage {
 	public By pageNameField = By.id("pagename");
 	public String active_dataset_buttons = ".selected > span > span >button.btn-browse-text_to_replace";
 	public By editAccordion = By.cssSelector("div.ui-accordion-content-active > div#sortable-content > div > div > button#content-edit");
-
-	public By fileUploadResp = By.id("response");
-	public int publishedVersions = 0;
+    public By fileUploadResp = By.id("response");
+    public int publishedVersions = 0;
 	public By markdownEditor = By.id("wmd-input");
 	public By visualisation_uniqueID = By.id("visualisation-uid");
 	public By metadata_keywords = By.xpath(".//*[@id='keywordsTag']/li/input");
@@ -59,14 +58,12 @@ public class ContentCreation extends BasePage {
 	public By telephone = By.id("contactTelephone");
 	public By onsCheckBox = By.id("natStat-checkbox");
 	public By cancelled = By.name("cancelled");
-
-	public By title = By.id("title");
-	public By metaDescription = By.id("metaDescription");
+    public By title = By.id("title");
+    public By metaDescription = By.id("metaDescription");
 	public By content = By.xpath("//div[@id='content']/div");
 	public By contentEdit = By.id("content-edit");
-
-	public By releasesFolder = By.xpath(".//*[@id='browse-tree']/section/nav/ul/li/ul/li[14]/span/span[1]");
-	public By create_link = By.linkText("Create");
+    public By releasesFolder = By.xpath(".//*[@id='browse-tree']/section/nav/ul/li/ul/li[14]/span/span[1]");
+    public By create_link = By.linkText("Create");
 	public By create_page_btn = By.cssSelector(".btn-page-create");
 
 
@@ -97,10 +94,8 @@ public class ContentCreation extends BasePage {
 
 	public WebElement getDirectoryElement(String directoryName) {
 		WebElement dirnameToReturn = null;
-		//try {
-		//WebElement dirnameToReturn = null;
-		for (WebElement dir : getDirectoryElements()) {
-			if (dir.getText().contains(directoryName)) {
+        for (WebElement dir : getDirectoryElements()) {
+            if (dir.getText().contains(directoryName)) {
 				dirnameToReturn = dir;
 				break;
 			}
@@ -129,8 +124,8 @@ public class ContentCreation extends BasePage {
 
 
 	public void goToCMSContentLinks(String contentFinder) {
-		String[] splitString = contentFinder.split("/");
-		StringBuilder sb = new StringBuilder();
+        String[] splitString = contentFinder.toLowerCase().split("/");
+        StringBuilder sb = new StringBuilder();
 		for (String ss : splitString) {
 			sb.append("/" + ss);
 			try {
@@ -141,13 +136,11 @@ public class ContentCreation extends BasePage {
 			}
 
 		}
-		//  click(activeEditButton);
 	}
 
 	public void goToReleasesFolder() {
 
 		click(releasesFolder);
-		//createCalendarEntry();
 		click(create_link);
 	}
 
@@ -182,10 +175,10 @@ public class ContentCreation extends BasePage {
 		click(getButton(buttonElement, ContentText.ADD_VERSION.getContentString()));
 		sendKeys(file_label_text, RandomStringGen.getRandomString(4));
 		String fileLoc = new File(ChooseFile(fileType)).getAbsolutePath();
-		if (configuration.getBrowser().toUpperCase().contains("BROWSERSTACK")) {
-			sendKeys(fileUpload, "C:\\Users\\hello\\Downloads\\cxnv.csdb");
-		} else {
-			sendKeys(fileUpload, fileLoc);
+        if (configuration.getBrowser().toUpperCase().contains("BROWSERSTACK")) {
+            sendKeys(fileUpload, "C:\\Users\\hello\\Downloads\\cxnv.csdb");
+        } else {
+            sendKeys(fileUpload, fileLoc);
 		}
 
 		getWebDriverWait().until(ExpectedConditions.invisibilityOfElementWithText(fileUploadResp, "Uploading . . ."));
@@ -251,11 +244,11 @@ public class ContentCreation extends BasePage {
 		Helper.pause(1000);
 	}
 
-	public void createPageAndSaveForReview(String pageType) {
-		click(getButton(buttonElement, "Create"));
+    public void createPageAndSaveForReview(String pageType, String pageName) {
+        click(getButton(buttonElement, "Create"));
 		select(selectNewPage, pageType);
-		sendKeys(pageNameField, "bDsx5G8");
-		click(getButton(buttonElement, "Create page"));
+        sendKeys(pageNameField, pageName);
+        click(getButton(buttonElement, "Create page"));
 		saveSubmitForReview();
 	}
 
@@ -295,10 +288,8 @@ public class ContentCreation extends BasePage {
 	public void createVisualisationPageAndSaveForReview() {
 		click(getButton(buttonElement, "Upload visualisation"));
 		select(selectNewPage, "Visualisation");
-
-		//sendKeys(visualisation_uniqueID, "DVC126");
-		sendKeys(visualisation_uniqueID, RandomStringGen.getRandomString(5));
-		sendKeys(pageNameField, "Visualisation Page");
+        sendKeys(visualisation_uniqueID, RandomStringGen.getRandomString(5));
+        sendKeys(pageNameField, "Visualisation Page");
 		click(getButton(buttonElement, "Create page"));
 		saveSubmitForReview();
 
@@ -358,27 +349,21 @@ public class ContentCreation extends BasePage {
 		sendKeys(releaseDate, releaseDateText);
 		getElement(releaseDate).sendKeys(Keys.ESCAPE);
 		sendKeys(pageNameField, randomPageName);
-		//click(getButton(buttonElement, "Create page"));
-		click(create_page_btn);
-	}
+        click(create_page_btn);
+    }
 
 	public void addFOIEntryMetadata(FoiEntry foiEntry) {
 
 		click(metadata);
-		//sendKeys(title, foiEntry.getTitle());
-		getElementText(title).equals(TestContext.getCacheService().getDataMap().get("foiEntry").getStringData());
-		sendKeys(metadata_keywords, foiEntry.getKeywords());
+        getElementText(title).equals(TestContext.getCacheService().getDataMap().get("foiEntry").getStringData());
+        sendKeys(metadata_keywords, foiEntry.getKeywords());
 		sendKeys(metaDescription, foiEntry.getMetaDescription());
-
-		click(content);
-		click(contentEdit);
+        click(content);
+        click(contentEdit);
 		sendKeys(markdownEditor, foiEntry.getMarkdownText());
 		click(getButton(buttonElement, "Save changes and exit"));
-
-		saveSubmitForReview();
-
-
-	}
+        saveSubmitForReview();
+    }
 
 
 }

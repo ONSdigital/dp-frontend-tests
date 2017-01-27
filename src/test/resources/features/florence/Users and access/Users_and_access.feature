@@ -5,7 +5,7 @@ Feature: End to end tests related to Authentication/Encryption
 
     Given I am logged in as an admin
     Then browse to teams page
-    And a team with teamname:"Labour Market Team" is created
+    And a new team is created
     And add a user viewer@test.com to the team
     And I logout of florence
 
@@ -24,12 +24,15 @@ Feature: End to end tests related to Authentication/Encryption
 
     Given I am logged in as an admin
     Then browse to teams page
-    When I delete the team:"Labour Market Team"
+    When I delete the new team
     And I select the collection
     Then I delete all the worked on pages in the collection
     When I delete the collection
     Then I logout of florence
 
+     # **********************************************************************  #
+                       #  END OF SCENARIOS #
+  # **********************************************************************  #
 
 
 

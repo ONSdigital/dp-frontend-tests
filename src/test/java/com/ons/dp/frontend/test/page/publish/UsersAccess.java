@@ -80,22 +80,22 @@ public class UsersAccess extends BasePage {
         dataTable = new DataTable(false);
     }
 
-    public void createUser(User createUser) {
-        clearForm();
+    public void createUser(User createUser, String userType) {
+        //clearForm();
         sendKeys(create_username, createUser.getUsername());
         sendKeys(create_email, createUser.getEmail());
         sendKeys(create_pwd, createUser.getPassword());
-        switch (createUser.getUserType()) {
-            case Administrator:
+        switch (userType) {
+            case "Administrator":
                 click(type_admin);
                 break;
-            case Publisher:
+            case "Publisher":
                 click(type_publisher);
                 break;
-            case Visualisation_Publisher:
+            case "Visualisation_Publisher":
                 click(type_visualisation_publisher);
                 break;
-            case Viewer:
+            case "Viewer":
                 click(type_viewer);
                 break;
             default:
@@ -150,11 +150,5 @@ public class UsersAccess extends BasePage {
 
 
     }
-    /*
-            public By  "Select a team", ".table.table--primary.table--fixed-height-27.js-selectable-table");
 
-            public By  "Delete team", ".btn.btn--warning.btn-team-delete");
-
-            public By  "Delete collection", "#collection-delete");
-    */
 }

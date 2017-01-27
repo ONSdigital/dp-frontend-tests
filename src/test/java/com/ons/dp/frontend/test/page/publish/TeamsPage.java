@@ -57,7 +57,7 @@ public class TeamsPage extends BasePage {
     }
 
     public void createTeam(String teamName) {
-        clearForm();
+        // clearForm();
         sendKeys(team_name, teamName);
         click(getButton(buttonElement, "Create team"));
 

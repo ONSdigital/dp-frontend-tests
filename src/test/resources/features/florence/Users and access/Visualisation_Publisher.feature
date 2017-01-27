@@ -29,6 +29,10 @@ Feature: Visualisation Publisher - Users and access
     When I delete the collection
     Then the collection does not exist
     Then I logout of florence
+
+   # **********************************************************************  #
+                       #  END OF SCENARIOS #
+  # **********************************************************************  #
     
 
 

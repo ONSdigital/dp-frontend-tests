@@ -29,20 +29,14 @@ public class Collection extends BasePage {
     public By select_a_calendar_entry = By.cssSelector(".btn.btn--primary.btn--inline-block.btn-select-release");
     public By search_for_a_release = By.id("release-search-input");
     public By calendar_entry_list = By.id("release-list");
-
-
     public By custom_date = By.id("date");
     public By custom_hour = By.id("hour");
     public By custom_min = By.id("min");
-
-
-
     public By create_collection = By.xpath("//button[text()[contains(.,'Create collection')]]");
     public By delete_collection = By.id("collection-delete");
     public By confirm_deletion = By.cssSelector("div.sa-confirm-button-container>button.confirm");
     public By pages_edited_approval = By.cssSelector("li.page-list__item");
     public By bulletin_pages_edited_approval = By.cssSelector(".page__item.page__item--bulletin");
-
     public By page_element = By.cssSelector("li.page-list__item>span");
     public By sweet_alert = By.cssSelector("div.sweet-alert.showSweetAlert.visible");
     public By progress_pages = By.id("in-progress-uris");
@@ -85,16 +79,14 @@ public class Collection extends BasePage {
             case SCHEDULE_CUSTOM:
                 click(sch_publish);
                 click(custom_schedule);
-                // sendKeys(custom_date, CustomDates.getTomorrowsDate());
-	            getDriver().findElement(By.id("date")).sendKeys(CustomDates.getDate(1));
-	            getDriver().findElement(By.id("date")).sendKeys(Keys.ESCAPE);
+                getDriver().findElement(By.id("date")).sendKeys(CustomDates.getDate(1));
+                getDriver().findElement(By.id("date")).sendKeys(Keys.ESCAPE);
                 select(custom_hour, "10");
                 select(custom_min, "30");
                 break;
             case SCHEDULE_CALENDAR_ENTRY:
                 click(sch_publish);
                 click(calendar_entry_schedule);
-
                 click(select_a_calendar_entry);
                 Helper.pause(1000);
                 String releaseName = TestContext.getCacheService().getDataMap().get("calendarEntry").getStringData();
@@ -111,15 +103,12 @@ public class Collection extends BasePage {
     }
 
     public void selectACalendarEntry(String entryName) {
-        //boolean present = false;
         for (WebElement entry : getAllCalendarEntryReleases()) {
             if (entry.getText().contains(entryName)) {
-                // present = true;
                 entry.click();
                 break;
             }
         }
-        // return present;
     }
 
     public void selectTeam(String teamname) {

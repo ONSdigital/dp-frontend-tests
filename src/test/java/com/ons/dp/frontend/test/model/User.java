@@ -1,14 +1,10 @@
 package com.ons.dp.frontend.test.model;
 
 public class User {
-    private String username, email, password;
-    private UserType userType;
 
-    public User() {
+    private String username, email, password, usertype;
 
-    }
-
-    public User(String username, String email, String password, UserType userType) {
+    public User(String username, String email, String password, String userType) {
         setUsername(username);
         setEmail(email);
         setPassword(password);
@@ -39,16 +35,13 @@ public class User {
         this.password = password;
     }
 
-    public UserType getUserType() {
-        return userType;
+    public String getUserType() {
+        return usertype;
     }
 
-    public void setUserType(UserType userType) {
-        this.userType = userType;
+    public void setUserType(String usertype) {
+        this.usertype = usertype;
     }
 
-    public enum UserType {
-        Administrator, Publisher, Visualisation_Publisher, Viewer;
-    }
 
 }

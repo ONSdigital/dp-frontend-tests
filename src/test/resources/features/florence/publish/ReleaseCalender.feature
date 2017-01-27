@@ -6,7 +6,7 @@ Feature:
     Given I am logged in as a publisher
     And I create a MANUAL collection type
     And create a new calendar entry
-    And add the following details to the calendary entry
+    And add the following details to the calendar entry
       | image | contactName | contactEmail       | telephone   |
       | true  | QA Tester   | ptestuser@test.com | 02920000000 |
     Then I logout of florence
@@ -27,7 +27,7 @@ Feature:
     Given I am logged in as a publisher
     And I create a MANUAL collection type
     And create a new calendar entry
-    And add the following details to the calendary entry
+    And add the following details to the calendar entry
       | image | contactName | telephone   |
       | false | QA Tester   | 02920000000 |
     Then I logout of florence

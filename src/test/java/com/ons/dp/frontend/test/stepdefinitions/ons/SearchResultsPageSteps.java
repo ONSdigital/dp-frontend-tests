@@ -11,12 +11,12 @@ public class SearchResultsPageSteps {
 
     @Then("^there should not be any search results related to \"([^\"]*)\" page$")
     public void thereShouldNotBeAnySearchResultsRelatedToPage(String searchText) throws Throwable {
-        searchResultsPage.noSearchResults(searchText);
+        searchResultsPage.noSearchResults(TestContext.getCacheService().getDataMap().get("pageName").getStringData());
     }
 
     @Then("^there should be a search result related to \"([^\"]*)\" page$")
     public void thereShouldBeAResultRelatedToPage(String searchText) throws Throwable {
-        searchResultsPage.searchResults(searchText);
+        searchResultsPage.searchResults(TestContext.getCacheService().getDataMap().get("pageName").getStringData());
     }
 
     @And("^I click on search result$")

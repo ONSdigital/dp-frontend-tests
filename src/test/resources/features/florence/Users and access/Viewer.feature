@@ -20,6 +20,10 @@ Feature: Viewer - Users and access
     Given I am logged in as a viewer into florence website
     Then I should see the text "You do not have the permissions to enter here. Please contact an administrator" on the pop-up
 
+    # **********************************************************************  #
+                       #  END OF SCENARIOS #
+  # **********************************************************************  #
+
 
 
 
