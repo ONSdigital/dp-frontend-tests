@@ -1,6 +1,7 @@
 package com.ons.dp.frontend.test.page.publish;
 
 import Util.Log;
+import Util.ScheduledTime;
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.model.DataTable;
 import com.ons.dp.frontend.test.page.BasePage;
@@ -8,6 +9,7 @@ import com.ons.dp.frontend.test.util.CustomDates;
 import com.ons.dp.frontend.test.util.Do;
 import com.ons.dp.frontend.test.util.Helper;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -79,11 +81,19 @@ public class Collection extends BasePage {
             case SCHEDULE_CUSTOM:
                 click(sch_publish);
                 click(custom_schedule);
-                getDriver().findElement(By.id("date")).sendKeys(CustomDates.getDate(1));
+                //getDriver().findElement(By.id("date")).sendKeys(CustomDates.getDate(1));
+                getDriver().findElement(By.id("date")).sendKeys(CustomDates.getDate(0));
                 getDriver().findElement(By.id("date")).sendKeys(Keys.ESCAPE);
-                select(custom_hour, "10");
-                select(custom_min, "30");
+
+                // Select Current Hour from the Hour dropdown
+                select(custom_hour, ScheduledTime.currentHour());
+
+                // HACK - Using JS modifing the min to enter in dropdown and pass a minute value in below method
+                JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                String scheduledTime = ScheduledTime.differentTime(3);
+                js.executeScript("document.getElementById(\"min\").childNodes[3].value =" + scheduledTime + "");
                 break;
+
             case SCHEDULE_CALENDAR_ENTRY:
                 click(sch_publish);
                 click(calendar_entry_schedule);

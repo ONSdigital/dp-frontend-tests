@@ -52,19 +52,31 @@ public class HomePageSteps {
 
     }
 
+    @Then("^I browse to help/random page on the ONS$")
+    public void browseToAHelpPage() {
+        String pageName = TestContext.getCacheService().getDataMap().get("pageName").getStringData();
+        homePage.goToPage("help/" + pageName);
+
+    }
+
     @And("^the ONS website contains the published changes$")
     public void getONSChanges() {
         Assert.assertTrue("The changes are not on the ONS website", homePage.pageSourceContains(TestContext.getCacheService().getDataMap().get("markdownText").getStringData()));
     }
 
-    @And("^the ONS website (does|does not) contain the classifications changes$")
+    @And("^the ONS website (does|does not) contain the new changes$")
     public void getONSClassificationChanges(String exist) {
         boolean exists = exist.length() <= 4;
 
         String pageName = TestContext.getCacheService().getDataMap().get("pageName").getStringData();
         if (exists) {
             basePage.refresh();
-            Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_title).contentEquals(pageName.toString()));
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Assert.assertTrue("The changes are on the ONS website", homePage.getElementText(page_title).contentEquals(pageName.toString()));
         } else {
             basePage.refresh();
             Assert.assertTrue("The changes are not on the ONS website", homePage.getElementText(page_header_title).contentEquals(

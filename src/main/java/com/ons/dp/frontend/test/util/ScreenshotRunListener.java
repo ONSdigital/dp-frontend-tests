@@ -7,7 +7,7 @@
 ///**
 // * Created by admin on 20/01/2017.
 // */
-//public class ScreenshotRunListener extends RunListener {
+//public class ScreenshotRunListener {
 //
 //    protected static GifAssembler gifAssembler = new GifAssembler();
 //

@@ -6,7 +6,7 @@ Feature: Delete Content
 
     Given I navigate to the ONS Website
     And I browse to "classifications/random page" on the ONS
-    Then the ONS website does not contain the classifications changes
+    Then the ONS website does not contain the new changes
 
     #  Create content - create a page
     Given I am logged in as a publisher
@@ -26,7 +26,7 @@ Feature: Delete Content
     # Navigate to the website to see the page exist
     Then I navigate to the ONS Website
     And I browse to classifications/random page on the ONS
-    Then the ONS website does contain the classifications changes
+    Then the ONS website does contain the new changes
 
     #  Create collection to Delete content
     Given I am logged in as a publisher
@@ -51,7 +51,7 @@ Feature: Delete Content
     # Navigate to the website to see the page doesn't exist / content deleted
     Then I navigate to the ONS Website
     And I browse to "classifications/random page" on the ONS
-    Then the ONS website does not contain the classifications changes
+    Then the ONS website does not contain the new changes
 
 
   Scenario: Delete content should be removed from search indexes
@@ -59,7 +59,7 @@ Feature: Delete Content
      # First Navigating to the website to see the page doesn't exist
     Given I navigate to the ONS Website
     And I browse to "classifications/random page" on the ONS
-    Then the ONS website does not contain the classifications changes
+    Then the ONS website does not contain the new changes
     # To make sure page not showing in search results/indexes
     When I search for "random page" in the ONS Website
     Then there should not be any search results related to "random" page
@@ -81,7 +81,7 @@ Feature: Delete Content
     # Navigate to the website to see the page exist
     Then I navigate to the ONS Website
     And I browse to classifications/random page on the ONS
-    Then the ONS website does contain the classifications changes
+    Then the ONS website does contain the new changes
 
     # To make sure page showing in search results/indexes
     When I search for "random page" in the ONS Website
@@ -110,7 +110,7 @@ Feature: Delete Content
     # Navigate to the website to see the page doesn't exist / content deleted
     Then I navigate to the ONS Website
     And I browse to "classifications/random page" on the ONS
-    Then the ONS website does not contain the classifications changes
+    Then the ONS website does not contain the new changes
     # To make sure page not showing in search results/indexes
     When I search for "random page" in the ONS Website
     Then there should not be any search results related to "random" page

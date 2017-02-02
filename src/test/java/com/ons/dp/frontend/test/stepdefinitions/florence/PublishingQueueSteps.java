@@ -17,5 +17,14 @@ public class PublishingQueueSteps {
 
     }
 
+    @When("^I click on publishing queue and publish scheduled collection$")
+    public void publishScheduledCollection() throws Throwable {
+
+        publishingQueue.publishQueue();
+        // Wait till scheduled time then collection automatically publishes
+        Thread.sleep(100000);
+
+    }
+
 
 }
