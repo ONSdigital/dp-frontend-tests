@@ -49,6 +49,7 @@ Feature: Publisher - Users and access
 
     Given I am logged in as a publisher
     And I create a MANUAL collection type
+    And I click on Create/edit button
     And I create a "Static landing page" and submit for review
     And I logout of florence
     Given I am logged in as a lead publisher

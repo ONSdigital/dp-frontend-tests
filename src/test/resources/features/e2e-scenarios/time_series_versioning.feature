@@ -10,6 +10,7 @@ Feature: End to End time series versioning tests
 
     Given I am logged in as an admin
     And I create a MANUAL collection type
+    And I click on Create/edit button
     And I browse to the content economy/grossdomesticproductgdp/datasets/businessinvestment under collections
     And I click on Edit button
     And I upload a <filetype> file
@@ -33,6 +34,7 @@ Feature: End to End time series versioning tests
   Scenario: Create and Delete a collection
     Given I am logged in as an admin
     And I create a MANUAL collection type
+    And I click on Create/edit button
     And I browse to the content economy/grossdomesticproductgdp/datasets/businessinvestment under collections
     And I click on Edit button
     And I select the collection

@@ -21,6 +21,7 @@ Feature: Create a published schedule collection
     And a new team is created
     And add the new user to the team
     And I create a SCHEDULED_CUSTOM collection type
+    And I click on Create/edit button
     And I browse to the content businessindustryandtrade under collections
     And I click on Edit button
     And I enter keywords metadata and save for review
@@ -44,6 +45,7 @@ Feature: Create a published schedule collection
 
     Given I am logged in as a publisher
     And I create a SCHEDULED_CUSTOM collection type
+    And I click on Create/edit button
     And I browse to the content help under collections
     And I click on Create button
     And I create a "Static landing page" and submit for review

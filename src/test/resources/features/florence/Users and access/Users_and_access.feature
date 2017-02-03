@@ -11,6 +11,8 @@ Feature: End to end tests related to Authentication/Encryption
 
     Given I am logged in as a publisher
     And I create a SCHEDULED_CUSTOM collection type
+    And I click on Create/edit button
+
     And I browse to the content businessindustryandtrade under collections
     And I click on Edit button
     And I enter keywords metadata and save for review

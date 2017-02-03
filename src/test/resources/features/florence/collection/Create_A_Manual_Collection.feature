@@ -9,6 +9,7 @@ Feature: Check a collection in florence website
 
     Given I am logged in as an admin
     And I create a MANUAL collection type
+    And I click on Create/edit button
     And I browse to the content aboutus under collections
     And I click on Edit button
     And I click on the content header CONTENT

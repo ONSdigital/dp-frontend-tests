@@ -1,10 +1,11 @@
 @release_calendar
-Feature:
-  Create and publish a release calendar
+Feature: Create and publish a release calendar
+
 
   Scenario: Verify that the release calendar entry can be published successfully
     Given I am logged in as a publisher
     And I create a MANUAL collection type
+    And I click on Create/edit button
     And create a new calendar entry
     And add the following details to the calendar entry
       | image | contactName | contactEmail       | telephone   |
@@ -26,6 +27,7 @@ Feature:
   Scenario: Publish release calendar without email and ONS image
     Given I am logged in as a publisher
     And I create a MANUAL collection type
+    And I click on Create/edit button
     And create a new calendar entry
     And add the following details to the calendar entry
       | image | contactName | telephone   |

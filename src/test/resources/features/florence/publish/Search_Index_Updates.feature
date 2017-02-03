@@ -6,6 +6,7 @@ Feature: Search Index Updates
 
     Given I am logged in as a publisher
     And I create a MANUAL collection type
+    And I click on Create/edit button
     And I browse to the content aboutus/transparencyandgovernance/freedomofinformationfoi under collections
     And create a new FOI entry
     And add the following details to the FOI entry
@@ -35,6 +36,7 @@ Feature: Search Index Updates
 
     Given I am logged in as a publisher
     And I create a MANUAL collection type
+    And I click on Create/edit button
 
     And I browse to the releases content under collections
 
@@ -57,6 +59,7 @@ Feature: Search Index Updates
     # Now create a release calendar entry to an existing release
     Given I am logged in as a publisher
     And I create a SCHEDULED_CALENDAR_ENTRY collection type
+    And I click on Create/edit button
 
     And I browse to the content peoplepopulationandcommunity/elections/electoralregistration/bulletins/electoralstatisticsforuk/2013-02-28 under collections
     And I click on Edit button
@@ -66,14 +69,14 @@ Feature: Search Index Updates
 
     Given I am logged in as a lead publisher
     And I select the collection
-    And I change the Scheduled collection to Manual collection
+#    And I change the Scheduled collection to Manual collection
     And I select the collection
     And I review the calendar entry files awaiting review
     And I approve the collection
 
     And I review the Electoral Statistics for UK: 2012 () bulletin file awaiting review with data-url:peoplepopulationandcommunity/elections/electoralregistration/bulletins/electoralstatisticsforuk/2013-02-28
     Then I approve the collection
-    When I click on publishing queue and publish collection
+#    When I click on publishing queue and publish collection
     Then I logout of florence
 
     When I navigate to the ONS Website

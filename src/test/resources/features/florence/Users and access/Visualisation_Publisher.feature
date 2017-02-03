@@ -21,6 +21,7 @@ Feature: Visualisation Publisher - Users and access
 
     Given I am logged in as a visualisation publisher
     And I create a MANUAL collection type
+    And I click on Create/edit button
     And upload visulisation and submit for review
     And I logout of florence
     Given I am logged in as an another visualisation publisher

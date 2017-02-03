@@ -99,6 +99,7 @@ Feature: Admin - Users and access
 
     Given I am logged in as an admin
     And I create a MANUAL collection type
+    And I click on Create/edit button
     And I create a "Static landing page" and submit for review
     And I delete all the worked on pages in the collection
     When I delete the collection

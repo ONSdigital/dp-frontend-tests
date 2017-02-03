@@ -127,4 +127,9 @@ public class CollectionSteps {
     public void iChangeTheScheduledCollectionToManualCollection() throws Throwable {
         collection.changeScheduledToManualCollection();
     }
+
+    @And("^I click on Create/edit button$")
+    public void iClickOnCreateEditButton() throws Throwable {
+        collection.clickOnCreateEditButton();
+    }
 }

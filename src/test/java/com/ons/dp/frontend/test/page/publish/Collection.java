@@ -29,8 +29,8 @@ public class Collection extends BasePage {
     public By custom_schedule = By.id("customschedule");
     public By calendar_entry_schedule = By.id("releaseschedule");
     public By select_a_calendar_entry = By.cssSelector(".btn.btn--primary.btn--inline-block.btn-select-release");
-    public By search_for_a_release = By.id("release-search-input");
-    public By calendar_entry_list = By.id("release-list");
+    public By search_for_a_release = By.id("js-modal-select__search");
+    public By calendar_entry_list = By.id("js-modal-select__body");
     public By custom_date = By.id("date");
     public By custom_hour = By.id("hour");
     public By custom_min = By.id("min");
@@ -50,6 +50,7 @@ public class Collection extends BasePage {
     public By work_on_collection = getButton(buttonElement, "Work on collection");
     public By edit_collection_details = getButton(buttonElement, "Edit collection details");
     public By save_changes_button = getButton(buttonElement, "Save changes");
+    public By create_edit_button = getButton(buttonElement, "Create/edit");
     public String reviewFileButt = ".btn.btn-page-edit[data-path='/text_to_replace']";
 
 
@@ -106,6 +107,7 @@ public class Collection extends BasePage {
                 break;
         }
         click(create_collection);
+
     }
 
     public List<WebElement> getAllCalendarEntryReleases() {
@@ -214,9 +216,9 @@ public class Collection extends BasePage {
         getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(reviewed_pages));
         getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(completed_pages));
         getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(getButton(buttonElement,
-                "Edit collection details")));
+                "Import timeseries")));
         Helper.pause(1000);
-        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(getButton(buttonElement, "Work on collection")));
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(getButton(buttonElement, "Restore content")));
     }
 
     // returns true when all the pages are deleted
@@ -255,6 +257,10 @@ public class Collection extends BasePage {
         click(save_changes_button);
         Helper.pause(500);
         refresh();
+    }
+
+    public void clickOnCreateEditButton() {
+        click(create_edit_button);
     }
 
     public enum CollectionTypes {

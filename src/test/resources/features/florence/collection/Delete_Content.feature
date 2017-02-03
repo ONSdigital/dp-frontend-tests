@@ -11,6 +11,7 @@ Feature: Delete Content
     #  Create content - create a page
     Given I am logged in as a publisher
     And I create a MANUAL collection type
+    And I click on Create/edit button
     And I browse to the content classifications under collections
     And I click on Create button
     And I create a new "Generic static page" and submit for review
@@ -31,6 +32,7 @@ Feature: Delete Content
     #  Create collection to Delete content
     Given I am logged in as a publisher
     And I create a MANUAL collection type
+    And I click on Create/edit button
     And I browse to the content classifications/random page under collections
     And I delete the content
     Then I logout of florence
@@ -67,6 +69,7 @@ Feature: Delete Content
     #  Create content - create a page
     Given I am logged in as a publisher
     And I create a MANUAL collection type
+    And I click on Create/edit button
     And I browse to the content classifications under collections
     And I click on Create button
     And I create a new "Generic static page" and submit for review
@@ -90,6 +93,7 @@ Feature: Delete Content
     #  Create collection to Delete content
     Given I am logged in as a publisher
     And I create a MANUAL collection type
+    And I click on Create/edit button
     And I browse to the content classifications/random page under collections
     And I delete the content
     Then I logout of florence
