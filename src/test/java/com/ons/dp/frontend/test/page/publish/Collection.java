@@ -48,7 +48,7 @@ public class Collection extends BasePage {
     public By staticPage = By.cssSelector(".page__item.page__item--static_landing_page");
     public By confirm_delete = By.cssSelector(".confirm");
     public By work_on_collection = getButton(buttonElement, "Work on collection");
-    public By edit_collection_details = getButton(buttonElement, "Edit collection details");
+    public By edit_collection_details = By.cssSelector(".edit.btn-collection-edit.js-edit-collection");
     public By save_changes_button = getButton(buttonElement, "Save changes");
     public By create_edit_button = getButton(buttonElement, "Create/edit");
     public String reviewFileButt = ".btn.btn-page-edit[data-path='/text_to_replace']";
@@ -260,6 +260,7 @@ public class Collection extends BasePage {
     }
 
     public void clickOnCreateEditButton() {
+        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(create_edit_button));
         click(create_edit_button);
     }
 

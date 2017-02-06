@@ -1,5 +1,6 @@
 package com.ons.dp.frontend.test.util;
 
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,5 +27,17 @@ public class CustomDates {
         return sdf.format(c.getTime());
 
     }
+
+    // To get the Date Format in "Monday 06 February 2017"
+    public static String getFullDateWithDay(int beforeAfterToday) {
+
+        Format formatter = new SimpleDateFormat("EEEE dd MMMM yyyy");
+        String today = formatter.format(new Date());
+        return today;
+
+    }
+
+
+
 
 }

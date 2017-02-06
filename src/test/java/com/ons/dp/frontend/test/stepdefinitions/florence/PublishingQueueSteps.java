@@ -21,6 +21,7 @@ public class PublishingQueueSteps {
     public void publishScheduledCollection() throws Throwable {
 
         publishingQueue.publishQueue();
+        // publishingQueue.waitUntilCollectionIsPublished();
         // Wait till scheduled time then collection automatically publishes
         Thread.sleep(100000);
 

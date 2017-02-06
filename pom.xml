@@ -103,38 +103,51 @@
                 <configuration>
                     <forkCount>2</forkCount>
                     <reuseForks>true</reuseForks>
-                    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
-                    <!--<systemPropertyVariables>-->
-                    <!--<databaseSchema>MY_TEST_SCHEMA_${surefire.forkNumber}</databaseSchema>-->
-                    <!--</systemPropertyVariables>-->
-                    <!--<workingDirectory>FORK_DIRECTORY_${surefire.forkNumber}</workingDirectory>-->
-
+                    <argLine>-Duser.language=en</argLine>
+                    <argLine>-Xmx1024m</argLine>
+                    <argLine>-XX:MaxPermSize=256m</argLine>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <useFile>false</useFile>
                     <includes>
-                        <include>**/testrunner/*.java</include>
+                        <include>**/*Test*.class</include>
                     </includes>
+                    <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
+                <!--<configuration>-->
+                <!--<forkCount>2</forkCount>-->
+                <!--<reuseForks>false</reuseForks>-->
+                <!--<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>-->
+                <!--&lt;!&ndash;<systemPropertyVariables>&ndash;&gt;-->
+                <!--&lt;!&ndash;<databaseSchema>MY_TEST_SCHEMA_${surefire.forkNumber}</databaseSchema>&ndash;&gt;-->
+                <!--&lt;!&ndash;</systemPropertyVariables>&ndash;&gt;-->
+                <!--&lt;!&ndash;<workingDirectory>FORK_DIRECTORY_${surefire.forkNumber}</workingDirectory>&ndash;&gt;-->
+
+                <!--<includes>-->
+                <!--<include>**/testrunner/*.java</include>-->
+                <!--</includes>-->
+                <!--</configuration>-->
             </plugin>
-            <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>2.0.0</version>
-                <executions>
-                    <execution>
-                        <id>execution</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <projectName>ONSFrontEndTests-Digital-Publishing</projectName>
-                            <outputDirectory>${project.build.directory}/site/cucumber-reports</outputDirectory>
-                            <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
-                            <skippedFails>true</skippedFails>
-                            <!--<enableFlashCharts>false</enableFlashCharts>-->
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+            <!--<groupId>net.masterthought</groupId>-->
+            <!--<artifactId>maven-cucumber-reporting</artifactId>-->
+            <!--<version>2.0.0</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>execution</id>-->
+            <!--<phase>verify</phase>-->
+            <!--<goals>-->
+            <!--<goal>generate</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<projectName>ONSFrontEndTests-Digital-Publishing</projectName>-->
+            <!--<outputDirectory>${project.build.directory}/site/cucumber-reports</outputDirectory>-->
+            <!--<cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>-->
+            <!--<skippedFails>true</skippedFails>-->
+            <!--&lt;!&ndash;<enableFlashCharts>false</enableFlashCharts>&ndash;&gt;-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
 
         </plugins>
     </build>

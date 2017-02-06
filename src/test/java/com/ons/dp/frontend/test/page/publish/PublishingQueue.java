@@ -3,6 +3,7 @@ package com.ons.dp.frontend.test.page.publish;
 import com.ons.dp.frontend.test.model.DataTable;
 import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.util.Helper;
+import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -14,6 +15,7 @@ public class PublishingQueue extends BasePage {
     public By collection_name_css = By.className("collection-name");
     public String publish_queue_link = "Publishing queue";
     public String publish_collection_link = "Publish collection";
+    public By publish_queue_table = By.id("publish-name");
 
     Collection collection = new Collection();
     DataTable dataTable;
@@ -44,4 +46,8 @@ public class PublishingQueue extends BasePage {
     }
 
 
+    public void waitUntilCollectionIsPublished() {
+        String today = DateTime.now().dayOfMonth().toString();
+        getWebDriverWait().until(ExpectedConditions.not(ExpectedConditions.textToBe(publish_queue_table, today)));
+    }
 }

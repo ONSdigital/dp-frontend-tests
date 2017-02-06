@@ -8,17 +8,18 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @ExtendedCucumberOptions(
-        jsonReport = "target/cucumber.json",
+        jsonReport = "target/webtest/cucumber.json",
         detailedReport = true,
         detailedAggregatedReport = true,
+
         toPDF = true,
         overviewReport = true,
-        outputFolder = "target")
+        outputFolder = "target/webtest")
 @CucumberOptions(
         features = "src/test/resources/features",
-        plugin = {"html:target/cucumber-html-report",
-                "json:target/cucumber.json", "pretty:target/cucumber-pretty.txt",
-                "usage:target/cucumber-usage.json", "junit:target/cucumber-results.xml"},
+        plugin = {"html:target/webtest/cucumber-html-report/",
+                "json:target/webtest/cucumber.json", "pretty:target/webtest/cucumber-pretty.txt",
+                "usage:target/webtest/cucumber-usage.json", "junit:target/webtest/cucumber-results.xml"},
         glue = "com.ons.dp.frontend.test",
         tags = {"@Media"}
 )
