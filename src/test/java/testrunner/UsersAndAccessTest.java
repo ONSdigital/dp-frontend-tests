@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
         overviewReport = true,
         outputFolder = "target/florence")
 @CucumberOptions(
-        features = "src/test/resources/features",
+        features = "src/test/resources/features/florence",
         plugin = {"html:target/florence/cucumber-html-report/",
                 "json:target/florence/cucumber.json", "pretty:target/florence/cucumber-pretty.txt",
                 "usage:target/florence/cucumber-usage.json", "junit:target/florence/cucumber-results.xml"},

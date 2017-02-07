@@ -85,6 +85,25 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>FlorenceTests</id>
+            <properties>
+
+                <include.tests>UsersAndAccessTest.java</include.tests>
+
+            </properties>
+        </profile>
+        <profile>
+            <id>WebTests</id>
+            <properties>
+
+                <include.tests>WebTests.java</include.tests>
+
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
@@ -108,8 +127,11 @@
                     <argLine>-XX:MaxPermSize=256m</argLine>
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                     <useFile>false</useFile>
+                    <!--<includes>-->
+                    <!--<include>**/*Test*.class</include>-->
+                    <!--</includes>-->
                     <includes>
-                        <include>**/*Test*.class</include>
+                        <include>${include.tests}</include>
                     </includes>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
@@ -150,6 +172,7 @@
             <!--</plugin>-->
 
         </plugins>
+
     </build>
 
 </project>

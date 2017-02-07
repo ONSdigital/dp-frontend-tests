@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
         overviewReport = true,
         outputFolder = "target/webtest")
 @CucumberOptions(
-        features = "src/test/resources/features",
+        features = "src/test/resources/features/ons",
         plugin = {"html:target/webtest/cucumber-html-report/",
                 "json:target/webtest/cucumber.json", "pretty:target/webtest/cucumber-pretty.txt",
                 "usage:target/webtest/cucumber-usage.json", "junit:target/webtest/cucumber-results.xml"},
