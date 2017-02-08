@@ -2,6 +2,7 @@ package com.ons.dp.frontend.test.stepdefinitions.florence;
 
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.publish.LoginPage;
+import com.ons.dp.frontend.test.stepdefinitions.BaseStepDefinition;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -10,9 +11,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginSteps {
+
     public By page_title = By.cssSelector(".page-intro__title");
     public By page_header_title = By.cssSelector(".page-header__title");
     LoginPage loginPage = new LoginPage();
+    private BaseStepDefinition baseStepDefinition;
+
+    public LoginSteps() {
+        this.baseStepDefinition = new BaseStepDefinition();
+    }
 
     @Given("I login as user: (.*) and password (.*)$")
     public void loginUser(String username, String pwd) {

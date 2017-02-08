@@ -2,6 +2,7 @@ package com.ons.dp.frontend.test.stepdefinitions.florence;
 
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.publish.TeamsPage;
+import com.ons.dp.frontend.test.stepdefinitions.BaseStepDefinition;
 import com.ons.dp.frontend.test.util.AnyData;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -14,6 +15,11 @@ import java.util.Random;
 public class TeamPageSteps {
 
     public TeamsPage teamsPage = new TeamsPage();
+    private BaseStepDefinition baseStepDefinition;
+
+    public TeamPageSteps() {
+        this.baseStepDefinition = new BaseStepDefinition();
+    }
 
     @Then("^browse to teams page$")
     public void browseToTeamsPage() throws Throwable {

@@ -1,6 +1,7 @@
 package com.ons.dp.frontend.test.stepdefinitions.ons;
 
 import com.ons.dp.frontend.test.page.webpage.MediaPage;
+import com.ons.dp.frontend.test.stepdefinitions.BaseStepDefinition;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -10,7 +11,12 @@ import cucumber.api.java.en.When;
  */
 public class MediaPageSteps {
 
+    private BaseStepDefinition baseStepDefinition;
     private MediaPage mediaPage = new MediaPage();
+
+    public MediaPageSteps() {
+        this.baseStepDefinition = new BaseStepDefinition();
+    }
 
     @Then("^I should be provided with clickable links to all ONS published news$")
     public void i_should_be_provided_with_clickable_links_to_all_ONS_published_news() throws Throwable {
@@ -106,10 +112,12 @@ public class MediaPageSteps {
         mediaPage.IsMediaHeaderDisplayed(linkText);
     }
 
+
     @And("^Provided with a clickable link to the \"([^\"]*)\" section$")
     public void providedWithAClickableLinkToTheSection(String linkText) throws Throwable {
         mediaPage.IsLinkDisplayedAndEnabled(linkText);
     }
+
 
 }
 

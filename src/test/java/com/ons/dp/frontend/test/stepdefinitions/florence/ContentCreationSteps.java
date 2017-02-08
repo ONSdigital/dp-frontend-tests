@@ -5,6 +5,7 @@ import com.ons.dp.frontend.test.model.CalendarEntry;
 import com.ons.dp.frontend.test.model.ContentText;
 import com.ons.dp.frontend.test.model.FoiEntry;
 import com.ons.dp.frontend.test.page.publish.ContentCreation;
+import com.ons.dp.frontend.test.stepdefinitions.BaseStepDefinition;
 import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.CustomDates;
 import com.ons.dp.frontend.test.util.RandomStringGen;
@@ -16,6 +17,11 @@ import java.util.List;
 
 public class ContentCreationSteps {
     ContentCreation contentCreation = new ContentCreation();
+    private BaseStepDefinition baseStepDefinition;
+
+    public ContentCreationSteps() {
+        this.baseStepDefinition = new BaseStepDefinition();
+    }
 
     @When("^I browse to the content (.*) under collections$")
     public void browseToTheContent(String contentToBrowse) throws Exception {

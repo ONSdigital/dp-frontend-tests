@@ -5,6 +5,7 @@ import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.model.CalendarEntry;
 import com.ons.dp.frontend.test.page.webpage.ReleaseCalendar;
 import com.ons.dp.frontend.test.page.webpage.SearchReleases;
+import com.ons.dp.frontend.test.stepdefinitions.BaseStepDefinition;
 import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.CustomDates;
 import com.ons.dp.frontend.test.util.Helper;
@@ -18,7 +19,11 @@ import static org.testng.Assert.assertTrue;
 public class ReleaseCalendarSteps {
 	ReleaseCalendar releaseCalendar = new ReleaseCalendar();
 	SearchReleases searchReleases = new SearchReleases();
+	private BaseStepDefinition baseStepDefinition;
 
+	public ReleaseCalendarSteps() {
+		this.baseStepDefinition = new BaseStepDefinition();
+	}
 
 	@Given("^click on (UPCOMING|PUBLISHED) release calendar$")
 	public void goToReleasesCalendar(String calendar) {

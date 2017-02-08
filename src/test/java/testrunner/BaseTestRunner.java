@@ -5,8 +5,11 @@ import org.junit.AfterClass;
 
 
 public class BaseTestRunner {
+
     @AfterClass
     public static void closeBrowser() {
         Browser.closeBrowser();
     }
+
+
 }

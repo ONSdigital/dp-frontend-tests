@@ -3,7 +3,7 @@ package com.ons.dp.frontend.test.stepdefinitions.florence;
 
 import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.page.webpage.UrlsPage;
-import cucumber.api.PendingException;
+import com.ons.dp.frontend.test.stepdefinitions.BaseStepDefinition;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,9 +12,15 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 
 public class CommonSteps {
+
     public By Select_a_document_to_view = By.id("docs-list");
+    private BaseStepDefinition baseStepDefinition;
     private BasePage basePage = new BasePage();
     private UrlsPage urlsPage = new UrlsPage();
+
+    public CommonSteps() {
+        this.baseStepDefinition = new BaseStepDefinition();
+    }
 
     @And("I logout of florence")
     public void logout_florence() {

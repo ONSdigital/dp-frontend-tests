@@ -2,12 +2,19 @@ package com.ons.dp.frontend.test.stepdefinitions.ons;
 
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.webpage.SearchResultsPage;
+import com.ons.dp.frontend.test.stepdefinitions.BaseStepDefinition;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
 public class SearchResultsPageSteps {
 
     SearchResultsPage searchResultsPage = new SearchResultsPage();
+    private BaseStepDefinition baseStepDefinition;
+
+
+    public SearchResultsPageSteps() {
+        this.baseStepDefinition = new BaseStepDefinition();
+    }
 
     @Then("^there should not be any search results related to \"([^\"]*)\" page$")
     public void thereShouldNotBeAnySearchResultsRelatedToPage(String searchText) throws Throwable {

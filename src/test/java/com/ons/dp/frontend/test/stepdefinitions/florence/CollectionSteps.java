@@ -3,6 +3,7 @@ package com.ons.dp.frontend.test.stepdefinitions.florence;
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.publish.Collection;
 import com.ons.dp.frontend.test.page.publish.ContentCreation;
+import com.ons.dp.frontend.test.stepdefinitions.BaseStepDefinition;
 import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.RandomStringGen;
 import cucumber.api.java.en.And;
@@ -13,6 +14,11 @@ import org.junit.Assert;
 public class CollectionSteps {
     Collection collection = new Collection();
     ContentCreation contentCreation = new ContentCreation();
+    private BaseStepDefinition baseStepDefinition;
+
+    public CollectionSteps() {
+        this.baseStepDefinition = new BaseStepDefinition();
+    }
 
     @Given("I create a (MANUAL|SCHEDULED_CUSTOM|SCHEDULED_CALENDAR_ENTRY) collection type$")
     public void createColl(String collType) {

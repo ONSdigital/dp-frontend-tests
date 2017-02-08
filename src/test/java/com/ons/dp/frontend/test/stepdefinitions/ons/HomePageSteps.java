@@ -5,6 +5,7 @@ import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.model.FoiEntry;
 import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.page.webpage.Homepage;
+import com.ons.dp.frontend.test.stepdefinitions.BaseStepDefinition;
 import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.RandomStringGen;
 import cucumber.api.java.en.And;
@@ -15,12 +16,19 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 
 public class HomePageSteps {
+
     public By page_title = By.cssSelector(".page-intro__title");
     public By page_header_title = By.cssSelector(".page-header__title");
     public By content_section_text = By.cssSelector(".section__content--static-markdown>p");
     public By column_text = By.xpath("//div[@class='col-wrap']/p");
     Homepage homePage = new Homepage();
     BasePage basePage = new BasePage();
+    private BaseStepDefinition baseStepDefinition;
+
+
+    public HomePageSteps() {
+        this.baseStepDefinition = new BaseStepDefinition();
+    }
 
     @Given("I navigate to the ONS Website$")
     public void iAmOnTheWebsite() throws Throwable {

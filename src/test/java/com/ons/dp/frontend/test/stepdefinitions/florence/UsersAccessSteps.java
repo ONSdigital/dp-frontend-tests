@@ -3,6 +3,7 @@ package com.ons.dp.frontend.test.stepdefinitions.florence;
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.model.User;
 import com.ons.dp.frontend.test.page.publish.UsersAccess;
+import com.ons.dp.frontend.test.stepdefinitions.BaseStepDefinition;
 import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.Helper;
 import cucumber.api.java.en.And;
@@ -16,9 +17,13 @@ import java.util.Random;
 
 public class UsersAccessSteps {
 
-
     public UsersAccess usersAndAccessPage = new UsersAccess();
     User createUser, randomUser;
+    private BaseStepDefinition baseStepDefinition;
+
+    public UsersAccessSteps() {
+        this.baseStepDefinition = new BaseStepDefinition();
+    }
 
     @Then("browse to users and access page")
     public void goToUsersAndAccess() {

@@ -3,13 +3,20 @@ package com.ons.dp.frontend.test.stepdefinitions.ons;
 
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.webpage.ProductPage;
+import com.ons.dp.frontend.test.stepdefinitions.BaseStepDefinition;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 
 public class ProductPageSteps {
+
     ProductPage productPage = new ProductPage();
+    private BaseStepDefinition baseStepDefinition;
+
+    public ProductPageSteps() {
+        this.baseStepDefinition = new BaseStepDefinition();
+    }
 
     @When("^I navigate to Business Investment time series dataset$")
     public void navigateToTimeSeries() throws Throwable {
