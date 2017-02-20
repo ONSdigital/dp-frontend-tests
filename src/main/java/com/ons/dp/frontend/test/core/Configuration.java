@@ -13,7 +13,9 @@ public class Configuration {
     private Logger log = Logger.getLogger(Configuration.class.getCanonicalName());
     private String onsURL;
     private String onsdevelop_URL;
+    private String onsSandpit_URL;
     private String florence_develop;
+    private String florence_sandpit;
     private String florence_preview;
     private String ermintrude_develop;
     private String florence_discovery;
@@ -40,8 +42,16 @@ public class Configuration {
         return onsdevelop_URL;
     }
 
+    public String getOnsSandpit_URL() {
+        return onsSandpit_URL;
+    }
+
     public String getFlorence_develop() {
         return florence_develop;
+    }
+
+    public String getFlorence_sandpit() {
+        return florence_sandpit;
     }
 
     public String getFlorence_preview() {
@@ -102,8 +112,14 @@ public class Configuration {
         if (config.containsKey("ons_develop")) {
             onsdevelop_URL = (String) config.get("ons_develop");
         }
+        if (config.containsKey("ons_sandpit")) {
+            onsSandpit_URL = (String) config.get("ons_sandpit");
+        }
         if (config.containsKey("florence_develop")) {
             florence_develop = (String) config.get("florence_develop");
+        }
+        if (config.containsKey("florence_sandpit")) {
+            florence_sandpit = (String) config.get("florence_sandpit");
         }
         if (config.containsKey("florence_preview")) {
             florence_preview = (String) config.get("florence_preview");
@@ -147,11 +163,18 @@ public class Configuration {
         if (onsdevelop_url_value != null) {
             onsdevelop_URL = onsdevelop_url_value;
         }
+        String onsSandpit_url_value = Helper.getSetting("TEST_ONSSANDPIT_URL");
+        if (onsSandpit_url_value != null) {
+            onsSandpit_URL = onsSandpit_url_value;
+        }
         String florence_develop_value = Helper.getSetting("TEST_FLORENCE_DEV");
         if (florence_develop_value != null) {
             florence_develop = florence_develop_value;
         }
-
+        String florence_sandpit_value = Helper.getSetting("TEST_FLORENCE_SANDPIT");
+        if (florence_sandpit_value != null) {
+            florence_sandpit = florence_sandpit_value;
+        }
         String ermintrude_develop_value = Helper.getSetting("TEST_ERMINTRUDE_DEV");
         if (ermintrude_develop_value != null) {
             ermintrude_develop = ermintrude_develop_value;
@@ -195,7 +218,9 @@ public class Configuration {
         return "Configuration{" +
                 "onsURL=" + onsURL +
                 "onsdevelop_URL=" + onsdevelop_URL +
+                "onsSandpit_URL=" + onsSandpit_URL +
                 ", florence_develop=" + florence_develop +
+                ", florence_sandpit=" + florence_sandpit +
                 ", ermintrude_develop=" + ermintrude_develop +
                 ", florence_discovery=" + florence_discovery +
                 ", ermintrude_discovery='" + ermintrude_discovery +

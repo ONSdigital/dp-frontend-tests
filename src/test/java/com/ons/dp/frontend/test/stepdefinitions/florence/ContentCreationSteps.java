@@ -158,4 +158,23 @@ public class ContentCreationSteps {
     public void iCreateANewWithPageNameAndSubmitForReview(String pageType, String pageName) throws Throwable {
         contentCreation.createPageAndSave(pageType, pageName);
     }
+
+    @And("^add a bar chart$")
+    public void addAChart() throws Throwable {
+        contentCreation.addContentToContentSection();
+        contentCreation.metaDataTabInChartData();
+        contentCreation.chartTabInChartData();
+
+    }
+
+    @And("^verify the chart data in preview$")
+    public void verifyTheChartDataInPreview() throws Throwable {
+        contentCreation.verifyChartDataInPreview();
+        contentCreation.saveTheChart();
+    }
+
+    @And("^I get the chart data$")
+    public void iGetTheChartData() throws Throwable {
+        contentCreation.getChartData();
+    }
 }

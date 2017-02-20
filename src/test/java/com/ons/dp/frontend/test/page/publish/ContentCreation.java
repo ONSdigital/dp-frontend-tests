@@ -9,7 +9,9 @@ import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.util.CustomDates;
 import com.ons.dp.frontend.test.util.Helper;
 import com.ons.dp.frontend.test.util.RandomStringGen;
+import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -44,6 +46,7 @@ public class ContentCreation extends BasePage {
 	public By visualisation_uniqueID = By.id("visualisation-uid");
 	public By metadata_keywords = By.xpath(".//*[@id='keywordsTag']/li/input");
 	public By metadata = By.xpath("//div[@class='edit-section']/div");
+
 	public By hamburger_icon = By.cssSelector(".page__container.selected>span>span>button.hamburger-icon");
 	public By activeDeleteButton = By.cssSelector(".page__container.selected>span>span>span>button.btn-browse-delete");
 	public By releaseDate = By.id("releaseDate");
@@ -60,11 +63,61 @@ public class ContentCreation extends BasePage {
 	public By cancelled = By.name("cancelled");
     public By title = By.id("title");
     public By metaDescription = By.id("metaDescription");
-	public By content = By.xpath("//div[@id='content']/div");
+	public By content = By.xpath("//div[@id='section']/div");
+	public By charts = By.xpath("//div[@id='charts']/div");
 	public By contentEdit = By.id("content-edit");
     public By releasesFolder = By.xpath(".//*[@id='browse-tree']/section/nav/ul/li/ul/li[14]/span/span[1]");
     public By create_link = By.linkText("Create");
 	public By create_page_btn = By.cssSelector(".btn-page-create");
+
+	public By add_section_btn = By.id("add-section");
+	public By section_one_title = By.id("section-title_0");
+	public By section_one_edit = By.id("section-edit_0");
+	public By section_one_delete = By.id("section-delete_0");
+
+	public By build_chart_image = By.id("js-editor--chart");
+
+
+	public By chart_title = By.id("chart-title");
+	public By chart_subtitle = By.id("chart-subtitle");
+	public By chart_source = By.id("chart-source");
+	public By chart_units = By.id("chart-unit");
+	public By chart_data = By.id("chart-data");
+	public By chart_alt_text = By.id("chart-alt-text");
+	public By chart_type = By.id("chart-type");
+	public By chart_aspect_ratio = By.id("aspect-ratio");
+	public By chart_start_from_zero = By.id("start-from-zero");
+	public By chart_label_interval = By.id("chart-label-interval");
+	public By chart_decimal_places = By.id("chart-decimal-places");
+	public By chart_x_axis_label = By.id("chart-x-axis-label");
+	public By chart_notes = By.id("chart-notes");
+
+	//Chart Data Preview
+	public By chart_title_preview = By.id("chart-title-preview");
+	public By chart_subtitle_preview = By.id("chart-subtitle-preview");
+	public By chart_source_preview = By.id("chart-source-preview");
+	public By chart_units_preview = By.xpath("//div[@class='highcharts-axis']/span");
+
+	// How to verify more data in chart data
+	// Below is to verify Births and Deaths
+	public By chart_data_preview_firstcolumn = By.xpath("//div[@class='highcharts-legend']/div/div/div[1]/span");
+	public By chart_data_preview_secondcolumn = By.xpath("//div[@class='highcharts-legend']/div/div/div[2]/span");
+
+	// to check for all data 2010 to 2015
+	public By chart_data_preview_firstrow = By.cssSelector(".highcharts-axis-labels.highcharts-xaxis-labels>span");
+	public By chart_data_preview_secondrow = By.cssSelector(".highcharts-axis-labels.highcharts-xaxis-labels>span:last-child");
+
+	// check with Rob, is this correct?
+	public By chart_alt_text_preview = By.id("chart-title-preview");
+
+	// how to verify chart type and aspect ratio
+	public By chart_start_from_zero_preview = By.xpath("div[@class='highcharts-yaxis-labels']/span");
+
+	public By chart_finish_at_100 = By.id("finish-at-hundred");
+
+	public By chart_finish_at_100_preview = By.cssSelector(".highcharts-axis-labels.highcharts-yaxis-labels>span:last-child");
+
+	public By chart_notes_preview = By.id("chart-notes-preview");
 
 
 	public int getNumberOfPublishedVersions() {
@@ -365,5 +418,84 @@ public class ContentCreation extends BasePage {
         saveSubmitForReview();
     }
 
+	public void addContentToContentSection() {
+		click(content);
+		click(add_section_btn);
+		sendKeys(section_one_title, "Section 1");
+		click(section_one_edit);
+		sendKeys(markdownEditor, "");
 
+	}
+
+	public void metaDataTabInChartData() {
+
+		click(build_chart_image);
+
+		sendKeys(chart_title, "Figure 2: Percentage of VAT and/or PAYE based enterprises by year");
+		sendKeys(chart_subtitle, "UK, 2005 to 2010");
+		sendKeys(chart_source, "Office for National Statistics");
+		sendKeys(chart_units, "%");
+		sendKeys(chart_x_axis_label, "");
+		sendKeys(chart_alt_text, "Figure 2: Percentage of VAT and/or PAYE based enterprises by year");
+		sendKeys(chart_notes, "This is the chart for PAYE and Companies data of 2010 and 2011");
+
+	}
+
+	public void chartTabInChartData() {
+
+		click(By.linkText("Chart"));
+
+		JavascriptExecutor js = (JavascriptExecutor) getDriver();
+		js.executeScript("document.getElementById('chart-data').value ='\tSole Proprietors and Partnerships\tCompanies and Public Corporations\\r\\n2010\t38.6\t57.4\\r\\n2011\t37.3\t58.6'");
+		js.executeScript("var event =document.createEvent('HTMLEvents'); event.initEvent('change',true,false);" +
+				"document.getElementById('chart-data').dispatchEvent(event);");
+
+		select(chart_type, "Bar Chart");
+
+		click(chart_finish_at_100);
+		sendKeys(chart_decimal_places, "1");
+
+	}
+
+	public void tabSpace() {
+		JavascriptExecutor js = (JavascriptExecutor) getDriver();
+		js.executeScript("document.getElementById('" + chart_data + "').value = '\\t';");
+
+	}
+
+	public void verifyChartDataInPreview() {
+
+		Assert.assertTrue(getElementText(chart_title_preview).contentEquals("Figure 2: Percentage of VAT and/or PAYE based enterprises by year"));
+
+		Assert.assertTrue(getElementText(chart_subtitle_preview).contentEquals("UK, 2005 to 2010"));
+
+		Assert.assertTrue(getElementText(chart_source_preview).contentEquals("Office for National Statistics"));
+
+		Assert.assertTrue(getElementText(chart_units_preview).contentEquals("%"));
+
+		Assert.assertTrue(getElementText(chart_data_preview_firstcolumn).contentEquals("Sole Proprietors and Partnerships"));
+
+		Assert.assertTrue(getElementText(chart_data_preview_secondcolumn).contentEquals("Companies and Public Corporations"));
+
+		Assert.assertTrue(getElementText(chart_data_preview_firstrow).contains("2010"));
+
+		Assert.assertTrue(getElementText(chart_data_preview_secondrow).contains("2011"));
+
+		Assert.assertTrue(getElementText(chart_alt_text_preview).contains("Figure 2: Percentage of VAT and/or PAYE based enterprises by year"));
+
+		Assert.assertTrue(getElementText(chart_finish_at_100_preview).contains("100"));
+
+		Assert.assertTrue(getElementText(chart_notes_preview).contains("This is the chart for PAYE and Companies data of 2010 and 2011"));
+
+	}
+
+	public void getChartData() {
+		click(charts);
+		getDriver().findElement(By.id("chart-edit_0")).click();
+
+	}
+
+	public void saveTheChart() {
+		click(getButton(buttonElement, "Save chart"));
+	}
 }

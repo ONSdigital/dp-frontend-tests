@@ -1,7 +1,9 @@
 config:
   ons_url: https://www.ons.gov.uk/
   ons_develop: https://develop.onsdigital.co.uk/
+  ons_sandpit: https://sandpit.onsdigital.co.uk/
   florence_develop: https://publishing.develop.onsdigital.co.uk/florence/index.html
+  florence_sandpit: https://publishing.sandpit.onsdigital.co.uk/florence/index.html
   florence_preview: https://publishing.develop.onsdigital.co.uk
   ermintrude_develop: https://preview.develop.onsdigital.co.uk/ermintrude/index.html
   florence_discovery: https://publishing.discovery.onsdigital.co.uk/florence/index.html

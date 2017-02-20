@@ -31,6 +31,16 @@ public class LoginSteps {
         loginPage.openAndLogin("admin@test.com", "one two three four");
     }
 
+    @Given("I am logged in as a publisher in sandpit env$")
+    public void publisherLoginInSandpitEnv() {
+        loginPage.openAndLoginToSandpit("publisher@test.com", "one two three four");
+    }
+
+    @Given("I am logged in as a lead publisher in sandpit env$")
+    public void leadPublisherLoginInSandpitEnv() {
+        loginPage.openAndLoginToSandpit("publisher2@test.com", "one two three four");
+    }
+
     @Given("I am logged in as a publisher$")
     public void publisherLogin() {
         loginPage.openAndLogin("publisher@test.com", "one two three four");

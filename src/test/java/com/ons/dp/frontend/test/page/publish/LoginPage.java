@@ -31,6 +31,10 @@ public class LoginPage extends BasePage {
 
     }
 
+    public void openSandpitLoginPage() {
+        navigateToUrl(getConfig().getFlorence_sandpit());
+    }
+
     public void openErmintrudeLoginPage() {
         navigateToUrl(getConfig().getErmintrude_develop());
     }
@@ -65,6 +69,10 @@ public class LoginPage extends BasePage {
         }
     }
 
+    public void openAndLoginToSandpit(String email, String pwd) {
+        openSandpitLoginPage();
+        login(email, pwd);
+    }
     public void openAndLoginToErmintrude(String email, String pwd) {
 
         openErmintrudeLoginPage();

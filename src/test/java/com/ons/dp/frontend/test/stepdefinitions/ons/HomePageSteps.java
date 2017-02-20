@@ -35,6 +35,11 @@ public class HomePageSteps {
         homePage.openHomePage();
     }
 
+    @Given("I navigate to the ONS Sandpit Website$")
+    public void iAmOnTheSandpitWebsite() throws Throwable {
+        homePage.openSandPitHomePage();
+    }
+
     @When("I search for \"([^\"]*)\" timeseries dataset$")
     public void iSearchForTimeseriesDataset(String timeSeriesID) throws Throwable {
         homePage.searchForTimeSeriesID(timeSeriesID);
@@ -67,6 +72,14 @@ public class HomePageSteps {
 
     }
 
+    @Then("^I browse to businessindustryandtrade/business/activitysizeandlocation/bulletins/random page on the Sandpit ONS$")
+    public void browseToABulletinPage() {
+        String pageName = TestContext.getCacheService().getDataMap().get("pageName").getStringData();
+        String editionName = TestContext.getCacheService().getDataMap().get("editionName").getStringData();
+        homePage.goToSandpitPage("businessindustryandtrade/business/activitysizeandlocation/bulletins/" + pageName.toLowerCase() + "/" + editionName.toLowerCase());
+
+    }
+
     @And("^the ONS website contains the published changes$")
     public void getONSChanges() {
         Assert.assertTrue("The changes are not on the ONS website", homePage.pageSourceContains(TestContext.getCacheService().getDataMap().get("markdownText").getStringData()));
@@ -92,6 +105,7 @@ public class HomePageSteps {
         }
 
     }
+
 
     @Then("^the ONS website (does|does not) contain the classifications changes with page \"([^\"]*)\"$")
     public void theONSWebsiteDoesContainTheClassificationsChangesWithPage(String exist, String pageName) throws Throwable {

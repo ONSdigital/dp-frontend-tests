@@ -72,7 +72,8 @@ public class CollectionSteps {
     public void reviewFilesInTheColl(String fileloc) throws Throwable {
         String colName = TestContext.getCacheService().getDataMap().get("collectionName").getStringData();
         String randonPageName = TestContext.getCacheService().getDataMap().get("pageName").getStringData();
-        collection.reviewFile(colName, randonPageName, fileloc.replace("random page", randonPageName));
+        String randonEditionName = TestContext.getCacheService().getDataMap().get("editionName").getStringData();
+        collection.reviewFile(colName, randonPageName, fileloc.replace("random page", randonPageName + "/" + randonEditionName));
     }
 
     @And("^I review the (.*) bulletin file awaiting review with data-url:(.*)$")

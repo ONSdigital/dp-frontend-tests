@@ -13,6 +13,10 @@ public class Homepage extends BasePage {
 
     }
 
+    public void openSandPitHomePage() {
+        navigateToUrl(getConfig().getOnsSandpit_URL());
+    }
+
     public void searchForTimeSeriesID(String timeSeriesID) {
         getElement(search).sendKeys(timeSeriesID);
         click(search_Submit);
@@ -22,6 +26,11 @@ public class Homepage extends BasePage {
     public void goToPage(String linkToGoTo) {
 
         navigateToUrl(getConfig().getOnsdevelop_URL() + linkToGoTo);
+    }
+
+    public void goToSandpitPage(String linkToGoTo) {
+
+        navigateToUrl(getConfig().getOnsSandpit_URL() + linkToGoTo);
     }
 
     public void openLiveHomePage() {
