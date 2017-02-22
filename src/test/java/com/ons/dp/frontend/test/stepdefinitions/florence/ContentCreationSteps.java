@@ -163,13 +163,27 @@ public class ContentCreationSteps {
     public void addAChart() throws Throwable {
         contentCreation.addContentToContentSection();
         contentCreation.metaDataTabInChartData();
-        contentCreation.chartTabInChartData();
+        contentCreation.chartTabForBarChartData();
 
     }
 
-    @And("^verify the chart data in preview$")
+    @And("^add a line chart$")
+    public void addALineChart() throws Throwable {
+        contentCreation.addContentToContentSection();
+        contentCreation.metaDataTabInChartData();
+        contentCreation.chartTabForLineChartData();
+
+    }
+
+    @And("^verify the bar chart data in preview$")
     public void verifyTheChartDataInPreview() throws Throwable {
-        contentCreation.verifyChartDataInPreview();
+        contentCreation.verifyBarChartDataInPreview();
+        contentCreation.saveTheChart();
+    }
+
+    @And("^verify the line chart data in preview$")
+    public void verifyTheLineChartDataInPreview() throws Throwable {
+        contentCreation.verifyLineChartDataInPreview();
         contentCreation.saveTheChart();
     }
 

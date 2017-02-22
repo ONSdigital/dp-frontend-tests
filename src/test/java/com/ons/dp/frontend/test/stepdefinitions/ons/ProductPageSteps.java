@@ -38,8 +38,8 @@ public class ProductPageSteps {
                 recentPubVer == (prevPubVer + 1));
     }
 
-    @And("^the ONS website (does|does not) contain the new chart details$")
-    public void getONSChartChanges(String exist) {
+    @And("^the ONS website (does|does not) contain the new (.*) chart details$")
+    public void getONSChartChanges(String exist, String chartType) {
         boolean exists = exist.length() <= 4;
 
         String pageName = TestContext.getCacheService().getDataMap().get("pageName").getStringData();
@@ -52,8 +52,14 @@ public class ProductPageSteps {
                 e.printStackTrace();
             }
 
+            if (chartType.contains("bar")) {
+                productPage.verifyBarChartData(pageName, editionName);
+            } else {
+                if (chartType.contains("line")) {
+                    productPage.verifyLineChartData(pageName, editionName);
+                }
+            }
 
-            productPage.verifyChartData(pageName, editionName);
 
         } else {
             productPage.refresh();

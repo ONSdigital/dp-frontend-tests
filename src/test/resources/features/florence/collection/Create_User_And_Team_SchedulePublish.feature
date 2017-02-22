@@ -35,7 +35,7 @@ Feature: Create a published schedule collection
     Then I logout of florence
 
 
-  Scenario: Scheduled publishes should begin at the scheduled time
+  Scenario: Scheduled publish should begin at the scheduled time
 
 
     Given I am logged in as an admin

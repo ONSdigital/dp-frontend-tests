@@ -63,6 +63,7 @@ public class ContentCreation extends BasePage {
 	public By cancelled = By.name("cancelled");
     public By title = By.id("title");
     public By metaDescription = By.id("metaDescription");
+	public By foi_content = By.xpath("//div[@id='content']/div");
 	public By content = By.xpath("//div[@id='section']/div");
 	public By charts = By.xpath("//div[@id='charts']/div");
 	public By contentEdit = By.id("content-edit");
@@ -90,6 +91,8 @@ public class ContentCreation extends BasePage {
 	public By chart_label_interval = By.id("chart-label-interval");
 	public By chart_decimal_places = By.id("chart-decimal-places");
 	public By chart_x_axis_label = By.id("chart-x-axis-label");
+	public By chart_overwrite_y_axis_max = By.id("chart-max");
+	public By chart_overwrite_y_axis_min = By.id("chart-min");
 	public By chart_notes = By.id("chart-notes");
 
 	//Chart Data Preview
@@ -103,19 +106,27 @@ public class ContentCreation extends BasePage {
 	public By chart_data_preview_firstcolumn = By.xpath("//div[@class='highcharts-legend']/div/div/div[1]/span");
 	public By chart_data_preview_secondcolumn = By.xpath("//div[@class='highcharts-legend']/div/div/div[2]/span");
 
-	// to check for all data 2010 to 2015
-	public By chart_data_preview_firstrow = By.cssSelector(".highcharts-axis-labels.highcharts-xaxis-labels>span");
-	public By chart_data_preview_secondrow = By.cssSelector(".highcharts-axis-labels.highcharts-xaxis-labels>span:last-child");
+	// to check bar chart for all data 2010 to 2012
+	public By bar_chart_data_preview_firstrow = By.cssSelector(".highcharts-axis-labels.highcharts-xaxis-labels>span:nth-child(1)");
+	public By bar_chart_data_preview_secondrow = By.cssSelector(".highcharts-axis-labels.highcharts-xaxis-labels>span:nth-child(2)");
+	public By bar_chart_data_preview_thirdrow = By.cssSelector(".highcharts-axis-labels.highcharts-xaxis-labels>span:nth-child(3)");
+
+	// to check line chart for all data 2010 to 2012
+	public By line_chart_data_preview_firstrow = By.cssSelector(".highcharts-axis-labels.highcharts-xaxis-labels>span:nth-child(3)");
+	public By line_chart_data_preview_secondrow = By.cssSelector(".highcharts-axis-labels.highcharts-xaxis-labels>span:nth-child(2)");
+	public By line_chart_data_preview_thirdrow = By.cssSelector(".highcharts-axis-labels.highcharts-xaxis-labels>span:nth-child(1)");
 
 	// check with Rob, is this correct?
 	public By chart_alt_text_preview = By.id("chart-title-preview");
 
 	// how to verify chart type and aspect ratio
-	public By chart_start_from_zero_preview = By.xpath("div[@class='highcharts-yaxis-labels']/span");
+	public By chart_start_from_zero_preview = By.cssSelector(".highcharts-axis-labels.highcharts-yaxis-labels>span");
 
 	public By chart_finish_at_100 = By.id("finish-at-hundred");
 
 	public By chart_finish_at_100_preview = By.cssSelector(".highcharts-axis-labels.highcharts-yaxis-labels>span:last-child");
+
+	public By chart_overwrite_y_axis_max_preview = By.cssSelector(".highcharts-axis-labels.highcharts-yaxis-labels>span:last-child");
 
 	public By chart_notes_preview = By.id("chart-notes-preview");
 
@@ -411,8 +422,8 @@ public class ContentCreation extends BasePage {
         getElementText(title).equals(TestContext.getCacheService().getDataMap().get("foiEntry").getStringData());
         sendKeys(metadata_keywords, foiEntry.getKeywords());
 		sendKeys(metaDescription, foiEntry.getMetaDescription());
-        click(content);
-        click(contentEdit);
+		click(foi_content);
+		click(contentEdit);
 		sendKeys(markdownEditor, foiEntry.getMarkdownText());
 		click(getButton(buttonElement, "Save changes and exit"));
         saveSubmitForReview();
@@ -441,12 +452,12 @@ public class ContentCreation extends BasePage {
 
 	}
 
-	public void chartTabInChartData() {
+	public void chartTabForBarChartData() {
 
 		click(By.linkText("Chart"));
 
 		JavascriptExecutor js = (JavascriptExecutor) getDriver();
-		js.executeScript("document.getElementById('chart-data').value ='\tSole Proprietors and Partnerships\tCompanies and Public Corporations\\r\\n2010\t38.6\t57.4\\r\\n2011\t37.3\t58.6'");
+		js.executeScript("document.getElementById('chart-data').value ='Year\tSole Proprietors and Partnerships\tCompanies and Public Corporations\\r\\n2010\t38.6\t57.4\\r\\n2011\t37.3\t58.6\\r\\n2012\t39.6\t59.8'");
 		js.executeScript("var event =document.createEvent('HTMLEvents'); event.initEvent('change',true,false);" +
 				"document.getElementById('chart-data').dispatchEvent(event);");
 
@@ -457,13 +468,33 @@ public class ContentCreation extends BasePage {
 
 	}
 
+	public void chartTabForLineChartData() {
+		click(By.linkText("Chart"));
+
+		JavascriptExecutor js = (JavascriptExecutor) getDriver();
+		js.executeScript("document.getElementById('chart-data').value ='Year\tSole Proprietors and Partnerships\tCompanies and Public Corporations\\r\\n2010\t38.6\t57.4\\r\\n2011\t37.3\t58.6\\r\\n2012\t39.6\t59.8'");
+		js.executeScript("var event =document.createEvent('HTMLEvents'); event.initEvent('change',true,false);" +
+				"document.getElementById('chart-data').dispatchEvent(event);");
+
+		select(chart_type, "Line Chart");
+
+		click(chart_start_from_zero);
+		sendKeys(chart_decimal_places, "1");
+		sendKeys(chart_overwrite_y_axis_max, "80");
+		sendKeys(chart_overwrite_y_axis_max, Keys.ESCAPE.toString());
+		sendKeys(chart_overwrite_y_axis_max, Keys.TAB.toString());
+		sendKeys(chart_overwrite_y_axis_min, "");
+
+
+	}
+
 	public void tabSpace() {
 		JavascriptExecutor js = (JavascriptExecutor) getDriver();
 		js.executeScript("document.getElementById('" + chart_data + "').value = '\\t';");
 
 	}
 
-	public void verifyChartDataInPreview() {
+	public void verifyBarChartDataInPreview() {
 
 		Assert.assertTrue(getElementText(chart_title_preview).contentEquals("Figure 2: Percentage of VAT and/or PAYE based enterprises by year"));
 
@@ -477,13 +508,45 @@ public class ContentCreation extends BasePage {
 
 		Assert.assertTrue(getElementText(chart_data_preview_secondcolumn).contentEquals("Companies and Public Corporations"));
 
-		Assert.assertTrue(getElementText(chart_data_preview_firstrow).contains("2010"));
+		Assert.assertTrue(getElementText(bar_chart_data_preview_firstrow).contains("2010"));
 
-		Assert.assertTrue(getElementText(chart_data_preview_secondrow).contains("2011"));
+		Assert.assertTrue(getElementText(bar_chart_data_preview_secondrow).contains("2011"));
+
+		Assert.assertTrue(getElementText(bar_chart_data_preview_thirdrow).contains("2012"));
 
 		Assert.assertTrue(getElementText(chart_alt_text_preview).contains("Figure 2: Percentage of VAT and/or PAYE based enterprises by year"));
 
 		Assert.assertTrue(getElementText(chart_finish_at_100_preview).contains("100"));
+
+		Assert.assertTrue(getElementText(chart_notes_preview).contains("This is the chart for PAYE and Companies data of 2010 and 2011"));
+
+	}
+
+	public void verifyLineChartDataInPreview() {
+
+		Assert.assertTrue(getElementText(chart_title_preview).contentEquals("Figure 2: Percentage of VAT and/or PAYE based enterprises by year"));
+
+		Assert.assertTrue(getElementText(chart_subtitle_preview).contentEquals("UK, 2005 to 2010"));
+
+		Assert.assertTrue(getElementText(chart_source_preview).contentEquals("Office for National Statistics"));
+
+		Assert.assertTrue(getElementText(chart_units_preview).contentEquals("%"));
+
+		Assert.assertTrue(getElementText(chart_data_preview_firstcolumn).contentEquals("Sole Proprietors and Partnerships"));
+
+		Assert.assertTrue(getElementText(chart_data_preview_secondcolumn).contentEquals("Companies and Public Corporations"));
+
+		Assert.assertTrue(getElementText(line_chart_data_preview_firstrow).contains("2010"));
+
+		Assert.assertTrue(getElementText(line_chart_data_preview_secondrow).contains("2011"));
+
+		Assert.assertTrue(getElementText(line_chart_data_preview_thirdrow).contains("2012"));
+
+		Assert.assertTrue(getElementText(chart_alt_text_preview).contains("Figure 2: Percentage of VAT and/or PAYE based enterprises by year"));
+
+		Assert.assertTrue(getElementText(chart_start_from_zero_preview).contains("0"));
+
+		Assert.assertTrue(getElementText(chart_overwrite_y_axis_max_preview).contains("80"));
 
 		Assert.assertTrue(getElementText(chart_notes_preview).contains("This is the chart for PAYE and Companies data of 2010 and 2011"));
 
@@ -498,4 +561,6 @@ public class ContentCreation extends BasePage {
 	public void saveTheChart() {
 		click(getButton(buttonElement, "Save chart"));
 	}
+
+
 }
