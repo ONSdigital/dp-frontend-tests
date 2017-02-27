@@ -94,6 +94,10 @@ public class ContentCreation extends BasePage {
 	public By chart_overwrite_y_axis_max = By.id("chart-max");
 	public By chart_overwrite_y_axis_min = By.id("chart-min");
 	public By chart_notes = By.id("chart-notes");
+	public By chart_show_marker_points = By.id("show-marker");
+	public By chart_highlight = By.id("chart-highlight");
+	public By chart_add_annotation_btn = By.id("Add annotation");
+	public By chart_annotation_notes_preview = By.cssSelector(".highcharts-annotation>g>text>tspan");
 
 	//Chart Data Preview
 	public By chart_title_preview = By.id("chart-title-preview");
@@ -488,6 +492,37 @@ public class ContentCreation extends BasePage {
 
 	}
 
+	public void advancedTabForLineChart() {
+
+		click(By.linkText("Advanced"));
+		click(chart_show_marker_points);
+
+	}
+
+	public void advancedTabForBarChart() {
+
+		click(By.linkText("Advanced"));
+		select(chart_highlight, "2010");
+
+		ArrayList<WebElement> chartMarkerPoints = (ArrayList<WebElement>) getDriver().findElements(By.cssSelector(".highcharts-series.highcharts-series-0>rect"));
+		Assert.assertTrue(chartMarkerPoints.get(0).getAttribute("fill").equals("gold"));
+	}
+
+	public void annotationTabForChart() {
+
+		click(By.linkText("Annotation"));
+		click(chart_add_annotation_btn);
+
+		Assert.assertTrue(getDriver().findElement(By.id("annotation-0")).isDisplayed());
+
+		getDriver().findElement(By.id("delete-annotation-0")).click();
+
+		Assert.assertFalse(getDriver().findElement(By.id("annotation-0")).isDisplayed());
+		//g[@class='highcharts-annotation']/g/text/tspan
+		//div[@id='annotation-0']/h3/span
+		// .highcharts-annotation>g>text>tspan
+	}
+
 	public void tabSpace() {
 		JavascriptExecutor js = (JavascriptExecutor) getDriver();
 		js.executeScript("document.getElementById('" + chart_data + "').value = '\\t';");
@@ -520,6 +555,7 @@ public class ContentCreation extends BasePage {
 
 		Assert.assertTrue(getElementText(chart_notes_preview).contains("This is the chart for PAYE and Companies data of 2010 and 2011"));
 
+
 	}
 
 	public void verifyLineChartDataInPreview() {
@@ -549,6 +585,9 @@ public class ContentCreation extends BasePage {
 		Assert.assertTrue(getElementText(chart_overwrite_y_axis_max_preview).contains("80"));
 
 		Assert.assertTrue(getElementText(chart_notes_preview).contains("This is the chart for PAYE and Companies data of 2010 and 2011"));
+
+		ArrayList<WebElement> chartMarkerPoints = (ArrayList<WebElement>) getDriver().findElements(By.cssSelector(".highcharts-markers.highcharts-series-0>path"));
+		Assert.assertEquals(chartMarkerPoints.size(), 3);
 
 	}
 

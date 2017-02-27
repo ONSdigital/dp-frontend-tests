@@ -164,6 +164,7 @@ public class ContentCreationSteps {
         contentCreation.addContentToContentSection();
         contentCreation.metaDataTabInChartData();
         contentCreation.chartTabForBarChartData();
+        contentCreation.advancedTabForBarChart();
 
     }
 
@@ -172,6 +173,7 @@ public class ContentCreationSteps {
         contentCreation.addContentToContentSection();
         contentCreation.metaDataTabInChartData();
         contentCreation.chartTabForLineChartData();
+        contentCreation.advancedTabForLineChart();
 
     }
 
