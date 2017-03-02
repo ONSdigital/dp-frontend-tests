@@ -39,7 +39,7 @@ public class ProductPageSteps {
     }
 
     @And("^the ONS website (does|does not) contain the new (.*) chart details$")
-    public void getONSChartChanges(String exist, String chartType) {
+    public void getONSChartChanges(String exist, String chartType) throws InterruptedException {
         boolean exists = exist.length() <= 4;
 
         String pageName = TestContext.getCacheService().getDataMap().get("pageName").getStringData();

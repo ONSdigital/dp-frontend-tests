@@ -96,8 +96,10 @@ public class ContentCreation extends BasePage {
 	public By chart_notes = By.id("chart-notes");
 	public By chart_show_marker_points = By.id("show-marker");
 	public By chart_highlight = By.id("chart-highlight");
-	public By chart_add_annotation_btn = By.id("Add annotation");
+	public By chart_add_annotation_btn = By.id("add-annotation");
 	public By chart_annotation_notes_preview = By.cssSelector(".highcharts-annotation>g>text>tspan");
+
+	public By annotation_link = By.linkText("Annotation");
 
 	//Chart Data Preview
 	public By chart_title_preview = By.id("chart-title-preview");
@@ -133,7 +135,15 @@ public class ContentCreation extends BasePage {
 	public By chart_overwrite_y_axis_max_preview = By.cssSelector(".highcharts-axis-labels.highcharts-yaxis-labels>span:last-child");
 
 	public By chart_notes_preview = By.id("chart-notes-preview");
-
+	public By advanced_tab = By.linkText("Advanced");
+	public By annotation_tab = By.linkText("Annotation");
+	public By new_annotation = By.id("annotation-0");
+	public By delete_annotation = By.id("delete-annotation-0");
+	public By annotation_notes = By.cssSelector(".highcharts-annotation>g>text>tspan");
+	public By annotation_chart_notes = By.id("chart-notes-0");
+	public By plot_bandwidth = By.id("band-width-0");
+	public By highlight_category = By.cssSelector(".highcharts-series.highcharts-series-0>rect");
+	public By chart_marker_points = By.cssSelector(".highcharts-markers.highcharts-series-0>path");
 
 	public int getNumberOfPublishedVersions() {
 		return publishedVersions;
@@ -180,7 +190,6 @@ public class ContentCreation extends BasePage {
 		return dirnameToReturn;
 		}
 
-
 	public By getContentHeaders(String title) {
 		return By.xpath(content_headers.replace("text_to_replace", title));
 	}
@@ -189,7 +198,6 @@ public class ContentCreation extends BasePage {
 		publishedVersions = findElementsBy(version_rows).size();
 
 	}
-
 
 	public void goToCMSContentLinks(String contentFinder) {
         String[] splitString = contentFinder.toLowerCase().split("/");
@@ -288,7 +296,6 @@ public class ContentCreation extends BasePage {
 		Helper.pause(1000);
 	}
 
-
 	public void approveCollection() {
 		try {
 			waitUntilTextPresent(getButton(buttonElement, ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString()), ContentText.SAVE_SUBMIT_APPROVAL_RETURN_TO_PARENT.getContentString());
@@ -362,7 +369,6 @@ public class ContentCreation extends BasePage {
 		saveSubmitForReview();
 
 	}
-
 
 	public void metaDataKeywords() {
 		Helper.pause(1000);
@@ -494,33 +500,46 @@ public class ContentCreation extends BasePage {
 
 	public void advancedTabForLineChart() {
 
-		click(By.linkText("Advanced"));
+		click(advanced_tab);
 		click(chart_show_marker_points);
 
 	}
 
 	public void advancedTabForBarChart() {
 
-		click(By.linkText("Advanced"));
+		click(advanced_tab);
 		select(chart_highlight, "2010");
 
-		ArrayList<WebElement> chartMarkerPoints = (ArrayList<WebElement>) getDriver().findElements(By.cssSelector(".highcharts-series.highcharts-series-0>rect"));
-		Assert.assertTrue(chartMarkerPoints.get(0).getAttribute("fill").equals("gold"));
+
 	}
 
-	public void annotationTabForChart() {
+	public void annotationTabForChart() throws InterruptedException {
 
-		click(By.linkText("Annotation"));
+		click(annotation_tab);
 		click(chart_add_annotation_btn);
 
-		Assert.assertTrue(getDriver().findElement(By.id("annotation-0")).isDisplayed());
+		getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(new_annotation));
 
-		getDriver().findElement(By.id("delete-annotation-0")).click();
+		Assert.assertTrue(getElement(new_annotation).isDisplayed());
 
-		Assert.assertFalse(getDriver().findElement(By.id("annotation-0")).isDisplayed());
-		//g[@class='highcharts-annotation']/g/text/tspan
-		//div[@id='annotation-0']/h3/span
-		// .highcharts-annotation>g>text>tspan
+		getElement(delete_annotation).click();
+
+		Thread.sleep(500);
+		Assert.assertEquals(getDriver().findElements(new_annotation).size(), 0);
+
+		click(chart_add_annotation_btn);
+		getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(annotation_notes));
+
+		Assert.assertEquals(getElement(annotation_notes).getText(), "Annotation 1: Automagic");
+
+		Thread.sleep(500);
+		getElement(annotation_chart_notes).clear();
+		getElement(annotation_chart_notes).sendKeys("Test Automation");
+
+		getElement(plot_bandwidth).sendKeys("0");
+
+		getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(annotation_notes));
+
 	}
 
 	public void tabSpace() {
@@ -555,6 +574,11 @@ public class ContentCreation extends BasePage {
 
 		Assert.assertTrue(getElementText(chart_notes_preview).contains("This is the chart for PAYE and Companies data of 2010 and 2011"));
 
+		ArrayList<WebElement> chartMarkerPoints = (ArrayList<WebElement>) getDriver().findElements(highlight_category);
+		Assert.assertTrue(chartMarkerPoints.get(0).getAttribute("fill").equals("gold"));
+
+		Assert.assertEquals(getDriver().findElement(annotation_notes).getText(), "Test Automation");
+
 
 	}
 
@@ -586,7 +610,7 @@ public class ContentCreation extends BasePage {
 
 		Assert.assertTrue(getElementText(chart_notes_preview).contains("This is the chart for PAYE and Companies data of 2010 and 2011"));
 
-		ArrayList<WebElement> chartMarkerPoints = (ArrayList<WebElement>) getDriver().findElements(By.cssSelector(".highcharts-markers.highcharts-series-0>path"));
+		ArrayList<WebElement> chartMarkerPoints = (ArrayList<WebElement>) getDriver().findElements(chart_marker_points);
 		Assert.assertEquals(chartMarkerPoints.size(), 3);
 
 	}

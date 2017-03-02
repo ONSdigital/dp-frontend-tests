@@ -165,6 +165,7 @@ public class ContentCreationSteps {
         contentCreation.metaDataTabInChartData();
         contentCreation.chartTabForBarChartData();
         contentCreation.advancedTabForBarChart();
+        contentCreation.annotationTabForChart();
 
     }
 

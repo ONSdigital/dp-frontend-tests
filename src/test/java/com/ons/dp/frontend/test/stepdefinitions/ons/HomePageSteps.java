@@ -165,4 +165,15 @@ public class HomePageSteps {
     }
 
 
+    @And("^I find all the available links$")
+    public void findAllTheLinks() throws Throwable {
+        homePage.findAllLinks();
+        // homePage.isLinkBroken();
+        // Assert.assertEquals(homePage.isLinkBroken(), "200");
+    }
+
+    @And("^check if any links are broken$")
+    public void checkAnyLinksAreBroken() throws Throwable {
+
+    }
 }

@@ -5,11 +5,14 @@ import com.ons.dp.frontend.test.page.BasePage;
 import com.ons.dp.frontend.test.util.CustomDates;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
 
 public class ProductPage extends BasePage {
     public By page_title = By.cssSelector(".page-intro__title");
     public By release_date = By.xpath("//div[@class='col-wrap']/p[2]");
-    public By first_section_text = By.cssSelector("#section-1>header>h2");
+    public By first_section_text = By.cssSelector("#section-1>section>header>h2");
     public By chart_title = By.cssSelector(".flush--third--vertical");
     public By chart_subtitle = By.cssSelector(".flush--third--bottom");
     public By chart_units = By.cssSelector(".highcharts-yaxis-title");
@@ -23,7 +26,7 @@ public class ProductPage extends BasePage {
 
     public By chart_data_preview_firstcolumn = By.xpath("//div[@class='highcharts-legend']/div/div/div[1]/span");
     public By chart_data_preview_secondcolumn = By.xpath("//div[@class='highcharts-legend']/div/div/div[2]/span");
-    public By chart_finish_at_100 = By.cssSelector(".highcharts-axis-labels.highcharts-yaxis-labels>span:nth-child(6)");
+    public By chart_finish_at_100 = By.cssSelector(".highcharts-axis-labels.highcharts-yaxis-labels>span:nth-child(5)");
     public By chart_y_axis_max = By.cssSelector(".highcharts-axis-labels.highcharts-yaxis-labels>span:nth-child(5)");
     public By chart_source = By.cssSelector(".flush--third--bottom.font-size--h6");
     public By chart_notes = By.cssSelector(".notes-holder-js>p");
@@ -42,10 +45,12 @@ public class ProductPage extends BasePage {
         return dataTable.numberOfRows;
     }
 
-    public void verifyBarChartData(String pageName, String editionName) {
+    public void verifyBarChartData(String pageName, String editionName) throws InterruptedException {
 
+        refresh();
+        Thread.sleep(500);
         Assert.assertTrue(getElementText(page_title).contains(pageName + ": " + editionName));
-        Assert.assertTrue(getElementText(release_date).contains(CustomDates.getDateInDiffFormat(+1)));
+        Assert.assertTrue(getElementText(release_date).contains(CustomDates.getDateInDiffFormat(+1).substring(1)));
         Assert.assertTrue(getElementText(first_section_text).contains("Section 1"));
         Assert.assertTrue(getElementText(chart_title).contains("Figure 2: Percentage of VAT and/or PAYE based enterprises by year"));
 
@@ -60,12 +65,15 @@ public class ProductPage extends BasePage {
         Assert.assertTrue(getElementText(chart_source).contains("Source: Office for National Statistics"));
         Assert.assertTrue(getElementText(chart_notes).contains("This is the chart for PAYE and Companies data of 2010 and 2011"));
 
+        ArrayList<WebElement> chartMarkerPoints = (ArrayList<WebElement>) getDriver().findElements(By.cssSelector(".highcharts-series.highcharts-series-0>rect"));
+        Assert.assertTrue(chartMarkerPoints.get(0).getAttribute("fill").equals("gold"));
+
     }
 
     public void verifyLineChartData(String pageName, String editionName) {
 
         Assert.assertTrue(getElementText(page_title).contains(pageName + ": " + editionName));
-        Assert.assertTrue(getElementText(release_date).contains(CustomDates.getDateInDiffFormat(+1)));
+        Assert.assertTrue(getElementText(release_date).contains(CustomDates.getDateInDiffFormat(+1).substring(1)));
         Assert.assertTrue(getElementText(first_section_text).contains("Section 1"));
         Assert.assertTrue(getElementText(chart_title).contains("Figure 2: Percentage of VAT and/or PAYE based enterprises by year"));
 
