@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductPage extends BasePage {
     public By page_title = By.cssSelector(".page-intro__title");
@@ -30,7 +31,31 @@ public class ProductPage extends BasePage {
     public By chart_y_axis_max = By.cssSelector(".highcharts-axis-labels.highcharts-yaxis-labels>span:nth-child(5)");
     public By chart_source = By.cssSelector(".flush--third--bottom.font-size--h6");
     public By chart_notes = By.cssSelector(".notes-holder-js>p");
+    public By chart_controls = By.cssSelector(".btn.btn--secondary.btn--chart-control");
+
+    public By from_quarter_dropdown = By.id("from-quarter-1");
+    public By from_year_dropdown = By.id("from-year-1");
+    public By to_quarter_dropdown = By.id("to-quarter-2");
+    public By to_year_dropdown = By.id("to-year-2");
+
+    public By filtered_time_series = By.cssSelector(".btn.btn--secondary.btn--chart-control.btn--chart-control--download.btn--secondary-active");
+    public By start_point_of_graph = By.cssSelector(".highcharts-axis-labels.highcharts-xaxis-labels>text:first-child");
+    public By end_point_of_graph = By.cssSelector(".highcharts-axis-labels.highcharts-xaxis-labels>text:last-child");
+    public By filtered_image_link = By.xpath(".//*[@id='filtered-download-controls']/div/a[1]");
+    public By filtered_csv_link = By.xpath(".//*[@id='filtered-download-controls']/div/a[2]");
+    public By filtered_xls_link = By.xpath(".//*[@id='filtered-download-controls']/div/a[3]");
+    private String from_quarter_value = "Q2";
+    private String from_year_value = "1960";
+    private String to_quarter_value = "Q4";
+    private String to_year_value = "2015";
+    private String labour_productivity_csv_timeseries = "/generator?format=csv&uri=/employmentandlabourmarket/peopleinwork/labourproductivity/timeseries/a4ym/prdy";
+
+    private String labour_productivity_image_timeseries = "/employmentandlabourmarket/peopleinwork/labourproductivity/timeseries/a4ym/prdy/linechartimage";
+    private String labour_productivity_xls_timeseries = "/generator?format=xls&uri=/employmentandlabourmarket/peopleinwork/labourproductivity/timeseries/a4ym/prdy";
+
+
     private String businessinvestmentpage = getConfig().getOnsdevelop_URL() + "economy/grossdomesticproductgdp/datasets/businessinvestment";
+    private String labourProductivityPage = getConfig().getOnsdevelop_URL() + "employmentandlabourmarket/peopleinwork/labourproductivity/timeseries/a4ym/prdy/";
 
     public void clickPreviousVersionsLink() {
         click(getlinkText("Previous versions"));
@@ -87,6 +112,47 @@ public class ProductPage extends BasePage {
         Assert.assertTrue(getElementText(chart_y_axis_max).contains("80"));
         Assert.assertTrue(getElementText(chart_source).contains("Source: Office for National Statistics"));
         Assert.assertTrue(getElementText(chart_notes).contains("This is the chart for PAYE and Companies data of 2010 and 2011"));
+
+    }
+
+    public void navigateToLabourProductivityPage() {
+
+        navigateToUrl(labourProductivityPage);
+    }
+
+    public void customiseTimePeriod() {
+
+        List<WebElement> ListOfControls = getDriver().findElements(chart_controls);
+        for (WebElement eachControl : ListOfControls) {
+
+            if (eachControl.getText().contains("Custom")) {
+                eachControl.click();
+            }
+
+        }
+
+        select(from_quarter_dropdown, from_quarter_value);
+        select(from_year_dropdown, from_year_value);
+        select(to_quarter_dropdown, to_quarter_value);
+        select(to_year_dropdown, to_year_value);
+
+
+    }
+
+    public void customisedGraph() {
+
+        Assert.assertTrue(getElementText(start_point_of_graph).contentEquals(from_year_value + " " + from_quarter_value));
+        Assert.assertTrue(getElementText(end_point_of_graph).contentEquals(to_year_value + " " + to_quarter_value));
+
+
+    }
+
+    public void downloadCustomisedTimeSeries() {
+
+        getElement(filtered_time_series).click();
+        Assert.assertTrue(getElement(filtered_image_link).getAttribute("href").contains(labour_productivity_image_timeseries));
+        Assert.assertTrue(getElement(filtered_csv_link).getAttribute("href").contains(labour_productivity_csv_timeseries));
+        Assert.assertTrue(getElement(filtered_xls_link).getAttribute("href").contains(labour_productivity_xls_timeseries));
 
     }
 }

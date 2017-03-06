@@ -25,6 +25,11 @@ public class ProductPageSteps {
         productPage.navigateToBusinessInvestmentDatasetPage();
     }
 
+    @And("^I navigate to Labour productivity time series page$")
+    public void iNavigateToLabourProductivityTimeSeriesPage() throws Throwable {
+        productPage.navigateToLabourProductivityPage();
+    }
+
     @And("^I click the previous versions$")
     public void clickPreviousVersions() throws Throwable {
         productPage.clickPreviousVersionsLink();
@@ -69,4 +74,18 @@ public class ProductPageSteps {
     }
 
 
+    @When("^I customize time period$")
+    public void iCustomizeTimePeriod() throws Throwable {
+        productPage.customiseTimePeriod();
+    }
+
+    @Then("^chart should reflect the time period chosen$")
+    public void chartShouldReflectTheTimePeriodChosen() throws Throwable {
+        productPage.customisedGraph();
+    }
+
+    @And("^can download customised time series$")
+    public void canDownloadCustomisedTimeSeries() throws Throwable {
+        productPage.downloadCustomisedTimeSeries();
+    }
 }
