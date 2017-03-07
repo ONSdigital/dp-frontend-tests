@@ -1,3 +1,4 @@
+@timeseriesgenerator
 Feature: Time Series Generator
 
   Scenario: Custom time period for time series generator

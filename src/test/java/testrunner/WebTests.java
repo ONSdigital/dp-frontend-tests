@@ -21,7 +21,7 @@ import org.junit.runner.RunWith;
                 "json:target/webtest/cucumber.json", "pretty:target/webtest/cucumber-pretty.txt",
                 "usage:target/webtest/cucumber-usage.json", "junit:target/webtest/cucumber-results.xml"},
         glue = "com.ons.dp.frontend.test",
-        tags = {"@Media"}
+        tags = {"@Media,@timeseriesgenerator"}
 )
 
 public class WebTests extends BaseTestRunner {
