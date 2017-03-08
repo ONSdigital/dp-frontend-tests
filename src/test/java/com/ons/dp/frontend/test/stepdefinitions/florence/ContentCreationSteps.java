@@ -84,14 +84,14 @@ public class ContentCreationSteps {
 	@And("^create a new calendar entry$")
 	public void calendarEntry() throws Throwable {
 		String pageName = RandomStringGen.getRandomString(8);
-		contentCreation.createCalendarEntry(CustomDates.getDate(1), "09:30", pageName);
-		TestContext.getCacheService().setDataMap("calendarEntry", new AnyData(pageName));
+        contentCreation.createCalendarEntry(CustomDates.getDate(1), "01:30", pageName);
+        TestContext.getCacheService().setDataMap("calendarEntry", new AnyData(pageName));
 	}
 
     @And("^create a new release calendar entry and submit for review$")
     public void createANewReleaseCalendarEntry() throws Throwable {
         String pageName = RandomStringGen.getRandomString(8);
-        contentCreation.createReleaseCalendarEntry(CustomDates.getDate(1), "09:30", pageName);
+        contentCreation.createReleaseCalendarEntry(CustomDates.getDate(1), "01:30", pageName);
         TestContext.getCacheService().setDataMap("calendarEntry", new AnyData(pageName));
     }
 

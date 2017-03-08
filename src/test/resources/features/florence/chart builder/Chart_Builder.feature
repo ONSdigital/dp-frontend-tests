@@ -60,7 +60,7 @@ Feature: Tests to check chart builder
     When I click on publishing queue and publish collection
     Then I logout of florence
 
-    # Check for the bar chart in website and its contents
+    # Check for the line chart in website and its contents
     Given I navigate to the ONS Sandpit Website
     And I browse to businessindustryandtrade/business/activitysizeandlocation/bulletins/random page on the Sandpit ONS
     Then the ONS website does contain the new line chart details
