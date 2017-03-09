@@ -54,7 +54,8 @@ public class Homepage extends BasePage {
         navigateToUrl(getConfig().getOnsSandpit_URL());
     }
 
-    public void searchForTimeSeriesID(String timeSeriesID) {
+    public void searchForTimeSeriesID(String timeSeriesID) throws InterruptedException {
+
         getElement(search).sendKeys(timeSeriesID);
         click(search_Submit);
 

@@ -34,8 +34,12 @@ public class SearchResultsPage extends BasePage {
 
     }
 
-    public void searchResults(String searchText) {
-
+    public void searchResults(String searchText) throws InterruptedException {
+        // Waiting for a minute as search not updating straight away
+        Thread.sleep(60000);
+        refresh();
+        Thread.sleep(60000);
+        refresh();
         //String actualText = getElementText(search_results_text);
 
         String expectedText = results_text.replace("text", searchText);

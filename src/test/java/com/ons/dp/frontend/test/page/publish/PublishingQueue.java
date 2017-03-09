@@ -22,12 +22,12 @@ public class PublishingQueue extends BasePage {
 
     public void publishQueue() {
         getWebDriverWait().until(ExpectedConditions.textToBe(getlinkText(publish_queue_link), publish_queue_link));
-        Helper.pause(3000);
+        Helper.pause(5000);
         click(getlinkText(publish_queue_link));
     }
 
-	public void publishCollection(String collection) {
-		getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(collection_css));
+    public void publishCollection(String collection) throws InterruptedException {
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(collection_css));
 		dataTable = new DataTable(true);
         try {
             getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(first_row_publishqueue_table));
@@ -42,6 +42,7 @@ public class PublishingQueue extends BasePage {
 		click(By.xpath("//h3[contains(text()," + collection + ")]"));
 		waitUntilTextPresent(getButton(buttonElement, publish_collection_link), publish_collection_link);
         click(getButton(buttonElement, publish_collection_link));
+        Thread.sleep(2000);
 
     }
 

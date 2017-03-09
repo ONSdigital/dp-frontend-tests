@@ -43,7 +43,12 @@ public class ReleaseCalendarSteps {
 	}
 
 	@And("^search results contains the release information$")
-	public void verifyReleaseIsDisplayed() {
+	public void verifyReleaseIsDisplayed() throws InterruptedException {
+		// Waiting for a minute as search not updating straight away
+		Thread.sleep(60000);
+		releaseCalendar.refresh();
+		Thread.sleep(60000);
+		releaseCalendar.refresh();
 		String releaseTitle = TestContext.getCacheService().getDataMap().get("calendarEntry").getStringData();
 		while (releaseCalendar.isElementPresent(releaseCalendar.returnNextPage())) {
 			releasePresent(releaseTitle);
