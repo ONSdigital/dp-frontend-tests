@@ -3,6 +3,7 @@ package com.ons.dp.frontend.test.stepdefinitions.ons;
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.webpage.SearchResultsPage;
 import com.ons.dp.frontend.test.stepdefinitions.BaseStepDefinition;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -30,5 +31,10 @@ public class SearchResultsPageSteps {
     public void iClickOnSearchResult() throws Throwable {
         String searchResult = TestContext.getCacheService().getDataMap().get("foiEntry").getStringData();
         searchResultsPage.findResultAndClick(searchResult);
+    }
+
+    @And("^I select CPI dataset from search results$")
+    public void iSelectCPIDatasetFromSearchResults() throws Throwable {
+         searchResultsPage.selectFirstResult();
     }
 }

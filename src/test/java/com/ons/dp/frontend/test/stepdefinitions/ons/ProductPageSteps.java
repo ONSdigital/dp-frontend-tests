@@ -4,6 +4,7 @@ package com.ons.dp.frontend.test.stepdefinitions.ons;
 import com.ons.dp.frontend.test.core.TestContext;
 import com.ons.dp.frontend.test.page.webpage.ProductPage;
 import com.ons.dp.frontend.test.stepdefinitions.BaseStepDefinition;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -87,5 +88,10 @@ public class ProductPageSteps {
     @And("^can download customised time series$")
     public void canDownloadCustomisedTimeSeries() throws Throwable {
         productPage.downloadCustomisedTimeSeries();
+    }
+
+    @And("^there should be a dataset download page$")
+    public void thereShouldBeADatasetDownloadPage() throws Throwable {
+        Assert.assertTrue(productPage.isDatasetDownloadBtnExists());
     }
 }

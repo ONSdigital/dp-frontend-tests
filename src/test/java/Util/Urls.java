@@ -33,6 +33,9 @@ public class Urls {
 
         // Ermintrude
         urlMapping.put("Ermintrude", "https://preview.develop.onsdigital.co.uk/ermintrude/index.html");
+
+        // CPI Dataset Landpage
+        urlMapping.put("CPI dataset landing", "https://develop.onsdigital.co.uk/economy/inflationandpriceindices/datasets/consumerpriceinflation");
     }
 }
 

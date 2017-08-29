@@ -44,6 +44,7 @@ public class ProductPage extends BasePage {
     public By filtered_image_link = By.xpath(".//*[@id='filtered-download-controls']/div/a[1]");
     public By filtered_csv_link = By.xpath(".//*[@id='filtered-download-controls']/div/a[2]");
     public By filtered_xls_link = By.xpath(".//*[@id='filtered-download-controls']/div/a[3]");
+    public By datasetDownloadBtn = By.cssSelector(".btn.btn--primary.btn--thick");
     private String from_quarter_value = "Q2";
     private String from_year_value = "1960";
     private String to_quarter_value = "Q4";
@@ -154,5 +155,10 @@ public class ProductPage extends BasePage {
         Assert.assertTrue(getElement(filtered_csv_link).getAttribute("href").contains(labour_productivity_csv_timeseries));
         Assert.assertTrue(getElement(filtered_xls_link).getAttribute("href").contains(labour_productivity_xls_timeseries));
 
+    }
+
+    public boolean isDatasetDownloadBtnExists() {
+
+          return isElementPresent(datasetDownloadBtn);
     }
 }

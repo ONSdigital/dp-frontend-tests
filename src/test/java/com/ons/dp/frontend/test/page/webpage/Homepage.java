@@ -103,4 +103,10 @@ public class Homepage extends BasePage {
 
         return finalList;
     }
+
+    public void searchWithText(String searchText) {
+        getElement(search).sendKeys(searchText);
+        click(search_Submit);
+
+    }
 }

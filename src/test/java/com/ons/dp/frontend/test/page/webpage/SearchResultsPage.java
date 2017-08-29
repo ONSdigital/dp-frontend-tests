@@ -5,6 +5,7 @@ import com.ons.dp.frontend.test.page.BasePage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,9 @@ public class SearchResultsPage extends BasePage {
     public String no_results_text = "Sorry, no results were found that contain " + "‘" + "text" + "’";
 
     public String results_text = "1 results containing " + "‘" + "text" + "’" + "," + " sorted by relevance";
+
+    public By dataset_Checbox = By.id("checkbox-dataset");
+    public By firstSearchResult = By.cssSelector(".search-results__title>a");
 
     public void noSearchResults(String searchText) {
 
@@ -68,6 +72,14 @@ public class SearchResultsPage extends BasePage {
         } catch (NullPointerException ee) {
             Log.info("Couldn't find the expected page");
         }
+
+    }
+
+    public void selectFirstResult() {
+
+        click(dataset_Checbox);
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(firstSearchResult));
+        click(firstSearchResult);
 
     }
 }

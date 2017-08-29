@@ -8,6 +8,7 @@ import com.ons.dp.frontend.test.page.webpage.Homepage;
 import com.ons.dp.frontend.test.stepdefinitions.BaseStepDefinition;
 import com.ons.dp.frontend.test.util.AnyData;
 import com.ons.dp.frontend.test.util.RandomStringGen;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -175,5 +176,10 @@ public class HomePageSteps {
     @And("^check if any links are broken$")
     public void checkAnyLinksAreBroken() throws Throwable {
 
+    }
+
+    @When("^I search for (.*) dataset$")
+    public void iSearchForCPIDataset(String searchText) throws Throwable {
+        homePage.searchWithText(searchText);
     }
 }

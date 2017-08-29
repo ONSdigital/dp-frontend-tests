@@ -7,9 +7,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriverException;
 
-/**
- * Created by admin on 08/02/2017.
- */
 public class BaseStepDefinition {
 
     BasePage basePage = new BasePage();

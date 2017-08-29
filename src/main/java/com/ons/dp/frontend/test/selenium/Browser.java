@@ -52,12 +52,12 @@ public class Browser {
                     file.setExecutable(true);
                 }
 
-                System.setProperty("webdriver.firefox.marionette", resource.getPath());
-                // System.setProperty("webdriver.gecko.driver", resource.getPath());
-                // System.setProperty("webdriver.firefox.marionette", "/Users/admin/Downloads/geckodriver");
+             //   System.setProperty("webdriver.firefox.marionette", resource.getPath());
+                 System.setProperty("webdriver.gecko.driver", resource.getPath());
 
                 FirefoxProfile ffProfile = new FirefoxProfile();
                 ffProfile.setEnableNativeEvents(false);
+                //ffProfile.setPreference("capability.policy.default.Window.frameElement.get","allAccess");
                 DesiredCapabilities desiredCapabilities = DesiredCapabilities.firefox();
                 desiredCapabilities.setCapability(FirefoxDriver.PROFILE, ffProfile);
                 webDriver = new FirefoxDriver(desiredCapabilities);
@@ -76,6 +76,7 @@ public class Browser {
                 DesiredCapabilities desiredCapabilitiesChrome = DesiredCapabilities.chrome();
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--start-maximized");
+                options.addArguments("--disable-impl-side-painting");
                 desiredCapabilitiesChrome.setCapability(ChromeOptions.CAPABILITY, options);
                 webDriver = new ChromeDriver();
                 webDriver.manage().window().maximize();
@@ -99,7 +100,8 @@ public class Browser {
                 }
                 break;
             default:
-                System.setProperty("webdriver.gecko.driver", "/home/giri/Downloads/firefox/browser/firefox");
+                URL ff_resource = Browser.class.getResource(Helper.getFirefoxDriverLocation());
+                System.setProperty("webdriver.gecko.driver", ff_resource.getPath());
                 webDriver = new FirefoxDriver();
         }
         if (webDriver instanceof JavascriptExecutor) {

@@ -1,9 +1,8 @@
-@Media
+@Media @imp
 Feature: Check the media related information on ONS Website
 
   As a customer i want to find the media related information
   So that I am aware of the latest information from ONS
-
 
   Scenario: Navigate to Media
 
@@ -31,6 +30,7 @@ Feature: Check the media related information on ONS Website
     And Links to published news are listed by date published
     And I can refine results using keywords like "crime"
     And Provided with links to The National Archives for archived releases
+
 
 
   Scenario: Click on first news result in List of all news page
