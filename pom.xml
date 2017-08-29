@@ -115,6 +115,14 @@
 
             </properties>
         </profile>
+        <profile>
+            <id>CMDTests</id>
+            <properties>
+
+                <include.tests>CMDTests.java</include.tests>
+
+            </properties>
+        </profile>
     </profiles>
 
     <build>
