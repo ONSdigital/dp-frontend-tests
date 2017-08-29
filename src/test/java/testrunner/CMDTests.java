@@ -8,20 +8,19 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @ExtendedCucumberOptions(
-        jsonReport = "target/webtest/cucumber.json",
+        jsonReport = "target/cmdtest/cucumber.json",
         detailedReport = true,
         detailedAggregatedReport = true,
 
         toPDF = true,
         overviewReport = true,
-        outputFolder = "target/webtest")
+        outputFolder = "target/cmdtest")
 @CucumberOptions(
         features = "src/test/resources/features/CMD",
-        plugin = {"html:target/webtest/cucumber-html-report/",
-                "json:target/webtest/cucumber.json", "pretty:target/webtest/cucumber-pretty.txt",
-                "usage:target/webtest/cucumber-usage.json", "junit:target/webtest/cucumber-results.xml"},
+        plugin = {"html:target/cmdtest/cucumber-html-report/",
+                "json:target/cmdtest/cucumber.json", "pretty:target/cmdtest/cucumber-pretty.txt",
+                "usage:target/cmdtest/cucumber-usage.json", "junit:target/cmdtest/cucumber-results.xml"},
         glue = "com.ons.dp.frontend.test",
-        // tags = {"@Media,@timeseriesgenerator"}
         tags = {"@cpi"}
 )
 public class CMDTests extends BaseTestRunner{
